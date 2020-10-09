@@ -1,10 +1,9 @@
 #include "program.h"
+#include "util.h"
+#include "base_plate.h"
 
 #include <Windows.h>
 #include <cstdio>
-
-#include "util.h"
-#include "base_plate.h"
 
 polaris::Program* gpProgram;
 
