@@ -9,6 +9,8 @@ polaris::Program* gpProgram;
 
 namespace polaris
 {
+	// NOTE: We'd be better doing this off in a separate thread
+	// to avoid lag on the game thread.
 	DWORD UpdateThread(LPVOID lpParam)
 	{
 		while (1)
@@ -22,6 +24,12 @@ namespace polaris
 
 	Program::Program()
 	{
+		if (gpProgram != nullptr)
+		{
+			MessageBoxA(NULL, "An unknown error has occured. Please relaunch Fortnite and try again!", "Error", MB_ICONERROR);
+			ExitProcess(EXIT_FAILURE);
+		}
+
 		Util::InitConsole();
 
 		std::cout << "Welcome to Polaris!" << std::endl;
