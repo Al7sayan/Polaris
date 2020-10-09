@@ -4,18 +4,17 @@
 #include <cstdio>
 
 #include "util.h"
-#include "table.h"
-#include "idle_plate.h"
+#include "base_plate.h"
+
+polaris::Program* gpProgram;
 
 namespace polaris
 {
-	Table* mainTable;
-
 	DWORD UpdateThread(LPVOID lpParam)
 	{
 		while (1)
 		{
-			mainTable->Update();
+			gpProgram->m_pMainTable->Update();
 			Sleep(1000 / 60);
 		}
 
@@ -26,18 +25,18 @@ namespace polaris
 	{
 		Util::InitConsole();
 
-		printf("Initializing!\n");
+		std::cout << "Welcome to Polaris!" << std::endl;
 
-		mainTable = new Table;
-		mainTable->PushPlate(new IdlePlate);
+		m_pMainTable = new Table;
+		m_pMainTable->PushPlate(new BasePlate);
 
 		CreateThread(0, 0, UpdateThread, 0, 0, 0);
 	}
 
 	Program::~Program()
 	{
-		printf("Disposing!\n");
+		std::cout << "Disposing!" << std::endl;
 		
-		mainTable->Pop();
+		m_pMainTable->Pop();
 	}
 }

@@ -5,7 +5,7 @@
 
 namespace polaris
 {
-    class IdlePlate : public Plate
+    class BasePlate : public Plate
     {
     public:
         void OnEnabled() override;

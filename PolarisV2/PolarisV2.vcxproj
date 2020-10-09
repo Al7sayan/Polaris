@@ -116,6 +116,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -167,7 +168,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="idle_plate.cpp" />
+    <ClCompile Include="base_plate.cpp" />
     <ClCompile Include="program.cpp" />
     <ClCompile Include="SDK\FN_Basic.cpp" />
     <ClCompile Include="SDK\FN_CoreUObject_functions.cpp" />
@@ -178,7 +179,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="build.h" />
-    <ClInclude Include="idle_plate.h" />
+    <ClInclude Include="base_plate.h" />
+    <ClInclude Include="globals.h" />
     <ClInclude Include="program.h" />
     <ClInclude Include="SDK.hpp" />
     <ClInclude Include="plate.h" />

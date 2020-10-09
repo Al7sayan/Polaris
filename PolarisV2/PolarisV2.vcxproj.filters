@@ -7,9 +7,6 @@
     <Filter Include="Table\Plates">
       <UniqueIdentifier>{0a2e18e3-7b04-4f36-941b-79deec3c88ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Table\Plates\Idle">
-      <UniqueIdentifier>{e255795b-244f-405d-a2e0-61b7527c4e44}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Table\Plates\Frontend">
       <UniqueIdentifier>{1dba7569-6d7e-4d45-8217-52b90e703867}</UniqueIdentifier>
     </Filter>
@@ -22,12 +19,15 @@
     <Filter Include="Third Party\SDK">
       <UniqueIdentifier>{b2e86bfb-5c22-4d19-b49b-e5f20c4fb446}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Constants">
-      <UniqueIdentifier>{aab72208-794e-42b4-aab1-1c6f24d6a28f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Utilities">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Table\Plates\Base">
+      <UniqueIdentifier>{e255795b-244f-405d-a2e0-61b7527c4e44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Globals">
+      <UniqueIdentifier>{aab72208-794e-42b4-aab1-1c6f24d6a28f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -49,11 +49,11 @@
     <ClCompile Include="plate.cpp">
       <Filter>Table\Plates</Filter>
     </ClCompile>
-    <ClCompile Include="idle_plate.cpp">
-      <Filter>Table\Plates\Idle</Filter>
-    </ClCompile>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="program.cpp" />
+    <ClCompile Include="base_plate.cpp">
+      <Filter>Table\Plates\Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="util.h">
@@ -68,12 +68,15 @@
     <ClInclude Include="plate.h">
       <Filter>Table\Plates</Filter>
     </ClInclude>
-    <ClInclude Include="idle_plate.h">
-      <Filter>Table\Plates\Idle</Filter>
-    </ClInclude>
     <ClInclude Include="program.h" />
     <ClInclude Include="build.h">
-      <Filter>Constants</Filter>
+      <Filter>Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="base_plate.h">
+      <Filter>Table\Plates\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="globals.h">
+      <Filter>Globals</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
