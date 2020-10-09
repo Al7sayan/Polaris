@@ -167,16 +167,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="idle_plate.cpp" />
     <ClCompile Include="program.cpp" />
     <ClCompile Include="SDK\FN_Basic.cpp" />
     <ClCompile Include="SDK\FN_CoreUObject_functions.cpp" />
     <ClCompile Include="SDK\FN_Engine_functions.cpp" />
     <ClCompile Include="SDK\FN_FortniteGame_functions.cpp" />
+    <ClCompile Include="plate.cpp" />
+    <ClCompile Include="table.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="build.h" />
+    <ClInclude Include="idle_plate.h" />
     <ClInclude Include="program.h" />
     <ClInclude Include="SDK.hpp" />
+    <ClInclude Include="plate.h" />
+    <ClInclude Include="table.h" />
     <ClInclude Include="util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
