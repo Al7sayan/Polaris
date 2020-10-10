@@ -35,6 +35,12 @@
     <Filter Include="Table System\Plates\Peh Plate">
       <UniqueIdentifier>{481ce6a3-02e7-4eee-a95a-d2c661434d32}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utilities\SDK">
+      <UniqueIdentifier>{73b1869e-3fc9-4101-ba5a-8d021b07133b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities\Error Handling">
+      <UniqueIdentifier>{392349c6-e5ff-44f0-ae1c-de5d965a7ee0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SDK\FN_Basic.cpp">
@@ -69,11 +75,14 @@
     <ClCompile Include="frontend_plate.cpp">
       <Filter>Table System\Plates\Frontend</Filter>
     </ClCompile>
+    <ClCompile Include="sdk_utils.cpp">
+      <Filter>Utilities\SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="error_utils.cpp">
+      <Filter>Utilities\Error Handling</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="util.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
     <ClInclude Include="SDK.hpp">
       <Filter>Third Party\SDK</Filter>
     </ClInclude>
@@ -101,6 +110,12 @@
     </ClInclude>
     <ClInclude Include="frontend_plate.h">
       <Filter>Table System\Plates\Frontend</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk_utils.h">
+      <Filter>Utilities\SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="error_utils.h">
+      <Filter>Utilities\Error Handling</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

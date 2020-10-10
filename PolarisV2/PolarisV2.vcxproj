@@ -169,10 +169,12 @@
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="base_plate.cpp" />
+    <ClCompile Include="error_utils.cpp" />
     <ClCompile Include="frontend_plate.cpp" />
     <ClCompile Include="peh_plate.cpp" />
     <ClCompile Include="peh_table.cpp" />
     <ClCompile Include="program.cpp" />
+    <ClCompile Include="sdk_utils.cpp" />
     <ClCompile Include="SDK\FN_Basic.cpp" />
     <ClCompile Include="SDK\FN_CoreUObject_functions.cpp" />
     <ClCompile Include="SDK\FN_Engine_functions.cpp" />
@@ -183,6 +185,7 @@
   <ItemGroup>
     <ClInclude Include="build.h" />
     <ClInclude Include="base_plate.h" />
+    <ClInclude Include="error_utils.h" />
     <ClInclude Include="frontend_plate.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="peh_plate.h" />
@@ -191,7 +194,7 @@
     <ClInclude Include="SDK.hpp" />
     <ClInclude Include="plate.h" />
     <ClInclude Include="table.h" />
-    <ClInclude Include="util.h" />
+    <ClInclude Include="sdk_utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

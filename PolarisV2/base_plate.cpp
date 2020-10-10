@@ -1,27 +1,22 @@
 #include "base_plate.h"
-#include "util.h"
+#include "sdk_utils.h"
 #include "program.h"
 #include "frontend_plate.h"
+#include "error_utils.h"
 
 namespace polaris
 {
     DWORD LoadThread(LPVOID lpParam)
     {
-        Util::InitSdk();
+        SDKUtils::InitSdk();
 
         // NOTE: This does not seem to crash while loading, unlike putting it in util.
-        uintptr_t pBaseAddress = Util::BaseAddress();
+        uintptr_t pBaseAddress = SDKUtils::BaseAddress();
         if (!pBaseAddress)
-        {
-            MessageBoxA(NULL, "An unknown error has occured. Please relaunch Fortnite and try again!", "Error", MB_ICONERROR);
-            ExitProcess(EXIT_FAILURE);
-        }
+            ErrorUtils::ThrowException(L"BaseAddress was not found.");
 
         if (!polaris::Globals::gpWorld)
-        {
-            MessageBoxA(NULL, "An unknown error has occured. Please relaunch Fortnite and try again!", "Error", MB_ICONERROR);
-            ExitProcess(EXIT_FAILURE);
-        }
+            ErrorUtils::ThrowException(L"gpWorld was not found.");
 
         // NOTE: We wait until this is not null. This becomes a valid pointer as soon as
         // the initial loading screen drops. From then, we can continue initializing Polaris.

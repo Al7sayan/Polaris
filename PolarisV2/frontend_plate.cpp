@@ -1,4 +1,5 @@
 #include "frontend_plate.h"
+#include "globals.h"
 
 #include <iostream>
 
