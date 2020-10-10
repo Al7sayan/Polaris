@@ -81,6 +81,12 @@
     <ClCompile Include="error_utils.cpp">
       <Filter>Utilities\Error Handling</Filter>
     </ClCompile>
+    <ClCompile Include="athena_plate.cpp">
+      <Filter>Table System\Plates\Athena</Filter>
+    </ClCompile>
+    <ClCompile Include="globals.cpp">
+      <Filter>Globals</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDK.hpp">
@@ -116,6 +122,9 @@
     </ClInclude>
     <ClInclude Include="error_utils.h">
       <Filter>Utilities\Error Handling</Filter>
+    </ClInclude>
+    <ClInclude Include="athena_plate.h">
+      <Filter>Table System\Plates\Athena</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

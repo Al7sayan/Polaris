@@ -6,7 +6,7 @@ namespace polaris
 {
     void ErrorUtils::ThrowException(LPCWSTR message)
     {
-        LPCWSTR base = L"An unhandled exception occurred during the executing. Please review the logs for more information about the error and where it origininated.\n\nException Details:\n";
+        LPCWSTR base = L"An unhandled exception occurred during the execution. Please review the logs for more information about the error and where it origininated.\n\nException Details:\n";
         std::wstring combined = std::wstring(base) + message;
         LPCWSTR combinedLPC = combined.c_str();
 

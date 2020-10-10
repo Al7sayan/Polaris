@@ -10,24 +10,24 @@ namespace polaris
     {
         SDKUtils::InitSdk();
 
-        // NOTE: This does not seem to crash while loading, unlike putting it in util.
         uintptr_t pBaseAddress = SDKUtils::BaseAddress();
         if (!pBaseAddress)
             ErrorUtils::ThrowException(L"BaseAddress was not found.");
 
-        if (!polaris::Globals::gpWorld)
-            ErrorUtils::ThrowException(L"gpWorld was not found.");
-
         // NOTE: We wait until this is not null. This becomes a valid pointer as soon as
         // the initial loading screen drops. From then, we can continue initializing Polaris.
-        while ((*polaris::Globals::gpWorld) == nullptr)
+        while ((*polaris::gpWorld) == nullptr)
             Sleep(1000 / 60);
 
-        polaris::Globals::gpLevel = (*polaris::Globals::gpWorld)->PersistentLevel;
-        polaris::Globals::gpGameInstance = (*polaris::Globals::gpWorld)->OwningGameInstance;
-        polaris::Globals::gpLocalPlayers = polaris::Globals::gpGameInstance->LocalPlayers;
-        polaris::Globals::gpLocalPlayer = polaris::Globals::gpLocalPlayers[0];
-        polaris::Globals::gpPlayerController = polaris::Globals::gpLocalPlayer->PlayerController;
+        // NOTE: For some reason if you don't wait a bit here, everything will be nullptr.
+        Sleep(300);
+
+        polaris::gpLevel = (*polaris::gpWorld)->PersistentLevel;
+        polaris::gpGameInstance = (*polaris::gpWorld)->OwningGameInstance;
+        polaris::gpLocalPlayers = polaris::gpGameInstance->LocalPlayers;
+        polaris::gpLocalPlayer = polaris::gpLocalPlayers[0];
+        polaris::gpActors = &polaris::gpLevel->Actors;
+        polaris::gpPlayerController = polaris::gpLocalPlayer->PlayerController;
 
         gpProgram->m_pMainTable->PushPlate(new FrontendPlate);
     }

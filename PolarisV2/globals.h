@@ -5,20 +5,16 @@
 
 namespace polaris
 {
-	class Globals
-	{
-	public:
-		static inline SDK::UWorld** gpWorld;
-		static inline SDK::ULevel* gpLevel;
-		static inline SDK::TArray<SDK::AActor*>* gpActors;
+	extern SDK::UWorld** gpWorld;
+	extern SDK::ULevel* gpLevel;
+	extern SDK::TArray<SDK::AActor*>* gpActors;
 
-		static inline SDK::UGameInstance* gpGameInstance;
+	extern SDK::UGameInstance* gpGameInstance;
 
-		static inline SDK::TArray<SDK::ULocalPlayer*> gpLocalPlayers;
-		static inline SDK::ULocalPlayer* gpLocalPlayer;
+	extern SDK::TArray<SDK::ULocalPlayer*> gpLocalPlayers;
+	extern SDK::ULocalPlayer* gpLocalPlayer;
 
-		static inline SDK::APlayerController* gpPlayerController;
-	};
+	extern SDK::APlayerController* gpPlayerController;
 };
 
 #endif // !GLOBALS_H

@@ -44,6 +44,29 @@ namespace polaris
 
 		return result;
 	}
+	SDK::AActor* SDKUtils::FindActor(SDK::UClass* pClass, int iSkip)
+	{
+		for (int i = 0, j = 0; i < gpActors->Num(); i++)
+		{
+			SDK::AActor* pActor = gpActors->operator[](i);
+
+			if (pActor != nullptr)
+			{
+				if (pActor->IsA(pClass))
+				{
+					if (j >= iSkip)
+						return pActor;
+					else
+					{
+						j++;
+						continue;
+					}
+				}
+			}
+		}
+
+		return nullptr;
+	}
 
 	VOID SDKUtils::InitConsole()
 	{
@@ -56,7 +79,7 @@ namespace polaris
 	{
 		auto pUWorldAddress = SDKUtils::FindPattern("\x48\x8B\x1D\x00\x00\x00\x00\x00\x00\x00\x10\x4C\x8D\x4D\x00\x4C", "xxx???????xxxx?x");
 		auto pUWorldOffset = *reinterpret_cast<uint32_t*>(pUWorldAddress + 3);
-		Globals::gpWorld = reinterpret_cast<SDK::UWorld**>(pUWorldAddress + 7 + pUWorldOffset);
+		gpWorld = reinterpret_cast<SDK::UWorld**>(pUWorldAddress + 7 + pUWorldOffset);
 
 		auto pGObjectAddress = SDKUtils::FindPattern("\x48\x8D\x0D\x00\x00\x00\x00\xE8\x00\x00\x00\x00\xE8\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x48\x8B\xD6", "xxx????x????x????x????xxx");
 		auto pGObjectOffset = *reinterpret_cast<uint32_t*>(pGObjectAddress + 3);

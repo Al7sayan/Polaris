@@ -167,10 +167,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="athena_plate.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="base_plate.cpp" />
     <ClCompile Include="error_utils.cpp" />
     <ClCompile Include="frontend_plate.cpp" />
+    <ClCompile Include="globals.cpp" />
     <ClCompile Include="peh_plate.cpp" />
     <ClCompile Include="peh_table.cpp" />
     <ClCompile Include="program.cpp" />
@@ -183,6 +185,7 @@
     <ClCompile Include="table.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="athena_plate.h" />
     <ClInclude Include="build.h" />
     <ClInclude Include="base_plate.h" />
     <ClInclude Include="error_utils.h" />
