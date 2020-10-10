@@ -2,8 +2,10 @@
 #include "util.h"
 #include "base_plate.h"
 
-#include <Windows.h>
+#include <windows.h>
 #include <cstdio>
+#include <MinHook.h>
+#pragma comment(lib, "libMinHook.x64.lib")
 
 polaris::Program* gpProgram;
 
@@ -24,17 +26,17 @@ namespace polaris
 
 	Program::Program()
 	{
-		if (gpProgram != nullptr)
+		if (gpProgram != nullptr || MH_Initialize() != MH_OK)
 		{
 			MessageBoxA(NULL, "An unknown error has occured. Please relaunch Fortnite and try again!", "Error", MB_ICONERROR);
 			ExitProcess(EXIT_FAILURE);
 		}
+		gpProgram = this;
 
 		Util::InitConsole();
-
 		std::cout << "Welcome to Polaris!" << std::endl;
 
-		m_pMainTable = new Table;
+		m_pMainTable = new PehTable;
 		m_pMainTable->PushPlate(new BasePlate);
 
 		CreateThread(0, 0, UpdateThread, 0, 0, 0);

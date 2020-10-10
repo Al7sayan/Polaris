@@ -169,6 +169,9 @@
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="base_plate.cpp" />
+    <ClCompile Include="frontend_plate.cpp" />
+    <ClCompile Include="peh_plate.cpp" />
+    <ClCompile Include="peh_table.cpp" />
     <ClCompile Include="program.cpp" />
     <ClCompile Include="SDK\FN_Basic.cpp" />
     <ClCompile Include="SDK\FN_CoreUObject_functions.cpp" />
@@ -180,7 +183,10 @@
   <ItemGroup>
     <ClInclude Include="build.h" />
     <ClInclude Include="base_plate.h" />
+    <ClInclude Include="frontend_plate.h" />
     <ClInclude Include="globals.h" />
+    <ClInclude Include="peh_plate.h" />
+    <ClInclude Include="peh_table.h" />
     <ClInclude Include="program.h" />
     <ClInclude Include="SDK.hpp" />
     <ClInclude Include="plate.h" />

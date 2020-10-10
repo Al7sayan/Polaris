@@ -1,18 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Table">
-      <UniqueIdentifier>{c508fda0-e1c4-4636-84c1-881eb532b6c4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Table\Plates">
-      <UniqueIdentifier>{0a2e18e3-7b04-4f36-941b-79deec3c88ae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Table\Plates\Frontend">
-      <UniqueIdentifier>{1dba7569-6d7e-4d45-8217-52b90e703867}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Table\Plates\Athena">
-      <UniqueIdentifier>{3144f85a-8930-456e-87bb-24954dfef5e4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Third Party">
       <UniqueIdentifier>{a437db91-f314-4e05-bcf1-d855c033d77e}</UniqueIdentifier>
     </Filter>
@@ -23,11 +11,29 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Table\Plates\Base">
-      <UniqueIdentifier>{e255795b-244f-405d-a2e0-61b7527c4e44}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Globals">
       <UniqueIdentifier>{aab72208-794e-42b4-aab1-1c6f24d6a28f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Table System">
+      <UniqueIdentifier>{c508fda0-e1c4-4636-84c1-881eb532b6c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Table System\Plates">
+      <UniqueIdentifier>{0a2e18e3-7b04-4f36-941b-79deec3c88ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Table System\Plates\Base">
+      <UniqueIdentifier>{e255795b-244f-405d-a2e0-61b7527c4e44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Table System\Plates\Frontend">
+      <UniqueIdentifier>{1dba7569-6d7e-4d45-8217-52b90e703867}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Table System\Plates\Athena">
+      <UniqueIdentifier>{3144f85a-8930-456e-87bb-24954dfef5e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Table System\Peh Table">
+      <UniqueIdentifier>{37da6385-db2a-4d05-a6bb-932d876af354}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Table System\Plates\Peh Plate">
+      <UniqueIdentifier>{481ce6a3-02e7-4eee-a95a-d2c661434d32}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -44,15 +50,24 @@
       <Filter>Third Party\SDK</Filter>
     </ClCompile>
     <ClCompile Include="table.cpp">
-      <Filter>Table</Filter>
+      <Filter>Table System</Filter>
     </ClCompile>
     <ClCompile Include="plate.cpp">
-      <Filter>Table\Plates</Filter>
+      <Filter>Table System\Plates</Filter>
     </ClCompile>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="program.cpp" />
     <ClCompile Include="base_plate.cpp">
-      <Filter>Table\Plates\Base</Filter>
+      <Filter>Table System\Plates\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="peh_table.cpp">
+      <Filter>Table System\Peh Table</Filter>
+    </ClCompile>
+    <ClCompile Include="peh_plate.cpp">
+      <Filter>Table System\Plates\Peh Plate</Filter>
+    </ClCompile>
+    <ClCompile Include="frontend_plate.cpp">
+      <Filter>Table System\Plates\Frontend</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -63,20 +78,29 @@
       <Filter>Third Party\SDK</Filter>
     </ClInclude>
     <ClInclude Include="table.h">
-      <Filter>Table</Filter>
+      <Filter>Table System</Filter>
     </ClInclude>
     <ClInclude Include="plate.h">
-      <Filter>Table\Plates</Filter>
+      <Filter>Table System\Plates</Filter>
     </ClInclude>
     <ClInclude Include="program.h" />
     <ClInclude Include="build.h">
       <Filter>Globals</Filter>
     </ClInclude>
     <ClInclude Include="base_plate.h">
-      <Filter>Table\Plates\Base</Filter>
+      <Filter>Table System\Plates\Base</Filter>
     </ClInclude>
     <ClInclude Include="globals.h">
       <Filter>Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="peh_table.h">
+      <Filter>Table System\Peh Table</Filter>
+    </ClInclude>
+    <ClInclude Include="peh_plate.h">
+      <Filter>Table System\Plates\Peh Plate</Filter>
+    </ClInclude>
+    <ClInclude Include="frontend_plate.h">
+      <Filter>Table System\Plates\Frontend</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

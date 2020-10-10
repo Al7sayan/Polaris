@@ -1,13 +1,13 @@
 #pragma once
 
-#include "table.h"
+#include "peh_table.h"
 
 namespace polaris
 {
 	class Program
 	{
 	public:
-		Table* m_pMainTable;
+		PehTable* m_pMainTable; //!< The main PEH (Process Event Hook) Table.
 
 		Program();
 		~Program();

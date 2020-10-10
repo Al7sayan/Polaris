@@ -21,4 +21,4 @@ namespace polaris
 	};
 };
 
-#endif // GLOBALS_H
+#endif // !GLOBALS_H

@@ -1,15 +1,20 @@
-#ifndef IDLE_PLATE_H
-#define IDLE_PLATE_H
+#ifndef BASE_PLATE_H
+#define BASE_PLATE_H
 
-#include "plate.h"
+#include "peh_plate.h"
 
 namespace polaris
 {
-    class BasePlate : public Plate
+    //!  The base PehPlate.
+    /*!
+    * This Plate is always at the bottom of the Main PehTable.
+    * In charge of initializing Polaris before going into Frontend mode.
+    */
+    class BasePlate : public PehPlate
     {
     public:
         void OnEnabled() override;
     };
 }
 
-#endif // IDLE_PLATE_H
+#endif // !BASE_PLATE_H
