@@ -8,36 +8,38 @@ namespace polaris
     void AthenaPlate::ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams)
     {
         if (pFunction->GetName().find("ReadyToStartMatch") != std::string::npos && m_bIsInitialized == false)
-        {
             Initialize();
-        }
     }
     void AthenaPlate::Update()
     {
+        if (m_bIsInitialized == false || m_pPlayerPawn == nullptr)
+            return;
 
+        bool wantsToSprint = static_cast<SDK::AFortPlayerControllerAthena*>(gpPlayerController)->bWantsToSprint;
+        m_pPlayerPawn->CurrentMovementStyle = wantsToSprint ? SDK::EFortMovementStyle::Sprinting : SDK::EFortMovementStyle::Running;
     }
 
     void AthenaPlate::OnEnabled()
     {
-        gpPlayerController->SwitchLevel(m_sMapName);
+        gpPlayerController->SwitchLevel(TEXT("Athena_Terrain"));
     }
 
     void AthenaPlate::Initialize()
     {
         m_bIsInitialized = true;
         SDKUtils::InitSdk();
+        SDKUtils::InitGlobals();
 
-        // TODO: Make this a function of some kind
-        polaris::gpLevel = (*polaris::gpWorld)->PersistentLevel;
-        polaris::gpGameInstance = (*polaris::gpWorld)->OwningGameInstance;
-        polaris::gpLocalPlayers = polaris::gpGameInstance->LocalPlayers;
-        polaris::gpLocalPlayer = polaris::gpLocalPlayers[0];
-        polaris::gpActors = &polaris::gpLevel->Actors;
-        polaris::gpPlayerController = polaris::gpLocalPlayer->PlayerController;
+        gpPlayerController->CheatManager->Summon(TEXT("PlayerPawn_Athena_C"));
+        m_pPlayerPawn = static_cast<SDK::AFortPlayerPawn*>(SDKUtils::FindActor(SDK::AFortPlayerPawn::StaticClass()));
+        gpPlayerController->Possess(m_pPlayerPawn);
 
-        //gpPlayerController->CheatManager->Summon(m_sPawnName);
-        //m_pPlayerPawn = static_cast<SDK::AFortPlayerPawn*>(SDKUtils::FindActor(SDK::AFortPlayerPawn::StaticClass()));
-        //gpPlayerController->Possess(m_pPlayerPawn);
+        // Load Ramirez onto the pawn and replicate character parts.
+        auto playerState = static_cast<SDK::AFortPlayerStateAthena*>(gpPlayerController->PlayerState);
+        playerState->CharacterParts[0] = SDK::UObject::FindObject<SDK::UCustomCharacterPart>("CustomCharacterPart F_Med_Head1.F_Med_Head1");
+        playerState->CharacterParts[1] = SDK::UObject::FindObject<SDK::UCustomCharacterPart>("CustomCharacterPart F_Med_Soldier_01.F_Med_Soldier_01");
+        playerState->OnRep_CharacterParts();
+        m_pPlayerPawn->OnCharacterPartsReinitialized();
 
         // Tell the client that we are ready to start the match, this allows the loading screen to drop.
         static_cast<SDK::AFortPlayerController*>(gpPlayerController)->ServerReadyToStartMatch();

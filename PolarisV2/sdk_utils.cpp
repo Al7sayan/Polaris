@@ -90,6 +90,15 @@ namespace polaris
 
 		SDK::FName::GNames = *reinterpret_cast<SDK::TNameEntryArray**>(pGNameAddress + 7 + pGNameOffset);
 	}
+	VOID SDKUtils::InitGlobals()
+	{
+		polaris::gpLevel = (*polaris::gpWorld)->PersistentLevel;
+		polaris::gpGameInstance = (*polaris::gpWorld)->OwningGameInstance;
+		polaris::gpLocalPlayers = polaris::gpGameInstance->LocalPlayers;
+		polaris::gpLocalPlayer = polaris::gpLocalPlayers[0];
+		polaris::gpActors = &polaris::gpLevel->Actors;
+		polaris::gpPlayerController = polaris::gpLocalPlayer->PlayerController;
+	}
 
 	std::string SDKUtils::GetConcatPath(const std::string& sFirst, const std::string& sSecond)
 	{

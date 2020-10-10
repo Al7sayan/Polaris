@@ -12,9 +12,6 @@ namespace polaris
         bool m_bIsInitialized;
 
     public:
-        SDK::FString m_sMapName;
-        SDK::FString m_sPawnName;
-
         void ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams) override;
         void Update() override;
 

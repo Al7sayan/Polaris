@@ -22,13 +22,7 @@ namespace polaris
         // NOTE: For some reason if you don't wait a bit here, everything will be nullptr.
         Sleep(300);
 
-        polaris::gpLevel = (*polaris::gpWorld)->PersistentLevel;
-        polaris::gpGameInstance = (*polaris::gpWorld)->OwningGameInstance;
-        polaris::gpLocalPlayers = polaris::gpGameInstance->LocalPlayers;
-        polaris::gpLocalPlayer = polaris::gpLocalPlayers[0];
-        polaris::gpActors = &polaris::gpLevel->Actors;
-        polaris::gpPlayerController = polaris::gpLocalPlayer->PlayerController;
-
+        SDKUtils::InitGlobals();
         gpProgram->m_pMainTable->PushPlate(new FrontendPlate);
     }
 
