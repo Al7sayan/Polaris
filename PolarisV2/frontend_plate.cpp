@@ -10,6 +10,9 @@ namespace polaris
     void FrontendPlate::OnEnabled()
     {
         std::cout << "We're now in the Frontend State." << std::endl;
+
+        if (gpLevel->URL.Map.ToString() != "/Game/Maps/FortniteEntry")
+            gpPlayerController->SwitchLevel(TEXT("Frontend"));
     }
 
     void FrontendPlate::ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams)

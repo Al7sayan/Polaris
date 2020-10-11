@@ -2,13 +2,14 @@
 #define ATHENA_PLATE_H
 
 #include "peh_plate.h"
+#include "athena_pawn.h"
 
 namespace polaris
 {
     class AthenaPlate : public PehPlate
     {
     private:
-        SDK::AFortPlayerPawn* m_pPlayerPawn;
+        AthenaPawn* m_pPlayerPawn;
         bool m_bIsInitialized;
 
     public:

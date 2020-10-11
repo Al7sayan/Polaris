@@ -17,10 +17,10 @@ namespace polaris
         // NOTE: We wait until this is not null. This becomes a valid pointer as soon as
         // the initial loading screen drops. From then, we can continue initializing Polaris.
         while ((*polaris::gpWorld) == nullptr)
-            Sleep(1000 / 60);
+            Sleep(1000);
 
         // NOTE: For some reason if you don't wait a bit here, everything will be nullptr.
-        Sleep(300);
+        Sleep(500);
 
         SDKUtils::InitGlobals();
         gpProgram->m_pMainTable->PushPlate(new FrontendPlate);

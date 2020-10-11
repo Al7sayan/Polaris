@@ -2,21 +2,29 @@
 #include "globals.h"
 #include "error_utils.h"
 #include "sdk_utils.h"
+#include "program.h"
 
 namespace polaris
 {
     void AthenaPlate::ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams)
     {
+        if (m_pPlayerPawn != nullptr)
+            m_pPlayerPawn->ProcessEventHook(pObject, pFunction, pParams);
+
         if (pFunction->GetName().find("ReadyToStartMatch") != std::string::npos && m_bIsInitialized == false)
             Initialize();
+
+        if (pFunction->GetName().find("ServerAttemptAircraftJump") != std::string::npos)
+            m_pPlayerPawn = new AthenaPawn;
     }
     void AthenaPlate::Update()
     {
-        if (m_bIsInitialized == false || m_pPlayerPawn == nullptr)
-            return;
+        if (m_pPlayerPawn != nullptr)
+            m_pPlayerPawn->Update();
 
-        bool wantsToSprint = static_cast<SDK::AFortPlayerControllerAthena*>(gpPlayerController)->bWantsToSprint;
-        m_pPlayerPawn->CurrentMovementStyle = wantsToSprint ? SDK::EFortMovementStyle::Sprinting : SDK::EFortMovementStyle::Running;
+        // TEMP: Go back to Frontend.
+        if (GetAsyncKeyState(VK_OEM_PLUS) & 0x8000)
+            gpProgram->m_pMainTable->PopPlate();
     }
 
     void AthenaPlate::OnEnabled()
@@ -30,16 +38,7 @@ namespace polaris
         SDKUtils::InitSdk();
         SDKUtils::InitGlobals();
 
-        gpPlayerController->CheatManager->Summon(TEXT("PlayerPawn_Athena_C"));
-        m_pPlayerPawn = static_cast<SDK::AFortPlayerPawn*>(SDKUtils::FindActor(SDK::AFortPlayerPawn::StaticClass()));
-        gpPlayerController->Possess(m_pPlayerPawn);
-
-        // Load Ramirez onto the pawn and replicate character parts.
-        auto playerState = static_cast<SDK::AFortPlayerStateAthena*>(gpPlayerController->PlayerState);
-        playerState->CharacterParts[0] = SDK::UObject::FindObject<SDK::UCustomCharacterPart>("CustomCharacterPart F_Med_Head1.F_Med_Head1");
-        playerState->CharacterParts[1] = SDK::UObject::FindObject<SDK::UCustomCharacterPart>("CustomCharacterPart F_Med_Soldier_01.F_Med_Soldier_01");
-        playerState->OnRep_CharacterParts();
-        m_pPlayerPawn->OnCharacterPartsReinitialized();
+        m_pPlayerPawn = new AthenaPawn;
 
         // Tell the client that we are ready to start the match, this allows the loading screen to drop.
         static_cast<SDK::AFortPlayerController*>(gpPlayerController)->ServerReadyToStartMatch();
