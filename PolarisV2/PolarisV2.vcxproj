@@ -78,7 +78,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>.\minhook;$(IncludePath)</IncludePath>
+    <IncludePath>.\imgui;.\imgui\examples;.\minhook;$(IncludePath)</IncludePath>
     <LibraryPath>.\minhook;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release [Beta]|x64'">
@@ -169,11 +169,17 @@
   <ItemGroup>
     <ClCompile Include="athena_pawn.cpp" />
     <ClCompile Include="athena_plate.cpp" />
+    <ClCompile Include="directory_utils.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="base_plate.cpp" />
     <ClCompile Include="error_utils.cpp" />
     <ClCompile Include="frontend_plate.cpp" />
     <ClCompile Include="globals.cpp" />
+    <ClCompile Include="imgui\examples\imgui_impl_dx11.cpp" />
+    <ClCompile Include="imgui\examples\imgui_impl_win32.cpp" />
+    <ClCompile Include="imgui\imgui.cpp" />
+    <ClCompile Include="imgui\imgui_draw.cpp" />
+    <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="pawn.cpp" />
     <ClCompile Include="peh_plate.cpp" />
     <ClCompile Include="peh_table.cpp" />
@@ -185,12 +191,14 @@
     <ClCompile Include="SDK\FN_FortniteGame_functions.cpp" />
     <ClCompile Include="plate.cpp" />
     <ClCompile Include="table.cpp" />
+    <ClCompile Include="ui_renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="athena_pawn.h" />
     <ClInclude Include="athena_plate.h" />
     <ClInclude Include="build.h" />
     <ClInclude Include="base_plate.h" />
+    <ClInclude Include="directory_utils.h" />
     <ClInclude Include="error_utils.h" />
     <ClInclude Include="frontend_plate.h" />
     <ClInclude Include="globals.h" />
@@ -202,6 +210,7 @@
     <ClInclude Include="plate.h" />
     <ClInclude Include="table.h" />
     <ClInclude Include="sdk_utils.h" />
+    <ClInclude Include="ui_renderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

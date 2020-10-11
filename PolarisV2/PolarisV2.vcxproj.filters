@@ -50,6 +50,15 @@
     <Filter Include="Pawn\Pawns\Athena">
       <UniqueIdentifier>{e66c5246-8a94-4d03-a99f-55b04d8c2b5f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{a552ffdd-0716-44bb-b9b7-e6030240e7f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Third Party\imgui">
+      <UniqueIdentifier>{7d7a8197-6995-4dfd-9d20-8cda58d6b89a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities\Platform">
+      <UniqueIdentifier>{d26f6036-f5e1-4ddd-9320-690a177b74eb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SDK\FN_Basic.cpp">
@@ -102,6 +111,27 @@
     <ClCompile Include="athena_pawn.cpp">
       <Filter>Pawn\Pawns\Athena</Filter>
     </ClCompile>
+    <ClCompile Include="imgui\imgui.cpp">
+      <Filter>Third Party\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_draw.cpp">
+      <Filter>Third Party\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_widgets.cpp">
+      <Filter>Third Party\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\examples\imgui_impl_dx11.cpp">
+      <Filter>Third Party\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\examples\imgui_impl_win32.cpp">
+      <Filter>Third Party\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="directory_utils.cpp">
+      <Filter>Utilities\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="ui_renderer.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDK.hpp">
@@ -146,6 +176,12 @@
     </ClInclude>
     <ClInclude Include="athena_pawn.h">
       <Filter>Pawn\Pawns\Athena</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_renderer.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="directory_utils.h">
+      <Filter>Utilities\Platform</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

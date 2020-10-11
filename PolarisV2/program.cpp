@@ -2,6 +2,7 @@
 #include "sdk_utils.h"
 #include "base_plate.h"
 #include "error_utils.h"
+#include "ui_renderer.h"
 
 #include <windows.h>
 #include <cstdio>
@@ -20,6 +21,8 @@ namespace polaris
 
 		SDKUtils::InitConsole();
 		std::cout << "Welcome to Polaris!" << std::endl;
+
+		new UIRenderer;
 
 		m_pMainTable = new PehTable;
 		m_pMainTable->PushPlate(new BasePlate);
