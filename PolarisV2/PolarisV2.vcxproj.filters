@@ -59,6 +59,18 @@
     <Filter Include="Utilities\Platform">
       <UniqueIdentifier>{d26f6036-f5e1-4ddd-9320-690a177b74eb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI\Renderer">
+      <UniqueIdentifier>{810e235e-a48c-4402-aef0-6d3da7c14626}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Window">
+      <UniqueIdentifier>{e4545648-70f8-4fc6-b9e1-580c08f9aa17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Window\Windows">
+      <UniqueIdentifier>{3944c69e-cfe8-4a1c-b6fb-35990305030c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Window\Windows\Main Window">
+      <UniqueIdentifier>{b3190ab4-4431-445b-9277-2ad73cd90886}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SDK\FN_Basic.cpp">
@@ -130,7 +142,13 @@
       <Filter>Utilities\Platform</Filter>
     </ClCompile>
     <ClCompile Include="ui_renderer.cpp">
-      <Filter>UI</Filter>
+      <Filter>UI\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="ui_window.cpp">
+      <Filter>UI\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="main_window.cpp">
+      <Filter>UI\Window\Windows\Main Window</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -177,11 +195,17 @@
     <ClInclude Include="athena_pawn.h">
       <Filter>Pawn\Pawns\Athena</Filter>
     </ClInclude>
-    <ClInclude Include="ui_renderer.h">
-      <Filter>UI</Filter>
-    </ClInclude>
     <ClInclude Include="directory_utils.h">
       <Filter>Utilities\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_renderer.h">
+      <Filter>UI\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_window.h">
+      <Filter>UI\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="main_window.h">
+      <Filter>UI\Window\Windows\Main Window</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

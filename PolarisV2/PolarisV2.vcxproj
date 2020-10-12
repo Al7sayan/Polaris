@@ -124,6 +124,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+      <AdditionalOptions>/PDBALTPATH:%_PDB% %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release [Beta]|x64'">
@@ -180,6 +181,7 @@
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_draw.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
+    <ClCompile Include="main_window.cpp" />
     <ClCompile Include="pawn.cpp" />
     <ClCompile Include="peh_plate.cpp" />
     <ClCompile Include="peh_table.cpp" />
@@ -192,6 +194,7 @@
     <ClCompile Include="plate.cpp" />
     <ClCompile Include="table.cpp" />
     <ClCompile Include="ui_renderer.cpp" />
+    <ClCompile Include="ui_window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="athena_pawn.h" />
@@ -202,6 +205,7 @@
     <ClInclude Include="error_utils.h" />
     <ClInclude Include="frontend_plate.h" />
     <ClInclude Include="globals.h" />
+    <ClInclude Include="main_window.h" />
     <ClInclude Include="pawn.h" />
     <ClInclude Include="peh_plate.h" />
     <ClInclude Include="peh_table.h" />
@@ -211,6 +215,7 @@
     <ClInclude Include="table.h" />
     <ClInclude Include="sdk_utils.h" />
     <ClInclude Include="ui_renderer.h" />
+    <ClInclude Include="ui_window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -22,8 +22,6 @@ namespace polaris
 		SDKUtils::InitConsole();
 		std::cout << "Welcome to Polaris!" << std::endl;
 
-		new UIRenderer;
-
 		m_pMainTable = new PehTable;
 		m_pMainTable->PushPlate(new BasePlate);
 	}

@@ -3,6 +3,8 @@
 #include "program.h"
 #include "frontend_plate.h"
 #include "error_utils.h"
+#include "ui_renderer.h"
+#include "main_window.h"
 
 namespace polaris
 {
@@ -17,7 +19,10 @@ namespace polaris
         // NOTE: We wait until this is not null. This becomes a valid pointer as soon as
         // the initial loading screen drops. From then, we can continue initializing Polaris.
         while ((*polaris::gpWorld) == nullptr)
-            Sleep(1000);
+            Sleep(1000 / 60);
+
+        new UIRenderer;
+        new MainWindow;
 
         // NOTE: For some reason if you don't wait a bit here, everything will be nullptr.
         Sleep(500);
