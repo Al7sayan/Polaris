@@ -29,6 +29,12 @@ namespace polaris
 
         SDKUtils::InitGlobals();
         gpProgram->m_pMainTable->PushPlate(new FrontendPlate);
+
+        // Initialize the console.
+        auto pConsole = SDK::UConsole::StaticClass()->CreateDefaultObject<SDK::UConsole>();
+
+        pConsole->Outer = gpLocalPlayer->ViewportClient;
+        gpLocalPlayer->ViewportClient->ViewportConsole = pConsole;
     }
 
     void BasePlate::OnEnabled()
