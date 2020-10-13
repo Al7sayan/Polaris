@@ -14,6 +14,7 @@ namespace polaris
         MainWindow();
 
         void Draw() override;
+        void Update() override;
     };
 }
 

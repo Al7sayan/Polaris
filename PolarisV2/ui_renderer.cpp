@@ -18,10 +18,16 @@ __declspec(dllexport) LRESULT CALLBACK WndProcHook(HWND hWnd, UINT Msg, WPARAM w
 {
 	if (Msg == WM_KEYUP && (wParam == VK_HOME || wParam == VK_ESCAPE))
 	{
-		//ImGui::GetIO().MouseDrawCursor = bLockFortInput;
+		gpRenderer->m_bLockFortInput = !gpRenderer->m_bLockFortInput;
+		ImGui::GetIO().MouseDrawCursor = gpRenderer->m_bLockFortInput;
 	}
 
-	ImGui_ImplWin32_WndProcHandler(hWnd, Msg, wParam, lParam);
+	if (gpRenderer->m_bLockFortInput)
+	{
+		ImGui_ImplWin32_WndProcHandler(hWnd, Msg, wParam, lParam);
+
+		return TRUE;
+	}
 
 	return CallWindowProc(gpRenderer->m_lpPrevWndFunc, hWnd, Msg, wParam, lParam);
 }
@@ -79,11 +85,18 @@ __declspec(dllexport) HRESULT PresentHook(IDXGISwapChain* pInstance, UINT SyncIn
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
+	if (!gpRenderer->m_bLockFortInput)
+		ImGui::SetNextWindowBgAlpha(0.5f);
+
 	for (auto window = gpRenderer->m_vpWindows.begin(); window != gpRenderer->m_vpWindows.end(); ++window)
 	{
+		(*window)->Update();
+
 		if((*window)->m_bIsOpen == true)
 			(*window)->Draw();
 	}
+
+	ImGui::SetNextWindowBgAlpha(1.0f);
 
 	ImGui::Render();
 	gpRenderer->m_pCurrentContext->OMSetRenderTargets(1, &gpRenderer->m_pCurrentView, NULL);

@@ -179,7 +179,6 @@
     <ClCompile Include="error_utils.cpp" />
     <ClCompile Include="farmstead_pawn.cpp" />
     <ClCompile Include="farmstead_plate.cpp" />
-    <ClCompile Include="field_window.cpp" />
     <ClCompile Include="frontend_plate.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="imgui\examples\imgui_impl_dx11.cpp" />
@@ -212,8 +211,6 @@
     <ClInclude Include="error_utils.h" />
     <ClInclude Include="farmstead_pawn.h" />
     <ClInclude Include="farmstead_plate.h" />
-    <ClInclude Include="field.h" />
-    <ClInclude Include="field_window.h" />
     <ClInclude Include="frontend_plate.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="imgui_text_extension.h" />

@@ -14,4 +14,7 @@ namespace polaris
     void UIWindow::Resize()
     {
     }
+    void UIWindow::Update()
+    {
+    }
 }

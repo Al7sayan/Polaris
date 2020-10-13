@@ -1,5 +1,6 @@
 #include "main_window.h"
 #include "program.h"
+#include "ui_renderer.h"
 
 namespace polaris
 {
@@ -24,10 +25,14 @@ namespace polaris
             {
                 if (ImGui::MenuItem("About"))
                 {
-                    m_pAboutWindow->m_bIsOpen = true;
+                    m_pAboutWindow->m_bIsOpen = !m_pAboutWindow->m_bIsOpen;
                 }
                 ImGui::EndMenu();
             }
         }
+    }
+    void MainWindow::Update()
+    {
+        m_bIsOpen = gpRenderer->m_bLockFortInput;
     }
 }

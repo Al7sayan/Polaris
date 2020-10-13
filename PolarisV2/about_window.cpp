@@ -48,6 +48,12 @@ namespace polaris
 			ImGui::Text("Samicc");
 			ImGui::Text("Slushia");
 
+			ImGui::Dummy(ImVec2(1, 10));
+
+			ImGui::Dummy(ImVec2(30, 0));
+			ImGui::SameLine();
+			ImGui::Button("Dismiss");
+
 			ImGui::End();
 		}
 	}

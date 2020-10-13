@@ -83,9 +83,6 @@
     <Filter Include="UI\Extensions">
       <UniqueIdentifier>{d8b4d04d-d840-4b9d-93ad-e976ccb6bad6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Window\Field Window">
-      <UniqueIdentifier>{295f6282-d081-4317-b677-7de39e61c0e1}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SDK\FN_Basic.cpp">
@@ -174,9 +171,6 @@
     <ClCompile Include="about_window.cpp">
       <Filter>UI\Window\Windows\About Window</Filter>
     </ClCompile>
-    <ClCompile Include="field_window.cpp">
-      <Filter>UI\Window\Field Window</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDK.hpp">
@@ -245,12 +239,6 @@
     </ClInclude>
     <ClInclude Include="imgui_text_extension.h">
       <Filter>UI\Extensions</Filter>
-    </ClInclude>
-    <ClInclude Include="field_window.h">
-      <Filter>UI\Window\Field Window</Filter>
-    </ClInclude>
-    <ClInclude Include="field.h">
-      <Filter>UI\Window\Field Window</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -17,6 +17,7 @@ namespace polaris
 
         virtual void Draw();
         virtual void Resize();
+        virtual void Update();
     };
 }
 

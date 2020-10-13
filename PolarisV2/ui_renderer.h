@@ -18,6 +18,7 @@ namespace polaris
         ID3D11RenderTargetView* m_pCurrentView = nullptr;
         HWND m_hWnd = 0;
         WNDPROC m_lpPrevWndFunc;
+        bool m_bLockFortInput;
 
         UIRenderer();
         ~UIRenderer();
