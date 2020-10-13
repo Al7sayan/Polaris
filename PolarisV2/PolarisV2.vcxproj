@@ -83,12 +83,12 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release [Beta]|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>.\minhook;$(IncludePath)</IncludePath>
+    <IncludePath>.\imgui;.\imgui\examples;.\minhook;$(IncludePath)</IncludePath>
     <LibraryPath>.\minhook;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release [Prod]|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>.\minhook;$(IncludePath)</IncludePath>
+    <IncludePath>.\imgui;.\imgui\examples;.\minhook;$(IncludePath)</IncludePath>
     <LibraryPath>.\minhook;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug (Slow)|x64'">
@@ -137,6 +137,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -157,6 +158,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -168,12 +170,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="about_window.cpp" />
     <ClCompile Include="athena_pawn.cpp" />
     <ClCompile Include="athena_plate.cpp" />
     <ClCompile Include="directory_utils.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="base_plate.cpp" />
     <ClCompile Include="error_utils.cpp" />
+    <ClCompile Include="farmstead_pawn.cpp" />
+    <ClCompile Include="farmstead_plate.cpp" />
+    <ClCompile Include="field_window.cpp" />
     <ClCompile Include="frontend_plate.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="imgui\examples\imgui_impl_dx11.cpp" />
@@ -197,14 +203,20 @@
     <ClCompile Include="ui_window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="about_window.h" />
     <ClInclude Include="athena_pawn.h" />
     <ClInclude Include="athena_plate.h" />
     <ClInclude Include="build.h" />
     <ClInclude Include="base_plate.h" />
     <ClInclude Include="directory_utils.h" />
     <ClInclude Include="error_utils.h" />
+    <ClInclude Include="farmstead_pawn.h" />
+    <ClInclude Include="farmstead_plate.h" />
+    <ClInclude Include="field.h" />
+    <ClInclude Include="field_window.h" />
     <ClInclude Include="frontend_plate.h" />
     <ClInclude Include="globals.h" />
+    <ClInclude Include="imgui_text_extension.h" />
     <ClInclude Include="main_window.h" />
     <ClInclude Include="pawn.h" />
     <ClInclude Include="peh_plate.h" />

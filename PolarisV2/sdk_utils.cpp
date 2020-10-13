@@ -99,6 +99,26 @@ namespace polaris
 		polaris::gpActors = &polaris::gpLevel->Actors;
 		polaris::gpPlayerController = polaris::gpLocalPlayer->PlayerController;
 	}
+	VOID SDKUtils::InitPatches()
+	{
+		// Item ownership check patching - allows weapons and other GameplayAbilites to properly function.
+		auto pAbilityPatchAddress = SDKUtils::FindPattern
+		(
+			"\xC0\x0F\x84\x3C\x02\x00\x00\x0F\x2F\xF7\x0F\x86\xF5\x00\x00\x00",
+			"xxxxxxxxxxxxxxxx"
+		);
+		if (pAbilityPatchAddress)
+		{
+			DWORD dwProtection;
+			VirtualProtect(pAbilityPatchAddress, 16, PAGE_EXECUTE_READWRITE, &dwProtection);
+
+			reinterpret_cast<uint8_t*>(pAbilityPatchAddress)[2] = 0x85;
+			reinterpret_cast<uint8_t*>(pAbilityPatchAddress)[11] = 0x8D;
+
+			DWORD dwTemp;
+			VirtualProtect(pAbilityPatchAddress, 16, dwProtection, &dwTemp);
+		}
+	}
 
 	std::string SDKUtils::GetConcatPath(const std::string& sFirst, const std::string& sSecond)
 	{

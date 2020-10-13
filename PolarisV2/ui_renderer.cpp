@@ -165,6 +165,8 @@ namespace polaris
 		// sugoi ui font
 		io.Fonts->AddFontFromFileTTF(SDKUtils::GetConcatPath(DirectoryUtils::GetFontsDir(), "segoeui.ttf").c_str(), 20);
 		io.Fonts->AddFontFromFileTTF(SDKUtils::GetConcatPath(DirectoryUtils::GetFontsDir(), "segoeui.ttf").c_str(), 15);
+
+		//Headers
 		io.Fonts->AddFontFromFileTTF(SDKUtils::GetConcatPath(DirectoryUtils::GetFontsDir(), "segoeui.ttf").c_str(), 35);
 		io.Fonts->AddFontFromFileTTF(SDKUtils::GetConcatPath(DirectoryUtils::GetFontsDir(), "segoeuib.ttf").c_str(), 25);
 

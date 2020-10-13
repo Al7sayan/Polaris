@@ -13,10 +13,9 @@ namespace polaris
     */
     class Pawn
     {
-    protected:
+    public:
         SDK::AFortPlayerPawn* m_pPawnActor; //!< The AFortPlayerPawn for the Pawn.
 
-    public:
         Pawn();
         ~Pawn();
 
