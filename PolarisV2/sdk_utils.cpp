@@ -77,7 +77,9 @@ namespace polaris
 	}
 	VOID SDKUtils::InitSdk()
 	{
-		auto pUWorldAddress = SDKUtils::FindPattern("\x48\x8B\x1D\x00\x00\x00\x00\x00\x00\x00\x10\x4C\x8D\x4D\x00\x4C", "xxx???????xxxx?x");
+		gpWorld = reinterpret_cast<SDK::UWorld**>(BaseAddress() + 0x4740328); // cant use SDK::GWorld, because its not in a header.
+
+		/*auto pUWorldAddress = SDKUtils::FindPattern("\x48\x8B\x1D\x00\x00\x00\x00\x00\x00\x00\x10\x4C\x8D\x4D\x00\x4C", "xxx???????xxxx?x");
 		auto pUWorldOffset = *reinterpret_cast<uint32_t*>(pUWorldAddress + 3);
 		gpWorld = reinterpret_cast<SDK::UWorld**>(pUWorldAddress + 7 + pUWorldOffset);
 
@@ -88,7 +90,7 @@ namespace polaris
 		auto pGNameAddress = SDKUtils::FindPattern("\x48\x8B\x05\x00\x00\x00\x00\x48\x85\xC0\x75\x50\xB9\x00\x00\x00\x00\x48\x89\x5C\x24", "xxx????xxxxxx????xxxx");
 		auto pGNameOffset = *reinterpret_cast<uint32_t*>(pGNameAddress + 3);
 
-		SDK::FName::GNames = *reinterpret_cast<SDK::TNameEntryArray**>(pGNameAddress + 7 + pGNameOffset);
+		SDK::FName::GNames = *reinterpret_cast<SDK::TNameEntryArray**>(pGNameAddress + 7 + pGNameOffset);*/
 	}
 	VOID SDKUtils::InitGlobals()
 	{

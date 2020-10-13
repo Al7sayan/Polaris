@@ -73,7 +73,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug (Slow)|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>.\minhook;$(IncludePath)</IncludePath>
+    <IncludePath>.\imgui;.\imgui\examples;.\minhook;$(IncludePath)</IncludePath>
     <LibraryPath>.\minhook;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -99,6 +99,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -179,7 +180,6 @@
     <ClCompile Include="error_utils.cpp" />
     <ClCompile Include="farmstead_pawn.cpp" />
     <ClCompile Include="farmstead_plate.cpp" />
-    <ClCompile Include="field_window.cpp" />
     <ClCompile Include="frontend_plate.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="imgui\examples\imgui_impl_dx11.cpp" />
@@ -192,6 +192,7 @@
     <ClCompile Include="peh_plate.cpp" />
     <ClCompile Include="peh_table.cpp" />
     <ClCompile Include="program.cpp" />
+    <ClCompile Include="SDK\FN_Encryption.cpp" />
     <ClCompile Include="sdk_utils.cpp" />
     <ClCompile Include="SDK\FN_Basic.cpp" />
     <ClCompile Include="SDK\FN_CoreUObject_functions.cpp" />
@@ -212,8 +213,6 @@
     <ClInclude Include="error_utils.h" />
     <ClInclude Include="farmstead_pawn.h" />
     <ClInclude Include="farmstead_plate.h" />
-    <ClInclude Include="field.h" />
-    <ClInclude Include="field_window.h" />
     <ClInclude Include="frontend_plate.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="imgui_text_extension.h" />
