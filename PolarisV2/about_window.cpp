@@ -50,9 +50,10 @@ namespace polaris
 
 			ImGui::Dummy(ImVec2(1, 10));
 
-			ImGui::Dummy(ImVec2(30, 0));
+			ImGui::Dummy(ImVec2(260, 0));
 			ImGui::SameLine();
-			ImGui::Button("Dismiss");
+			if (ImGui::Button("Dismiss"))
+				m_bIsOpen = false;
 
 			ImGui::End();
 		}
