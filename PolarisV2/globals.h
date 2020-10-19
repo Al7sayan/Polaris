@@ -15,6 +15,7 @@ namespace polaris
 	extern SDK::ULocalPlayer* gpLocalPlayer;
 
 	extern SDK::APlayerController* gpPlayerController;
+	extern SDK::UObject* (*StaticConstructObject_Internal)(SDK::UClass* InClass, SDK::UObject* InOuter, SDK::FName InName, int64_t InFlags, SDK::FUObjectItem::ObjectFlags InternalSetFlags, SDK::UObject* InTemplate, bool bCopyTransientsFromClassDefaults, void* InInstanceGraph, bool bAssumeTemplateIsArchetype);
 };
 
 #endif // !GLOBALS_H

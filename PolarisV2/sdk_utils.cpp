@@ -89,6 +89,14 @@ namespace polaris
 		auto pGNameOffset = *reinterpret_cast<uint32_t*>(pGNameAddress + 3);
 
 		SDK::FName::GNames = *reinterpret_cast<SDK::TNameEntryArray**>(pGNameAddress + 7 + pGNameOffset);
+
+		auto pStaticConstructObject_InternalOffset = FindPattern("\xE8\x00\x00\x00\x00\x89\x78\x38", "x????xxx");
+		if (!pStaticConstructObject_InternalOffset)
+			ErrorUtils::ThrowException(L"Finding pattern for StaticConstructObject_Internal has failed. Please relaunch Fortnite and try again!");
+
+		auto pStaticConstructObject_InternalAddress = pStaticConstructObject_InternalOffset + 5 + *reinterpret_cast<int32_t*>(pStaticConstructObject_InternalOffset + 1);
+
+		StaticConstructObject_Internal = reinterpret_cast<decltype(StaticConstructObject_Internal)>(pStaticConstructObject_InternalAddress);
 	}
 	VOID SDKUtils::InitGlobals()
 	{
