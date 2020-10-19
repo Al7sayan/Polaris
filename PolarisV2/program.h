@@ -7,7 +7,7 @@ namespace polaris
 	class Program
 	{
 	public:
-		PehTable* m_pMainTable; //!< The main PEH (Process Event Hook) Table.
+		tables::PehTable* m_pMainTable; //!< The main PEH (Process Event Hook) Table.
 
 		Program();
 		~Program();

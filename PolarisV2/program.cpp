@@ -16,14 +16,14 @@ namespace polaris
 	Program::Program()
 	{
 		if (gpProgram != nullptr || MH_Initialize() != MH_OK)
-			ErrorUtils::ThrowException(L"Initializing failed. Please restart Fortnite and try again!");
+			utilities::ErrorUtils::ThrowException(L"Initializing failed. Please restart Fortnite and try again!");
 		gpProgram = this;
 
-		SDKUtils::InitConsole();
+		utilities::SDKUtils::InitConsole();
 		std::cout << "Welcome to Polaris!" << std::endl;
 
-		m_pMainTable = new PehTable;
-		m_pMainTable->PushPlate(new BasePlate);
+		m_pMainTable = new tables::PehTable;
+		m_pMainTable->PushPlate(new tables::plates::BasePlate);
 	}
 
 	Program::~Program()

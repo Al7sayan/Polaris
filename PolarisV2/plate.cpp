@@ -2,14 +2,20 @@
 
 namespace polaris
 {
-    void Plate::Update()
+    namespace tables
     {
-    }
+        namespace plates
+        {
+            void Plate::Update()
+            {
+            }
 
-    void Plate::OnEnabled()
-    {
-    }
-    void Plate::OnDisabled()
-    {
+            void Plate::OnEnabled()
+            {
+            }
+            void Plate::OnDisabled()
+            {
+            }
+        }
     }
 }

@@ -6,56 +6,65 @@
 
 namespace polaris
 {
-	void AboutWindow::Draw()
+	namespace ui
 	{
-		std::string verNum = POLARIS_VER;
-		std::string verEnv = POLARIS_ID;
-		std::string combined = verNum + "-" + verEnv;
-
-		ImGui::Begin("About", &m_bIsOpen, ImGuiWindowFlags_NoTitleBar);
+		namespace window
 		{
-			ImGui::Header("Polaris");
-			ImGui::SameLine();
+			namespace windows
+			{
+				void AboutWindow::Draw()
+				{
+					std::string verNum = POLARIS_VER;
+					std::string verEnv = POLARIS_ID;
+					std::string combined = verNum + "-" + verEnv;
 
-			ImGui::Header(ImVec4(1.0f, 1.0f, 1.0f, 0.15f), combined.c_str());
+					ImGui::Begin("About", &m_bIsOpen, ImGuiWindowFlags_NoTitleBar);
+					{
+						ImGui::Header("Polaris");
+						ImGui::SameLine();
 
-			ImGui::SmallText("They said to think back, but I think we went a bit too far.");
+						ImGui::Header(ImVec4(1.0f, 1.0f, 1.0f, 0.15f), combined.c_str());
 
-			ImGui::Dummy(ImVec2(1, 10));
+						ImGui::SmallText("They said to think back, but I think we went a bit too far.");
 
-			ImGui::Header2("Creator");
-			ImGui::Text("Cyuubi");
+						ImGui::Dummy(ImVec2(1, 10));
 
-			ImGui::Dummy(ImVec2(1, 5));
+						ImGui::Header2("Creator");
+						ImGui::Text("Cyuubi");
 
-			ImGui::Header2("Developer");
-			ImGui::Text("irma");
+						ImGui::Dummy(ImVec2(1, 5));
 
-			ImGui::Dummy(ImVec2(1, 5));
+						ImGui::Header2("Developer");
+						ImGui::Text("irma");
 
-			ImGui::Header2("Contributor");
-			ImGui::Text("kanner");
-			ImGui::Text("pivotman319");
-			ImGui::Text("wiktorwiktor12");
+						ImGui::Dummy(ImVec2(1, 5));
 
-			ImGui::Dummy(ImVec2(1, 5));
+						ImGui::Header2("Contributor");
+						ImGui::Text("kanner");
+						ImGui::Text("pivotman319");
+						ImGui::Text("wiktorwiktor12");
 
-			ImGui::Header2("Special Thanks");
-			ImGui::Text("BattleDash");
-			ImGui::Text("Crush");
-			ImGui::Text("Darkblade");
-			ImGui::Text("Chase");
-			ImGui::Text("Samicc");
-			ImGui::Text("Slushia");
+						ImGui::Dummy(ImVec2(1, 5));
 
-			ImGui::Dummy(ImVec2(1, 10));
+						ImGui::Header2("Special Thanks");
+						ImGui::Text("BattleDash");
+						ImGui::Text("Crush");
+						ImGui::Text("Darkblade");
+						ImGui::Text("Chase");
+						ImGui::Text("Samicc");
+						ImGui::Text("Slushia");
 
-			ImGui::Dummy(ImVec2(260, 0));
-			ImGui::SameLine();
-			if (ImGui::Button("Dismiss"))
-				m_bIsOpen = false;
+						ImGui::Dummy(ImVec2(1, 10));
 
-			ImGui::End();
+						ImGui::Dummy(ImVec2(260, 0));
+						ImGui::SameLine();
+						if (ImGui::Button("Dismiss"))
+							m_bIsOpen = false;
+
+						ImGui::End();
+					}
+				}
+			}
 		}
 	}
 }

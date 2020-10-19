@@ -9,20 +9,31 @@
 
 namespace polaris
 {
-    class FarmsteadPlate : public PehPlate
+    namespace tables
     {
-    private:
-        FarmsteadPawn* m_pPlayerPawn;
-        bool m_bIsInitialized;
+        namespace plates
+        {
+            //!  Manages Farmstead's custom behavior.
+            /*!
+            * ez pirate StW with this plate.
+            * Not included in prod or beta builds.
+            */
+            class FarmsteadPlate : public PehPlate
+            {
+            private:
+                pawn::pawns::FarmsteadPawn* m_pPlayerPawn;
+                bool m_bIsInitialized;
 
-    public:
-        void ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams) override;
-        void Update() override;
+            public:
+                void ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams) override;
+                void Update() override;
 
-        void OnEnabled() override;
+                void OnEnabled() override;
 
-        void Initialize();
-    };
+                void Initialize(); //!< Initialize spawns a pawn gives it a pickaxe.
+            };
+        }
+    }
 }
 
 #endif // !FARMSTEAD_PLATE_H

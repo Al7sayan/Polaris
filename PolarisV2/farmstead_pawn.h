@@ -8,14 +8,21 @@
 
 namespace polaris
 {
-    class FarmsteadPawn : public Pawn
+    namespace pawn
     {
-    public:
-        FarmsteadPawn();
-        ~FarmsteadPawn();
+        namespace pawns
+        {
+            //!  Player Pawn class for a FarmsteadPlate.
+            class FarmsteadPawn : public Pawn
+            {
+            public:
+                FarmsteadPawn();
+                ~FarmsteadPawn();
 
-        void Update() override;
-    };
+                void Update() override;
+            };
+        }
+    }
 }
 
 #endif // !FARMSTEAD_PAWN_H

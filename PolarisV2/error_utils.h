@@ -5,11 +5,15 @@
 
 namespace polaris
 {
-    class ErrorUtils
+    namespace utilities
     {
-    public:
-        static void ThrowException(LPCWSTR message); //!< Pauses execution and prompts the user to restart the game.
-    };
+        //!  Utilities for Error handling.
+        class ErrorUtils
+        {
+        public:
+            static void ThrowException(LPCWSTR message); //!< ThrowException pauses execution and prompts the user to restart the game.
+        };
+    }
 }
 
 #endif // !ERROR_UTILS_H

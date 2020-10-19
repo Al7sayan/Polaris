@@ -2,7 +2,13 @@
 
 namespace polaris
 {
-    void PehPlate::ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams)
+    namespace tables
     {
+        namespace plates
+        {
+            void PehPlate::ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams)
+            {
+            }
+        }
     }
 }

@@ -5,11 +5,21 @@
 
 namespace polaris
 {
-    class AboutWindow : public UIWindow
+    namespace ui
     {
-    public:
-        void Draw() override;
-    };
+        namespace window
+        {
+            namespace windows
+            {
+                //!  Simple window including credits and build id.
+                class AboutWindow : public UIWindow
+                {
+                public:
+                    void Draw() override;
+                };
+            }
+        }
+    }
 }
 
 #endif // !ABOUT_WINDOW_H

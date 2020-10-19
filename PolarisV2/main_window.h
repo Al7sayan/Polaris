@@ -6,16 +6,29 @@
 
 namespace polaris
 {
-    class MainWindow : public UIWindow
+    namespace ui
     {
-    public:
-        AboutWindow* m_pAboutWindow;
+        namespace window
+        {
+            namespace windows
+            {
+                //!  The main menu bar.
+                /*!
+                * In charge of giving users access to the Polaris tools.
+                */
+                class MainWindow : public UIWindow
+                {
+                public:
+                    AboutWindow* m_pAboutWindow;
 
-        MainWindow();
+                    MainWindow();
 
-        void Draw() override;
-        void Update() override;
-    };
+                    void Draw() override;
+                    void Update() override;
+                };
+            }
+        }
+    }
 }
 
 #endif // !MAIN_WINDOW_H

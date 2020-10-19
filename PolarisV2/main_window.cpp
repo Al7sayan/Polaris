@@ -4,35 +4,44 @@
 
 namespace polaris
 {
-    MainWindow::MainWindow()
+    namespace ui
     {
-        m_pAboutWindow = new AboutWindow;
-    }
-
-    void MainWindow::Draw()
-    {
-        ImGui::BeginMainMenuBar();
+        namespace window
         {
-            if (ImGui::BeginMenu("Player"))
+            namespace windows
             {
-                if (ImGui::MenuItem("Exit"))
+                MainWindow::MainWindow()
                 {
-                    gpProgram->~Program();
+                    m_pAboutWindow = new AboutWindow;
                 }
-                ImGui::EndMenu();
-            }
-            if (ImGui::BeginMenu("Help"))
-            {
-                if (ImGui::MenuItem("About"))
+
+                void MainWindow::Draw()
                 {
-                    m_pAboutWindow->m_bIsOpen = !m_pAboutWindow->m_bIsOpen;
+                    ImGui::BeginMainMenuBar();
+                    {
+                        if (ImGui::BeginMenu("Player"))
+                        {
+                            if (ImGui::MenuItem("Exit"))
+                            {
+                                gpProgram->~Program();
+                            }
+                            ImGui::EndMenu();
+                        }
+                        if (ImGui::BeginMenu("Help"))
+                        {
+                            if (ImGui::MenuItem("About"))
+                            {
+                                m_pAboutWindow->m_bIsOpen = !m_pAboutWindow->m_bIsOpen;
+                            }
+                            ImGui::EndMenu();
+                        }
+                    }
                 }
-                ImGui::EndMenu();
+                void MainWindow::Update()
+                {
+                    m_bIsOpen = gpRenderer->m_bLockFortInput;
+                }
             }
         }
-    }
-    void MainWindow::Update()
-    {
-        m_bIsOpen = gpRenderer->m_bLockFortInput;
     }
 }

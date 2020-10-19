@@ -6,20 +6,30 @@
 
 namespace polaris
 {
-    class AthenaPlate : public PehPlate
+    namespace tables
     {
-    private:
-        AthenaPawn* m_pPlayerPawn;
-        bool m_bIsInitialized;
+        namespace plates
+        {
+            //!  Manages Athena's custom behavior.
+            /*!
+            * This Plate is in charge of essential Athena stuff, like spawning a pawn or dropping the loading screen.
+            */
+            class AthenaPlate : public PehPlate
+            {
+            private:
+                pawn::pawns::AthenaPawn* m_pPlayerPawn;
+                bool m_bIsInitialized;
 
-    public:
-        void ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams) override;
-        void Update() override;
+            public:
+                void ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams) override;
+                void Update() override;
 
-        void OnEnabled() override;
+                void OnEnabled() override;
 
-        void Initialize();
-    };
+                void Initialize(); //!< Initialize spawns a pawn and drops the loading screen.
+            };
+        }
+    }
 }
 
 #endif // !ATHENA_PLATE_H

@@ -6,12 +6,28 @@
 
 namespace polaris
 {
-    std::string DirectoryUtils::GetFontsDir()
+    namespace utilities
     {
-        char winDir[MAX_PATH];
-        if (!GetWindowsDirectoryA(winDir, sizeof(winDir)))
-            ErrorUtils::ThrowException(L"An unknown platform exception occured.");
+        std::string DirectoryUtils::GetConcatPath(const std::string& sFirst, const std::string& sSecond)
+        {
+            std::string sTemp = sFirst;
 
-        return SDKUtils::GetConcatPath(winDir, "Fonts");
+            if (sFirst[sFirst.length()] != '\\')
+            {
+                sTemp += '\\';
+
+                return(sTemp + sSecond);
+            }
+            else
+                return(sFirst + sSecond);
+        }
+        std::string DirectoryUtils::GetFontsDir()
+        {
+            char winDir[MAX_PATH];
+            if (!GetWindowsDirectoryA(winDir, sizeof(winDir)))
+                ErrorUtils::ThrowException(L"An unknown platform exception occured.");
+
+            return GetConcatPath(winDir, "Fonts");
+        }
     }
 }

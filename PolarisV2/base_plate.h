@@ -5,16 +5,22 @@
 
 namespace polaris
 {
-    //!  The base PehPlate.
-    /*!
-    * This Plate is always at the bottom of the Main PehTable.
-    * In charge of initializing Polaris before going into Frontend mode.
-    */
-    class BasePlate : public PehPlate
+    namespace tables
     {
-    public:
-        void OnEnabled() override;
-    };
+        namespace plates
+        {
+            //!  The base PehPlate.
+            /*!
+            * This Plate is always at the bottom of the Main PehTable.
+            * In charge of initializing Polaris before going into Frontend mode.
+            */
+            class BasePlate : public PehPlate
+            {
+            public:
+                void OnEnabled() override;
+            };
+        }
+    }
 }
 
 #endif // !BASE_PLATE_H

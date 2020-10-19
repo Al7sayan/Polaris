@@ -3,18 +3,24 @@
 
 namespace polaris
 {
-    UIWindow::UIWindow()
+    namespace ui
     {
-        gpRenderer->m_vpWindows.push_back(this);
-    }
+        namespace window
+        {
+            UIWindow::UIWindow()
+            {
+                gpRenderer->m_vpWindows.push_back(this);
+            }
 
-    void UIWindow::Draw()
-    {
-    }
-    void UIWindow::Resize()
-    {
-    }
-    void UIWindow::Update()
-    {
+            void UIWindow::Draw()
+            {
+            }
+            void UIWindow::Resize()
+            {
+            }
+            void UIWindow::Update()
+            {
+            }
+        }
     }
 }

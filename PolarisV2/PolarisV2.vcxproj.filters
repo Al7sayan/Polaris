@@ -35,20 +35,8 @@
     <Filter Include="Tables\Plates\Athena">
       <UniqueIdentifier>{3144f85a-8930-456e-87bb-24954dfef5e4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tables\Plates\Peh Plate">
-      <UniqueIdentifier>{481ce6a3-02e7-4eee-a95a-d2c661434d32}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Tables\Peh Table">
       <UniqueIdentifier>{37da6385-db2a-4d05-a6bb-932d876af354}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pawn">
-      <UniqueIdentifier>{0acadc5a-9351-4f4c-bf85-01f3ae63dff6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pawn\Pawns">
-      <UniqueIdentifier>{da11380f-6521-427b-8db8-9ad94518181f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pawn\Pawns\Athena">
-      <UniqueIdentifier>{e66c5246-8a94-4d03-a99f-55b04d8c2b5f}</UniqueIdentifier>
     </Filter>
     <Filter Include="UI">
       <UniqueIdentifier>{a552ffdd-0716-44bb-b9b7-e6030240e7f7}</UniqueIdentifier>
@@ -62,6 +50,12 @@
     <Filter Include="UI\Renderer">
       <UniqueIdentifier>{810e235e-a48c-4402-aef0-6d3da7c14626}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tables\Plates\Farmstead">
+      <UniqueIdentifier>{9ed2ec0b-a63e-4963-ab74-3180b7f32bdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Extensions">
+      <UniqueIdentifier>{d8b4d04d-d840-4b9d-93ad-e976ccb6bad6}</UniqueIdentifier>
+    </Filter>
     <Filter Include="UI\Window">
       <UniqueIdentifier>{e4545648-70f8-4fc6-b9e1-580c08f9aa17}</UniqueIdentifier>
     </Filter>
@@ -71,17 +65,20 @@
     <Filter Include="UI\Window\Windows\Main Window">
       <UniqueIdentifier>{b3190ab4-4431-445b-9277-2ad73cd90886}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tables\Plates\Farmstead">
-      <UniqueIdentifier>{9ed2ec0b-a63e-4963-ab74-3180b7f32bdd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pawn\Pawns\Farmstead">
-      <UniqueIdentifier>{af725836-dac5-4299-8292-5c6a898ed62d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="UI\Window\Windows\About Window">
       <UniqueIdentifier>{43ea6f48-fb7c-443d-90c4-315fe12099cf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Extensions">
-      <UniqueIdentifier>{d8b4d04d-d840-4b9d-93ad-e976ccb6bad6}</UniqueIdentifier>
+    <Filter Include="Pawn">
+      <UniqueIdentifier>{0acadc5a-9351-4f4c-bf85-01f3ae63dff6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pawn\Pawns">
+      <UniqueIdentifier>{da11380f-6521-427b-8db8-9ad94518181f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pawn\Pawns\Athena">
+      <UniqueIdentifier>{e66c5246-8a94-4d03-a99f-55b04d8c2b5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pawn\Pawns\Farmstead">
+      <UniqueIdentifier>{af725836-dac5-4299-8292-5c6a898ed62d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -100,9 +97,6 @@
     <ClCompile Include="table.cpp">
       <Filter>Tables</Filter>
     </ClCompile>
-    <ClCompile Include="plate.cpp">
-      <Filter>Tables\Plates</Filter>
-    </ClCompile>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="program.cpp" />
     <ClCompile Include="base_plate.cpp">
@@ -110,9 +104,6 @@
     </ClCompile>
     <ClCompile Include="peh_table.cpp">
       <Filter>Tables\Peh Table</Filter>
-    </ClCompile>
-    <ClCompile Include="peh_plate.cpp">
-      <Filter>Tables\Plates\Peh Plate</Filter>
     </ClCompile>
     <ClCompile Include="frontend_plate.cpp">
       <Filter>Tables\Plates\Frontend</Filter>
@@ -171,6 +162,12 @@
     <ClCompile Include="about_window.cpp">
       <Filter>UI\Window\Windows\About Window</Filter>
     </ClCompile>
+    <ClCompile Include="peh_plate.cpp">
+      <Filter>Tables\Plates</Filter>
+    </ClCompile>
+    <ClCompile Include="plate.cpp">
+      <Filter>Tables\Plates</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDK.hpp">
@@ -194,9 +191,6 @@
     </ClInclude>
     <ClInclude Include="peh_table.h">
       <Filter>Tables\Peh Table</Filter>
-    </ClInclude>
-    <ClInclude Include="peh_plate.h">
-      <Filter>Tables\Plates\Peh Plate</Filter>
     </ClInclude>
     <ClInclude Include="frontend_plate.h">
       <Filter>Tables\Plates\Frontend</Filter>
@@ -239,6 +233,9 @@
     </ClInclude>
     <ClInclude Include="imgui_text_extension.h">
       <Filter>UI\Extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="peh_plate.h">
+      <Filter>Tables\Plates</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

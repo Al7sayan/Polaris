@@ -5,14 +5,21 @@
 
 namespace polaris
 {
-    class AthenaPawn : public Pawn
+    namespace pawn
     {
-    public:
-        AthenaPawn();
-        ~AthenaPawn();
+        namespace pawns
+        {
+            //!  Player Pawn class for an AthenaPlate.
+            class AthenaPawn : public Pawn
+            {
+            public:
+                AthenaPawn();
+                ~AthenaPawn();
 
-        void Update() override;
-    };
+                void Update() override;
+            };
+        }
+    }
 }
 
 #endif // !ATHENA_PAWN_H
