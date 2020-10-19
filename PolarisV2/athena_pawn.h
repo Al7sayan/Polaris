@@ -17,6 +17,7 @@ namespace polaris
                 ~AthenaPawn();
 
                 void Update() override;
+                void SetupInventoryAndQuickBars();
             };
         }
     }

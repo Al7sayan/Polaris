@@ -3,7 +3,13 @@
 #include "error_utils.h"
 #include "sdk_utils.h"
 #include "program.h"
+#include <MinHook.h>
 
+PVOID(*CollectGarbageInternal)(uint32_t, bool) = nullptr;
+PVOID CollectGarbageInternalHook(uint32_t KeepFlags, bool bPerformFullPurge)
+{
+    return NULL;
+}
 namespace polaris
 {
     namespace tables
@@ -39,6 +45,14 @@ namespace polaris
             void AthenaPlate::Initialize()
             {
                 m_bIsInitialized = true;
+                //From: Wiktor, TEMPORARY UNTIL WE PUT THIS IN A SEPERATE CLASS
+                auto pCollectGarbageInternalAddress = utilities::SDKUtils::FindPattern("\x48\x8B\xC4\x48\x89\x58\x08\x88\x50\x10", "xxxxxxxxxx");
+                if (!pCollectGarbageInternalAddress)
+                    utilities::ErrorUtils::ThrowException(L"Finding pattern for CollectGarbageInternal has failed. Please relaunch Fortnite and try again!");
+
+                MH_CreateHook(static_cast<LPVOID>(pCollectGarbageInternalAddress), CollectGarbageInternalHook, reinterpret_cast<LPVOID*>(&CollectGarbageInternal));
+                MH_EnableHook(static_cast<LPVOID>(pCollectGarbageInternalAddress));
+
                 utilities::SDKUtils::InitSdk();
                 utilities::SDKUtils::InitGlobals();
 
