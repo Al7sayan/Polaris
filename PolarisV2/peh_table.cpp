@@ -48,13 +48,6 @@ namespace polaris
             if (!pProcessEventAddress)
                 utilities::ErrorUtils::ThrowException(L"ProcessEvent address was not found.");
 
-            auto pCollectGarbageInternalAddress = utilities::SDKUtils::FindPattern("\x48\x8B\xC4\x48\x89\x58\x08\x88\x50\x10", "xxxxxxxxxx");
-            if (!pCollectGarbageInternalAddress)
-                utilities::ErrorUtils::ThrowException(L"Finding pattern for CollectGarbageInternal has failed. Please relaunch Fortnite and try again!");
-
-            MH_CreateHook(static_cast<LPVOID>(pCollectGarbageInternalAddress), CollectGarbageInternalHook, reinterpret_cast<LPVOID*>(&CollectGarbageInternal));
-            MH_EnableHook(static_cast<LPVOID>(pCollectGarbageInternalAddress));
-
             MH_CreateHook(static_cast<LPVOID>(pProcessEventAddress), ProcessEventHook, reinterpret_cast<LPVOID*>(&ProcessEvent));
             MH_EnableHook(static_cast<LPVOID>(pProcessEventAddress));
         }
