@@ -31,12 +31,6 @@ namespace polaris
             return ProcessEvent(pObject, pFunction, pParams);
         }
 
-        PVOID(*CollectGarbageInternal)(uint32_t, bool) = nullptr;
-        PVOID CollectGarbageInternalHook(uint32_t KeepFlags, bool bPerformFullPurge)
-        {
-            return NULL;
-        }
-
         PehTable::PehTable()
         {
             if (gpPehTable != nullptr)
