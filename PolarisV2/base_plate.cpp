@@ -16,17 +16,10 @@ namespace polaris
             {
                 utilities::SDKUtils::InitSdk();
 
-                uintptr_t pBaseAddress = utilities::SDKUtils::BaseAddress();
-                if (!pBaseAddress)
-                    utilities::ErrorUtils::ThrowException(L"BaseAddress was not found.");
-
                 // NOTE: We wait until this is not null. This becomes a valid pointer as soon as
                 // the initial loading screen drops. From then, we can continue initializing Polaris.
                 while ((*globals::gpWorld) == nullptr)
                     Sleep(1000 / 60);
-
-                new ui::UIRenderer;
-                new ui::window::windows::MainWindow;
 
                 // NOTE: For some reason if you don't wait a bit here, everything will be nullptr.
                 Sleep(500);
@@ -35,10 +28,11 @@ namespace polaris
                 gpProgram->m_pMainTable->PushPlate(new FrontendPlate);
 
                 // Initialize the console.
-                auto pConsole = SDK::UConsole::StaticClass()->CreateDefaultObject<SDK::UConsole>();
+                //auto pConsole = SDK::UConsole::StaticClass()->CreateDefaultObject<SDK::UConsole>();
 
-                pConsole->Outer = globals::gpLocalPlayer->ViewportClient;
-                globals::gpLocalPlayer->ViewportClient->ViewportConsole = pConsole;
+                //pConsole->Outer = globals::gpLocalPlayer->ViewportClient;
+                //globals::gpLocalPlayer->ViewportClient->ViewportConsole = pConsole;
+                return NULL;
             }
 
             void BasePlate::OnEnabled()

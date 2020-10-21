@@ -4,6 +4,13 @@
 #include "peh_plate.h"
 #include "athena_pawn.h"
 
+struct joeNuts
+{
+    unsigned char joeNut[0x0338];
+    class SDK::UCheatManager* CheatManager;
+    class SDK::UClass* CheatClass;
+};
+
 namespace polaris
 {
     namespace tables
