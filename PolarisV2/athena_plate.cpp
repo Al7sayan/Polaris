@@ -3,13 +3,10 @@
 #include "error_utils.h"
 #include "sdk_utils.h"
 #include "program.h"
+#include "build.h"
+
 #include <MinHook.h>
 
-PVOID(*CollectGarbageInternal)(uint32_t, bool) = nullptr;
-PVOID CollectGarbageInternalHook(uint32_t KeepFlags, bool bPerformFullPurge)
-{
-    return NULL;
-}
 namespace polaris
 {
     namespace tables
@@ -18,8 +15,7 @@ namespace polaris
         {
             void AthenaPlate::ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams)
             {
-                if (m_pPlayerPawn != nullptr)
-                    m_pPlayerPawn->ProcessEventHook(pObject, pFunction, pParams);
+                Maybe(m_pPlayerPawn)->ProcessEventHook(pObject, pFunction, pParams);
 
                 if (pFunction->GetName().find("ReadyToStartMatch") != std::string::npos && m_bIsInitialized == false)
                     Initialize();
@@ -29,8 +25,7 @@ namespace polaris
             }
             void AthenaPlate::Update()
             {
-                if (m_pPlayerPawn != nullptr)
-                    m_pPlayerPawn->Update();
+                Maybe(m_pPlayerPawn)->Update();
 
                 // TEMP: Go back to Frontend.
                 if (GetAsyncKeyState(VK_OEM_PLUS) & 0x8000)
@@ -39,13 +34,21 @@ namespace polaris
 
             void AthenaPlate::OnEnabled()
             {
-                globals::gpPlayerController->SwitchLevel(TEXT("Athena_Terrain"));
+                Maybe(globals::gpPlayerController)->SwitchLevel(TEXT("Athena_Terrain"));
+            }
+
+            PVOID(*CollectGarbageInternal)(uint32_t, bool) = nullptr;
+            PVOID CollectGarbageInternalHook(uint32_t KeepFlags, bool bPerformFullPurge)
+            {
+                return NULL;
             }
 
             void AthenaPlate::Initialize()
             {
                 m_bIsInitialized = true;
+
                 //From: Wiktor, TEMPORARY UNTIL WE PUT THIS IN A SEPERATE CLASS
+                //NOTE: (irma) Wiktor, this is OK to put in Athena Plate.
                 auto pCollectGarbageInternalAddress = utilities::SDKUtils::FindPattern("\x48\x8B\xC4\x48\x89\x58\x08\x88\x50\x10", "xxxxxxxxxx");
                 if (!pCollectGarbageInternalAddress)
                     utilities::ErrorUtils::ThrowException(L"Finding pattern for CollectGarbageInternal has failed. Please relaunch Fortnite and try again!");
@@ -55,6 +58,7 @@ namespace polaris
 
                 utilities::SDKUtils::InitSdk();
                 utilities::SDKUtils::InitGlobals();
+                utilities::SDKUtils::InitPatches();
 
                 m_pPlayerPawn = new pawn::pawns::AthenaPawn;
 
