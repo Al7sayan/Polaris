@@ -16,7 +16,8 @@ namespace polaris
         class Pawn
         {
         public:
-            SDK::AFortPlayerPawn* m_pPawnActor;
+            SDK::AFortPlayerPawn* m_pPawnActor = nullptr; //!< The Pawn's actor.
+            bool m_bHasJumped = false; //!< True when space is being held down and the pawn has already finished a jump.
 
             virtual void ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams); //!< ProcessEventHook is used to hook behavior to ProcessEvent calls.
             virtual void Update(); //!< Update should be called in a PehPlate's Update function.

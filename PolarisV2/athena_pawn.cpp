@@ -26,6 +26,7 @@ namespace polaris
                 playerState->CharacterParts[1] = SDK::UObject::FindObject<SDK::UCustomCharacterPart>("CustomCharacterPart F_Med_Soldier_01.F_Med_Soldier_01");
                 playerState->OnRep_CharacterParts();
                 m_pPawnActor->OnCharacterPartsReinitialized();
+
                 playerState->TeamIndex = SDK::EFortTeam::HumanPvP_Team69; // funny number go brrrrrr
                 playerState->OnRep_TeamIndex();
 
@@ -35,7 +36,7 @@ namespace polaris
                 actorRotation.Roll = 0;
 
                 m_pPawnActor->K2_SetActorLocationAndRotation(m_pPawnActor->K2_GetActorLocation(), actorRotation, false, true, new SDK::FHitResult());
-                SetupInventoryAndQuickBars();
+                //SetupInventoryAndQuickBars();
             }
             AthenaPawn::~AthenaPawn()
             {
@@ -146,13 +147,13 @@ namespace polaris
                         iteminst->operator[](i) = pWorldItem;
                         i++;
                     }
-                    pQuickBars->EnableSlot(SDK::EFortQuickBars::Primary, 0);
-                    pQuickBars->ServerAddItemInternal(inv->ItemInstances.operator[](2)->ItemEntry.ItemGuid, SDK::EFortQuickBars::Secondary, 0);
-                    pQuickBars->ServerAddItemInternal(inv->ItemInstances.operator[](3)->ItemEntry.ItemGuid, SDK::EFortQuickBars::Secondary, 1);
-                    pQuickBars->ServerAddItemInternal(inv->ItemInstances.operator[](4)->ItemEntry.ItemGuid, SDK::EFortQuickBars::Secondary, 2);
-                    pQuickBars->ServerAddItemInternal(inv->ItemInstances.operator[](5)->ItemEntry.ItemGuid, SDK::EFortQuickBars::Secondary, 3);
-                    pQuickBars->ServerAddItemInternal(inv->ItemInstances.operator[](0)->ItemEntry.ItemGuid, SDK::EFortQuickBars::Secondary, 4);
-                    pQuickBars->ServerAddItemInternal(inv->ItemInstances.operator[](1)->ItemEntry.ItemGuid, SDK::EFortQuickBars::Primary, 0);
+                    //pQuickBars->EnableSlot(SDK::EFortQuickBars::Primary, 0);
+                    //pQuickBars->ServerAddItemInternal(inv->ItemInstances.operator[](2)->ItemEntry.ItemGuid, SDK::EFortQuickBars::Secondary, 0);
+                    //pQuickBars->ServerAddItemInternal(inv->ItemInstances.operator[](3)->ItemEntry.ItemGuid, SDK::EFortQuickBars::Secondary, 1);
+                    //pQuickBars->ServerAddItemInternal(inv->ItemInstances.operator[](4)->ItemEntry.ItemGuid, SDK::EFortQuickBars::Secondary, 2);
+                    //pQuickBars->ServerAddItemInternal(inv->ItemInstances.operator[](5)->ItemEntry.ItemGuid, SDK::EFortQuickBars::Secondary, 3);
+                    //pQuickBars->ServerAddItemInternal(inv->ItemInstances.operator[](0)->ItemEntry.ItemGuid, SDK::EFortQuickBars::Secondary, 4);
+                    //pQuickBars->ServerAddItemInternal(inv->ItemInstances.operator[](1)->ItemEntry.ItemGuid, SDK::EFortQuickBars::Primary, 0);
                 }
             }
             void AthenaPawn::Update()
