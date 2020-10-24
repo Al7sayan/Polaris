@@ -1,4 +1,3 @@
-#define Maybe(X) if (auto tempX = (X)) tempX
 #pragma once
 
 #define POLARIS_VER "v0.4.0"

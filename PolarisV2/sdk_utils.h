@@ -14,13 +14,6 @@ namespace polaris
 {
 	namespace utilities
 	{
-		struct AFortAsQuickBars
-		{
-		public:
-			unsigned char                                      UnknownData00[0x1A88];
-			class SDK::AFortQuickBars* QuickBars;
-		};
-
 		//!  Utilities for the SDK.
 		/*!
 		* Serves as easy access to many SDK utilities like finding a pattern.
