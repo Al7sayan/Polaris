@@ -80,6 +80,9 @@
     <Filter Include="Pawn\Pawns\Farmstead">
       <UniqueIdentifier>{af725836-dac5-4299-8292-5c6a898ed62d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI\Window\Windows\World Inspector">
+      <UniqueIdentifier>{4828f76c-1dd5-4f34-92dc-09354dd0c308}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SDK\FN_Basic.cpp">
@@ -168,6 +171,9 @@
     <ClCompile Include="plate.cpp">
       <Filter>Tables\Plates</Filter>
     </ClCompile>
+    <ClCompile Include="world_inspector.cpp">
+      <Filter>UI\Window\Windows\World Inspector</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDK.hpp">
@@ -236,6 +242,9 @@
     </ClInclude>
     <ClInclude Include="peh_plate.h">
       <Filter>Tables\Plates</Filter>
+    </ClInclude>
+    <ClInclude Include="world_inspector.h">
+      <Filter>UI\Window\Windows\World Inspector</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

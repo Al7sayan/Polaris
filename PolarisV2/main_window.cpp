@@ -13,6 +13,10 @@ namespace polaris
                 MainWindow::MainWindow()
                 {
                     m_pAboutWindow = new AboutWindow;
+                    m_pWorldInspector = new WorldInspector;
+
+                    m_pAboutWindow->m_bIsOpen = false;
+                    m_pWorldInspector->m_bIsOpen = false;
                 }
 
                 void MainWindow::Draw()
@@ -24,6 +28,14 @@ namespace polaris
                             if (ImGui::MenuItem("Exit"))
                             {
                                 gpProgram->~Program();
+                            }
+                            ImGui::EndMenu();
+                        }
+                        if (ImGui::BeginMenu("Windows"))
+                        {
+                            if (ImGui::MenuItem("World Inspector"))
+                            {
+                                m_pWorldInspector->m_bIsOpen = !m_pWorldInspector->m_bIsOpen;
                             }
                             ImGui::EndMenu();
                         }
