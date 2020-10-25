@@ -69,6 +69,53 @@ namespace polaris
 
                         auto level = world->Levels[selectedLevel];
                         auto actor = level->Actors[selectedActor];
+                        if (actor)
+                        {
+                            bool actorHasAuthority = actor->HasAuthority();
+
+                            ImGui::SameLine();
+
+                            ImGui::BeginGroup();
+                            ImGui::BeginChild("Inspector", ImVec2(0, -ImGui::GetFrameHeightWithSpacing()));
+                            {
+                                ImGui::Text(actor->GetName().c_str());
+                                ImGui::Separator();
+                            }
+                            ImGui::BeginTabBar("##Tabs");
+                            {
+                                {
+                                    ImGui::TextWrapped("ID: %s", actor->GetFullName().c_str());
+
+                                    auto location = actor->K2_GetActorLocation();
+                                    ImGui::TextWrapped("Position: (%d, %d, %d)", location.X, location.Y, location.Z);
+
+                                    auto rotation = actor->K2_GetActorRotation();
+                                    ImGui::TextWrapped("Rotation: (%d, %d, %d)", rotation.Pitch, rotation.Roll, rotation.Yaw);
+
+                                    auto scale = actor->GetActorScale3D();
+                                    ImGui::TextWrapped("Scale: (%d, %d, %d)", scale.X, scale.Y, scale.Z);
+
+                                    ImGui::Separator();
+                                }
+                                {
+                                    auto ownerLabel = actor->Owner != nullptr ? actor->Owner->GetName().c_str() : "None";
+                                    ImGui::TextWrapped("Owner: %s", ownerLabel);
+
+                                    auto authorityLabel = actor->HasAuthority() ? "Yes" : "No";
+                                    ImGui::TextWrapped("Has Authority: %s", authorityLabel);
+                                }
+                                ImGui::EndTabBar();
+                            }
+
+                            if (ImGui::Button("Destroy"))
+                                actor->ReceiveDestroyed();
+
+                            ImGui::SameLine();
+
+                            if (ImGui::Checkbox("Authority", &actorHasAuthority))
+                                actor->Role = actorHasAuthority ? SDK::ENetRole::ROLE_None : SDK::ENetRole::ROLE_Authority;
+                        }
+
                         ImGui::End();
                     }
                 }
