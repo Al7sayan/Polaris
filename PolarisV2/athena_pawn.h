@@ -33,7 +33,6 @@ namespace polaris
 
                 void Update() override;
                 void ApplyCustomizationLoadout(); //!< Applies skin, pickaxe and glider to pawn.
-                void SetupInventoryAndQuickBars();
                 void EquipWeapon(const char* cItemDef, int iGuid);
             };
         }
