@@ -27,6 +27,9 @@ namespace polaris
                 void OnEnabled() override;
 
                 void Initialize(); //!< Initialize spawns a pawn and drops the loading screen.
+                void SetupInventory(); //Inventory
+                void SetupQuickbars(); //Inventory
+                SDK::FGuid GenerateGuid(); //generates an item guid
             };
         }
     }
