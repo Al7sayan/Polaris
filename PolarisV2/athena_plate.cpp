@@ -81,7 +81,6 @@ namespace polaris
                 SetupInventory();
                 m_pPlayerPawn = new pawn::pawns::AthenaPawn;
 
-
                 // Tell the client that we are ready to start the match, this allows the loading screen to drop.
                 static_cast<SDK::AFortPlayerController*>(globals::gpPlayerController)->ServerReadyToStartMatch();
                 static_cast<SDK::AGameMode*>((*globals::gpWorld)->AuthorityGameMode)->StartMatch();

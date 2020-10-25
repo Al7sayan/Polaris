@@ -16,7 +16,6 @@ namespace polaris
         {
             static SDK::UCustomCharacterPart* pCharacterPartBody;
             static SDK::UCustomCharacterPart* pCharacterPartHead;
-            static SDK::UCustomCharacterPart* pCharacterPartBackbling;
             static SDK::UCustomCharacterPart* pCharacterPartHat;
 
             template<typename T>
@@ -197,8 +196,6 @@ namespace polaris
                     pCharacterPartHead = FindObject<SDK::UCustomCharacterPart>("CustomCharacterPart", "Head");
                 if (!pCharacterPartBody)
                     pCharacterPartBody = FindObject<SDK::UCustomCharacterPart>("CustomCharacterPart", "Body");
-                if (!pCharacterPartBackbling)
-                    pCharacterPartBackbling = FindObject<SDK::UCustomCharacterPart>("CustomCharacterPart", "Backbling");
                 if (!pCharacterPartHat)
                     pCharacterPartHat = FindObject<SDK::UCustomCharacterPart>("CustomCharacterPart", "Hat_");
 
@@ -209,7 +206,6 @@ namespace polaris
                 // Assign custom character parts to the player.
                 playerState->CharacterParts[0] = pCharacterPartHead;
                 playerState->CharacterParts[1] = pCharacterPartBody;
-                playerState->CharacterParts[2] = pCharacterPartBackbling;
                 playerState->CharacterParts[3] = pCharacterPartHat;
 
                 // If no head was found, force Ramirez's head.
