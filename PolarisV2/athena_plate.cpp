@@ -24,8 +24,14 @@ namespace polaris
                 if (pFunction->GetName().find("ReadyToStartMatch") != std::string::npos && m_bIsInitialized == false)
                     Initialize();
 
-                if (pFunction->GetName().find("ServerAttemptAircraftJump") != std::string::npos)
+                if (pFunction->GetName().find("ServerAttemptAircraftJump") != std::string::npos ||
+                    (pFunction->GetName().find("AircraftExitedDropZone") != std::string::npos && static_cast<SDK::AFortPlayerControllerAthena*>(globals::gpPlayerController)->IsInAircraft()))
+                {
+                    if(pFunction->GetName().find("ServerAttemptAircraftJump") != std::string::npos)
+                        m_pPlayerPawn->~AthenaPawn();
+
                     m_pPlayerPawn = new pawn::pawns::AthenaPawn;
+                }
             }
             void AthenaPlate::Update()
             {
@@ -55,6 +61,7 @@ namespace polaris
 
                 utilities::SDKUtils::InitSdk();
                 utilities::SDKUtils::InitGlobals();
+                utilities::SDKUtils::InitPatches();
 
                 m_pPlayerPawn = new pawn::pawns::AthenaPawn;
 

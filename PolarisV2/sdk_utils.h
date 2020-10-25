@@ -28,7 +28,6 @@ namespace polaris
 			static uintptr_t BaseAddress(); //!< BaseAddress returns the base offset of the game.
 			static PBYTE FindPattern(LPCSTR lpPattern, LPCSTR lpMask); //!< FindPattern finds a pattern in the game's EXE.
 			static SDK::AActor* FindActor(SDK::UClass* pClass, int iSkip = 0); //!< FindActor returns an actor by its class.
-
 			static VOID InitConsole(); //!< InitConsole initializes a new Console window if it doesn't exist yet.
 			static VOID InitSdk(); //!< InitSdk loads the SDK's properties.
 			static VOID InitGlobals(); //!< InitGlobals puts the SDK's properties in globals.
