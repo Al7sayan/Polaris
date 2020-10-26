@@ -19,7 +19,7 @@ namespace polaris
                 {
                     auto world = (*globals::gpWorld);
                     ImGui::SetNextWindowSize(ImVec2(820, 440), ImGuiCond_Appearing);
-                    ImGui::Begin("World Inspector", &m_bIsOpen, ImGuiWindowFlags_MenuBar);
+                    ImGui::Begin("World Inspector", &m_bIsOpen);
                     {
                         if (world == nullptr || (world && world->Levels.Count == 0))
                         {
@@ -64,8 +64,11 @@ namespace polaris
                                         }
                                     }
                                 }
+                                ImGui::EndChild();
                             }
                         }
+
+                        ImGui::SameLine();
 
                         auto level = world->Levels[selectedLevel];
                         auto actor = level->Actors[selectedActor];
@@ -78,11 +81,9 @@ namespace polaris
                             ImGui::BeginGroup();
                             ImGui::BeginChild("Inspector", ImVec2(0, -ImGui::GetFrameHeightWithSpacing()));
                             {
-                                ImGui::Text(actor->GetName().c_str());
+                                ImGui::Header2(actor->GetName().c_str());
+
                                 ImGui::Separator();
-                            }
-                            ImGui::BeginTabBar("##Tabs");
-                            {
                                 {
                                     ImGui::TextWrapped("ID: %s", actor->GetFullName().c_str());
 
@@ -104,15 +105,16 @@ namespace polaris
                                     auto authorityLabel = actor->HasAuthority() ? "Yes" : "No";
                                     ImGui::TextWrapped("Has Authority: %s", authorityLabel);
                                 }
-                                ImGui::EndTabBar();
+
+                                ImGui::EndChild();
                             }
 
                             if (ImGui::Button("Destroy"))
-                                actor->ReceiveDestroyed();
+                                actor->K2_DestroyActor();
 
                             ImGui::SameLine();
 
-                            if (ImGui::Checkbox("Authority", &actorHasAuthority))
+                            if (ImGui::Button("Toggle Authority"))
                                 actor->Role = actorHasAuthority ? SDK::ENetRole::ROLE_None : SDK::ENetRole::ROLE_Authority;
                         }
 
