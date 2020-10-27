@@ -4,6 +4,7 @@
 #include "ui_window.h"
 #include "about_window.h"
 #include "world_inspector.h"
+#include "watermark.h"
 
 namespace polaris
 {
@@ -22,6 +23,7 @@ namespace polaris
                 public:
                     AboutWindow* m_pAboutWindow;
                     WorldInspector* m_pWorldInspector;
+                    Watermark* m_pWatermark;
 
                     MainWindow();
 

@@ -168,6 +168,7 @@
     <ClCompile Include="table.cpp" />
     <ClCompile Include="ui_renderer.cpp" />
     <ClCompile Include="ui_window.cpp" />
+    <ClCompile Include="watermark.cpp" />
     <ClCompile Include="world_inspector.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +195,7 @@
     <ClInclude Include="sdk_utils.h" />
     <ClInclude Include="ui_renderer.h" />
     <ClInclude Include="ui_window.h" />
+    <ClInclude Include="watermark.h" />
     <ClInclude Include="world_inspector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

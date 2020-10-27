@@ -83,6 +83,9 @@
     <Filter Include="UI\Window\Windows\World Inspector">
       <UniqueIdentifier>{4828f76c-1dd5-4f34-92dc-09354dd0c308}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI\Window\Windows\Watermark">
+      <UniqueIdentifier>{71602d1a-2d6a-41de-bdf6-43c688a52496}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SDK\FN_Basic.cpp">
@@ -174,8 +177,8 @@
     <ClCompile Include="world_inspector.cpp">
       <Filter>UI\Window\Windows\World Inspector</Filter>
     </ClCompile>
-    <ClCompile Include="SDK\FN_GameplayAbilities_functions.cpp">
-      <Filter>Third Party\SDK</Filter>
+    <ClCompile Include="watermark.cpp">
+      <Filter>UI\Window\Windows\Watermark</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -248,6 +251,9 @@
     </ClInclude>
     <ClInclude Include="world_inspector.h">
       <Filter>UI\Window\Windows\World Inspector</Filter>
+    </ClInclude>
+    <ClInclude Include="watermark.h">
+      <Filter>UI\Window\Windows\Watermark</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

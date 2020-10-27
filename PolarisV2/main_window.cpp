@@ -14,6 +14,7 @@ namespace polaris
                 {
                     m_pAboutWindow = new AboutWindow;
                     m_pWorldInspector = new WorldInspector;
+                    m_pWatermark = new Watermark;
 
                     m_pAboutWindow->m_bIsOpen = false;
                     m_pWorldInspector->m_bIsOpen = false;
