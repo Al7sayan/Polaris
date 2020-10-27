@@ -3,8 +3,6 @@
 #include "program.h"
 #include "frontend_plate.h"
 #include "error_utils.h"
-#include "ui_renderer.h"
-#include "main_window.h"
 
 namespace polaris
 {
@@ -24,9 +22,6 @@ namespace polaris
                 // the initial loading screen drops. From then, we can continue initializing Polaris.
                 while ((*globals::gpWorld) == nullptr)
                     Sleep(1000 / 60);
-
-                new ui::UIRenderer;
-                new ui::window::windows::MainWindow;
 
                 // NOTE: For some reason if you don't wait a bit here, everything will be nullptr.
                 Sleep(500);
