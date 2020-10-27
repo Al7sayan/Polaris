@@ -24,7 +24,7 @@ namespace polaris
                 new ui::UIRenderer;
                 new ui::window::windows::MainWindow;
             }
-             // joe ntuasd a!@!
+
             void FrontendPlate::ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams)
             {
                 if (pFunction->GetName().find("BP_PlayButton") != std::string::npos)
