@@ -3,6 +3,8 @@
 #include "program.h"
 #include "frontend_plate.h"
 #include "error_utils.h"
+#include "ui_renderer.h"
+#include "main_window.h"
 
 namespace polaris
 {
@@ -34,6 +36,11 @@ namespace polaris
 
                 pConsole->Outer = globals::gpLocalPlayer->ViewportClient;
                 globals::gpLocalPlayer->ViewportClient->ViewportConsole = pConsole;
+
+                // Initialize the renderer and main window.
+                std::cout << "Initializing UI." << std::endl;
+                new ui::UIRenderer;
+                new ui::window::windows::MainWindow;
             }
 
             void BasePlate::OnEnabled()

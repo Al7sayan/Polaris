@@ -2,8 +2,6 @@
 #include "globals.h"
 #include "program.h"
 #include "athena_plate.h"
-#include "ui_renderer.h"
-#include "main_window.h"
 
 #include <iostream>
 
@@ -19,10 +17,6 @@ namespace polaris
 
                 if (globals::gpLevel->URL.Map.ToString() != "/Game/Maps/FortniteEntry")
                     globals::gpPlayerController->SwitchLevel(TEXT("Frontend"));
-
-                std::cout << "Initializing UI." << std::endl;
-                new ui::UIRenderer;
-                new ui::window::windows::MainWindow;
             }
 
             void FrontendPlate::ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams)
