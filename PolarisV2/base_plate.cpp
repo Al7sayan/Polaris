@@ -25,9 +25,6 @@ namespace polaris
                 while ((*globals::gpWorld) == nullptr)
                     Sleep(1000 / 60);
 
-                new ui::UIRenderer;
-                new ui::window::windows::MainWindow;
-
                 // NOTE: For some reason if you don't wait a bit here, everything will be nullptr.
                 Sleep(500);
 
@@ -39,6 +36,11 @@ namespace polaris
 
                 pConsole->Outer = globals::gpLocalPlayer->ViewportClient;
                 globals::gpLocalPlayer->ViewportClient->ViewportConsole = pConsole;
+
+                // Initialize the renderer and main window.
+                std::cout << "Initializing UI." << std::endl;
+                new ui::UIRenderer;
+                new ui::window::windows::MainWindow;
             }
 
             void BasePlate::OnEnabled()

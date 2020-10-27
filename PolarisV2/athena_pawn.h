@@ -14,6 +14,7 @@ namespace polaris
             class AthenaPawn : public Pawn
             {
             public:
+                bool m_bTryingToDeployGlider = false;
                 std::map<std::string, std::string> mPickaxeAsWid
                 {
                     {"DefaultPickaxe", "FortWeaponMeleeItemDefinition WID_Harvest_Pickaxe_Athena_C_T01.WID_Harvest_Pickaxe_Athena_C_T01"},

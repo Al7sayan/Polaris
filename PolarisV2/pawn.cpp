@@ -20,7 +20,9 @@ namespace polaris
                 if (m_bHasJumped == false)
                 {
                     m_bHasJumped = true;
-                    m_pPawnActor->Jump();
+                    if (!m_pPawnActor->IsJumpProvidingForce()) {
+                        m_pPawnActor->Jump();
+                    }
                 }
             }
             else

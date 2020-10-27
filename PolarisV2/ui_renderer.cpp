@@ -16,7 +16,7 @@ polaris::ui::UIRenderer* gpRenderer;
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 __declspec(dllexport) LRESULT CALLBACK WndProcHook(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 {
-	if (Msg == WM_KEYUP && (wParam == VK_HOME || wParam == VK_ESCAPE))
+	if (Msg == WM_KEYUP && (wParam == VK_HOME || (wParam == VK_ESCAPE && gpRenderer->m_bLockFortInput)))
 	{
 		gpRenderer->m_bLockFortInput = !gpRenderer->m_bLockFortInput;
 		ImGui::GetIO().MouseDrawCursor = gpRenderer->m_bLockFortInput;
@@ -48,7 +48,6 @@ __declspec(dllexport) HRESULT PresentHook(IDXGISwapChain* pInstance, UINT SyncIn
 		::DispatchMessage(&msg);
 	}
 
-	// Jesus fucking christ.
 	if (!gpRenderer->m_pCurrentDevice)
 	{
 		pInstance->GetDevice(__uuidof(gpRenderer->m_pCurrentDevice), reinterpret_cast<PVOID*>(&gpRenderer->m_pCurrentDevice));
@@ -149,7 +148,7 @@ namespace polaris
 			desc.SampleDesc.Count = 1;
 			desc.BufferCount = 1;
 			desc.OutputWindow = m_hWnd;
-			desc.Windowed = false;
+			desc.Windowed = true;
 
 			// Initialize and check if we failed to initialize our DirectX 11 device.
 			if (FAILED(D3D11CreateDeviceAndSwapChain(nullptr, D3D_DRIVER_TYPE_HARDWARE, 0, 0, &featureLevel, 1, D3D11_SDK_VERSION, &desc, &pSwapChain, &pDevice, nullptr, &pContext)))
@@ -170,6 +169,9 @@ namespace polaris
 			MH_CreateHook(pResizeBuffers, ResizeBuffersHook, reinterpret_cast<PVOID*>(&ResizeBuffers));
 			MH_EnableHook(pResizeBuffers);
 
+			pSwapChain->Release();
+			pDevice->Release();
+			pContext->Release();
 		}
 
 		void UIRenderer::SetTheme()

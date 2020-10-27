@@ -17,7 +17,6 @@ public:
     unsigned char                                      UnknownData00[0x1A88];
     class SDK::AFortQuickBars* QuickBars;
 };
-//SDK::FGuid *pGuids;
 SDK::FGuid pgPickaxe;
 SDK::FGuid pgTrap;
 SDK::FGuid pgWallBuild;
@@ -62,6 +61,9 @@ namespace polaris
 
             void AthenaPlate::OnEnabled()
             {
+                utilities::SDKUtils::InitSdk();
+                utilities::SDKUtils::InitGlobals();
+
                 globals::gpPlayerController->SwitchLevel(TEXT("Athena_Terrain"));
             }
 
@@ -139,40 +141,40 @@ namespace polaris
                 auto pShot = SDK::UObject::FindObject<SDK::UFortItemDefinition>("FortAmmoItemDefinition AthenaAmmoDataShells.AthenaAmmoDataShells");
                 auto pHeavy = SDK::UObject::FindObject<SDK::UFortItemDefinition>("FortAmmoItemDefinition AthenaAmmoDataBulletsHeavy.AthenaAmmoDataBulletsHeavy");
                 // funny item array
-                SDK::UFortItemDefinition* pItemDefs[13] = {};
-                SDK::FGuid pGuids[13] = {};
-                pItemDefs[0] = pTrapDef;
-                pItemDefs[1] = pPickaxeDef;
-                pItemDefs[2] = pWallBuildDef;
-                pItemDefs[3] = pFloorBuildDef;
-                pItemDefs[4] = pStairBuildDef;
-                pItemDefs[5] = pRoofBuildDef;
-                pItemDefs[6] = pWood;
-                pItemDefs[7] = pMetal;
-                pItemDefs[8] = pStone;
-                pItemDefs[9] = pLight;
-                pItemDefs[10] = pMed;
-                pItemDefs[11] = pShot;
-                pItemDefs[12] = pHeavy;
-                pGuids[0] = GenerateGuid();
-                pGuids[1] = GenerateGuid();
-                pGuids[2] = GenerateGuid();
-                pGuids[3] = GenerateGuid();
-                pGuids[4] = GenerateGuid();
-                pGuids[5] = GenerateGuid();
-                pGuids[6] = GenerateGuid();
-                pGuids[7] = GenerateGuid();
-                pGuids[8] = GenerateGuid();
-                pGuids[9] = GenerateGuid();
-                pGuids[10] = GenerateGuid();
-                pGuids[11] = GenerateGuid();
-                pGuids[12] = GenerateGuid();
-                pgPickaxe = pGuids[1];
-                pgTrap = pGuids[0];
-                pgWallBuild = pGuids[2];
-                pgFloorBuild = pGuids[3];
-                pgStairBuild = pGuids[4];
-                pgRoofBuild = pGuids[5];
+                SDK::UFortItemDefinition* aItemDefs[13] = {};
+                SDK::FGuid aGuids[13] = {};
+                aItemDefs[0] = pTrapDef;
+                aItemDefs[1] = pPickaxeDef;
+                aItemDefs[2] = pWallBuildDef;
+                aItemDefs[3] = pFloorBuildDef;
+                aItemDefs[4] = pStairBuildDef;
+                aItemDefs[5] = pRoofBuildDef;
+                aItemDefs[6] = pWood;
+                aItemDefs[7] = pMetal;
+                aItemDefs[8] = pStone;
+                aItemDefs[9] = pLight;
+                aItemDefs[10] = pMed;
+                aItemDefs[11] = pShot;
+                aItemDefs[12] = pHeavy;
+                aGuids[0] = GenerateGuid();
+                aGuids[1] = GenerateGuid();
+                aGuids[2] = GenerateGuid();
+                aGuids[3] = GenerateGuid();
+                aGuids[4] = GenerateGuid();
+                aGuids[5] = GenerateGuid();
+                aGuids[6] = GenerateGuid();
+                aGuids[7] = GenerateGuid();
+                aGuids[8] = GenerateGuid();
+                aGuids[9] = GenerateGuid();
+                aGuids[10] = GenerateGuid();
+                aGuids[11] = GenerateGuid();
+                aGuids[12] = GenerateGuid();
+                pgPickaxe = aGuids[1];
+                pgTrap = aGuids[0];
+                pgWallBuild = aGuids[2];
+                pgFloorBuild = aGuids[3];
+                pgStairBuild = aGuids[4];
+                pgRoofBuild = aGuids[5];
                 auto pInventory1 = static_cast<SDK::AFortInventory*>(polaris::utilities::SDKUtils::FindActor(SDK::AFortInventory::StaticClass()));
                 auto pInventory2 = static_cast<SDK::AFortInventory*>(polaris::utilities::SDKUtils::FindActor(SDK::AFortInventory::StaticClass(), 1));
                 SDK::AFortInventory* pActualInv = nullptr;
@@ -193,41 +195,41 @@ namespace polaris
                     //gaming rgb inventory
                     auto myInventory = pActualInv;
                     SDK::FFortItemList* inv = &myInventory->Inventory;
-                    SDK::TArray<class SDK::UFortWorldItem*>* iteminst = &inv->ItemInstances;
-                    iteminst->Count = 12;
-                    iteminst->Max = 12;
-                    iteminst->Data = (class SDK::UFortWorldItem**)::malloc(iteminst->Count * sizeof(SDK::UFortWorldItem*));
-                    for (int i = 0; SDK::UFortItemDefinition * itemdef = pItemDefs[i]; i <= 12) {
-                        auto ItemEntry = new SDK::FFortItemEntry;
+                    SDK::TArray<class SDK::UFortWorldItem*>* pItemInsts = &inv->ItemInstances;
+                    pItemInsts->Count = 12;
+                    pItemInsts->Max = 12;
+                    pItemInsts->Data = (class SDK::UFortWorldItem**)::malloc(pItemInsts->Count * sizeof(SDK::UFortWorldItem*));
+                    for (int i = 0; SDK::UFortItemDefinition * pItemdef = aItemDefs[i]; i <= 12) {
+                        auto pItemEntry = new SDK::FFortItemEntry;
                         switch (i) {
                         default:
-                            ItemEntry->Count = 100;
+                            pItemEntry->Count = 100;
                             break;
                         case 1:
-                            ItemEntry->Count = 1;
+                            pItemEntry->Count = 1;
                             break;
                         case 2:
-                            ItemEntry->Count = 1;
+                            pItemEntry->Count = 1;
                             break;
                         case 3:
-                            ItemEntry->Count = 1;
+                            pItemEntry->Count = 1;
                             break;
                         case 4:
-                            ItemEntry->Count = 1;
+                            pItemEntry->Count = 1;
                             break;
                         case 5:
-                            ItemEntry->Count = 1;
+                            pItemEntry->Count = 1;
                             break;
                         }
-                        ItemEntry->ItemDefinition = itemdef;
-                        ItemEntry->Durability = 1000;
-                        ItemEntry->Level = 1;
-                        ItemEntry->ItemGuid = pGuids[i];
-                        ItemEntry->bIsDirty = false;
+                        pItemEntry->ItemDefinition = pItemdef;
+                        pItemEntry->Durability = 1000;
+                        pItemEntry->Level = 1;
+                        pItemEntry->ItemGuid = aGuids[i];
+                        pItemEntry->bIsDirty = false;
                         auto pWorldItem = reinterpret_cast<SDK::UFortWorldItem*>(polaris::globals::StaticConstructObject_Internal(SDK::UFortWorldItem::StaticClass(), myInventory, SDK::FName("None"), 0, SDK::FUObjectItem::ObjectFlags::None, NULL, false, NULL, false));
                         pWorldItem->OwnerInventory = myInventory;
-                        pWorldItem->ItemEntry = *ItemEntry;
-                        iteminst->operator[](i) = pWorldItem;
+                        pWorldItem->ItemEntry = *pItemEntry;
+                        pItemInsts->operator[](i) = pWorldItem;
                         i++;
                     }
                 }
