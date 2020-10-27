@@ -1,6 +1,7 @@
 #include "main_window.h"
 #include "program.h"
 #include "ui_renderer.h"
+#include "changelog_window.h"
 
 namespace polaris
 {
@@ -48,6 +49,7 @@ namespace polaris
                             }
                             ImGui::EndMenu();
                         }
+                        ImGui::EndMainMenuBar();
                     }
                 }
                 void MainWindow::Update()

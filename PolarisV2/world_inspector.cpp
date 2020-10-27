@@ -116,6 +116,8 @@ namespace polaris
 
                             if (ImGui::Button("Toggle Authority"))
                                 actor->Role = actorHasAuthority ? SDK::ENetRole::ROLE_None : SDK::ENetRole::ROLE_Authority;
+
+                            ImGui::EndGroup();
                         }
 
                         ImGui::End();

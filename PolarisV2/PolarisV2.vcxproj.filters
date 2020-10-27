@@ -86,6 +86,9 @@
     <Filter Include="UI\Window\Windows\Watermark">
       <UniqueIdentifier>{71602d1a-2d6a-41de-bdf6-43c688a52496}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI\Window\Windows\Changelog Window">
+      <UniqueIdentifier>{f49e568a-860a-4a16-83ea-3ccdb0f2533b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SDK\FN_Basic.cpp">
@@ -180,6 +183,10 @@
     <ClCompile Include="watermark.cpp">
       <Filter>UI\Window\Windows\Watermark</Filter>
     </ClCompile>
+    <ClCompile Include="SDK\FN_GameplayAbilities_functions.cpp" />
+    <ClCompile Include="changelog_window.cpp">
+      <Filter>UI\Window\Windows\Changelog Window</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDK.hpp">
@@ -254,6 +261,9 @@
     </ClInclude>
     <ClInclude Include="watermark.h">
       <Filter>UI\Window\Windows\Watermark</Filter>
+    </ClInclude>
+    <ClInclude Include="changelog_window.h">
+      <Filter>UI\Window\Windows\Changelog Window</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

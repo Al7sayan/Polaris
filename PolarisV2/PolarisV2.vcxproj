@@ -140,6 +140,7 @@
     <ClCompile Include="about_window.cpp" />
     <ClCompile Include="athena_pawn.cpp" />
     <ClCompile Include="athena_plate.cpp" />
+    <ClCompile Include="changelog_window.cpp" />
     <ClCompile Include="directory_utils.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="base_plate.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="athena_plate.h" />
     <ClInclude Include="build.h" />
     <ClInclude Include="base_plate.h" />
+    <ClInclude Include="changelog_window.h" />
     <ClInclude Include="directory_utils.h" />
     <ClInclude Include="error_utils.h" />
     <ClInclude Include="farmstead_pawn.h" />
