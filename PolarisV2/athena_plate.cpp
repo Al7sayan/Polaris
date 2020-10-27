@@ -82,8 +82,8 @@ namespace polaris
                 MH_EnableHook(static_cast<LPVOID>(pCollectGarbageInternalAddress));
 
                 // Spawn a Player Pawn and setup inventory.
-                m_pPlayerPawn = new pawn::pawns::AthenaPawn;
-                SetupInventory();
+                //m_pPlayerPawn = new pawn::pawns::AthenaPawn;
+                //SetupInventory();
 
                 // Tell the client that we are ready to start the match, this allows the loading screen to drop.
                 static_cast<SDK::AFortPlayerController*>(globals::gpPlayerController)->ServerReadyToStartMatch();
