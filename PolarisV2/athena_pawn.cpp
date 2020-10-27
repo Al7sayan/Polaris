@@ -85,10 +85,6 @@ namespace polaris
                 if (!pCharacterPartHat)
                     pCharacterPartHat = FindObject<SDK::UCustomCharacterPart>("CustomCharacterPart", "Hat_");
 
-                // If a hat was still not found, search for glasses (for Ghoul Trooper)
-                if (!pCharacterPartHat)
-                    pCharacterPartHat = FindObject<SDK::UCustomCharacterPart>("CustomCharacterPart", "Glasses");
-
                 // Assign custom character parts to the player.
                 playerState->CharacterParts[0] = pCharacterPartHead;
                 playerState->CharacterParts[1] = pCharacterPartBody;
