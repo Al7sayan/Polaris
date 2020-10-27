@@ -5,8 +5,6 @@
 #define POLARIS_ID "prod"
 #elif _BETA
 #define POLARIS_ID "beta"
-#elif _DEBUG
-#define POLARIS_ID "debug"
 #else
 #define POLARIS_ID "local"
 #endif

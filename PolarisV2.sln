@@ -7,14 +7,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PolarisV2", "PolarisV2\Pola
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug (Slow)|x64 = Debug (Slow)|x64
 		Release [Beta]|x64 = Release [Beta]|x64
 		Release [Prod]|x64 = Release [Prod]|x64
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8D22ABD0-0DE1-4AB1-B8CD-516C32CCA4CE}.Debug (Slow)|x64.ActiveCfg = Debug (Slow)|x64
-		{8D22ABD0-0DE1-4AB1-B8CD-516C32CCA4CE}.Debug (Slow)|x64.Build.0 = Debug (Slow)|x64
 		{8D22ABD0-0DE1-4AB1-B8CD-516C32CCA4CE}.Release [Beta]|x64.ActiveCfg = Release [Beta]|x64
 		{8D22ABD0-0DE1-4AB1-B8CD-516C32CCA4CE}.Release [Beta]|x64.Build.0 = Release [Beta]|x64
 		{8D22ABD0-0DE1-4AB1-B8CD-516C32CCA4CE}.Release [Prod]|x64.ActiveCfg = Release [Prod]|x64

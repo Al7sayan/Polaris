@@ -174,6 +174,9 @@
     <ClCompile Include="world_inspector.cpp">
       <Filter>UI\Window\Windows\World Inspector</Filter>
     </ClCompile>
+    <ClCompile Include="SDK\FN_GameplayAbilities_functions.cpp">
+      <Filter>Third Party\SDK</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDK.hpp">
