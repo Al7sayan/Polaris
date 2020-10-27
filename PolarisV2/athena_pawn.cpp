@@ -77,7 +77,7 @@ namespace polaris
 
                 // Glider redeploy keybind
                 auto athenaPawn = static_cast<SDK::AFortPlayerPawnAthena*>(m_pPawnActor);
-                if (GetAsyncKeyState(VK_SPACE) & 0x8000 && athenaPawn->IsSkydiving() || athenaPawn->IsParachuteOpen())
+                if (GetAsyncKeyState(VK_SPACE) & 0x8000)
                 {
                     // We do this hacky bool check to avoid the holding button issue.
                     if (m_bTryingToDeployGlider == false)
@@ -86,7 +86,7 @@ namespace polaris
 
                         if (athenaPawn->IsSkydiving())
                             athenaPawn->CharacterMovement->SetMovementMode(SDK::EMovementMode::MOVE_Custom, 2U);
-                        else if (!athenaPawn->IsParachuteForcedOpen())
+                        else if (athenaPawn->IsParachuteOpen() && !athenaPawn->IsParachuteForcedOpen())
                             athenaPawn->CharacterMovement->SetMovementMode(SDK::EMovementMode::MOVE_Custom, 3U);
 
                         athenaPawn->OnRep_IsParachuteOpen(athenaPawn->IsParachuteOpen());
