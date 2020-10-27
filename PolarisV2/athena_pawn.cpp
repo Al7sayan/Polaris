@@ -84,7 +84,7 @@ namespace polaris
                     {
                         m_bTryingToDeployGlider = true;
 
-                        if (athenaPawn->IsSkydiving())
+                        if (athenaPawn->IsSkydiving() && !athenaPawn->IsParachuteOpen() && !athenaPawn->IsParachuteForcedOpen())
                             athenaPawn->CharacterMovement->SetMovementMode(SDK::EMovementMode::MOVE_Custom, 2U);
                         else if (athenaPawn->IsParachuteOpen() && !athenaPawn->IsParachuteForcedOpen())
                             athenaPawn->CharacterMovement->SetMovementMode(SDK::EMovementMode::MOVE_Custom, 3U);
