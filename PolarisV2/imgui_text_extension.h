@@ -73,6 +73,28 @@ namespace ImGui
 		ImGui::TextColored(color, text);
 		ImGui::PopFont();
 	}
+
+	static void BoldText(const char* text)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		ImFontAtlas* atlas = io.Fonts;
+		ImFont* headerFont = atlas->Fonts[4];
+
+		ImGui::PushFont(headerFont);
+		ImGui::Text(text);
+		ImGui::PopFont();
+	}
+
+	static void BoldText(ImVec4 color, const char* text)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		ImFontAtlas* atlas = io.Fonts;
+		ImFont* headerFont = atlas->Fonts[4];
+
+		ImGui::PushFont(headerFont);
+		ImGui::TextColored(color, text);
+		ImGui::PopFont();
+	}
 }
 
 #endif // !IMGUI_TEXT_EXTENSION_H

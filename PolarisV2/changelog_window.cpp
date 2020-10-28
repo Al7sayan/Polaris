@@ -20,33 +20,34 @@ namespace polaris
                 void ChangelogWindow::Draw()
                 {
                     ImGuiWindow* window = ImGui::GetCurrentWindow();
-                    std::string verNum = POLARIS_VER;
-                    std::string verEnv = POLARIS_ID;
-                    std::string combined = verNum + "-" + verEnv;
 
                     ImGui::Begin("Changelog", &m_bIsOpen, ImGuiWindowFlags_NoTitleBar);
                     {
-                        ImGui::Header2("What's new - ");
-                        ImGui::SameLine(0, 0);
-                        ImGui::Header2(combined.c_str());
+                        ImGui::Header2("What's new");
                         ImGui::SmallText(ImColor(1.0f, 1.0f, 1.0f, 0.5f), "October 27th, 2020");
 
+                        ImGui::BeginGroup();
                         ImGui::Dummy(ImVec2(0, 10));
+                        ImGui::SetCursorScreenPos(ImVec2(ImGui::GetCursorPosX(), ImGui::GetCursorPosY() - 1));
                         ImGui::Header2("New features");
+                        ImGui::SameLine();
+                        ImGui::Separator();
+                        ImGui::EndGroup();
 
-                        ImGui::Text("- Polaris is done. Everything is done.");
-                        ImGui::Text("- Matchmaking is now here!");
+                        ImGui::BoldText("- Building is finally here! ");
+                        ImGui::TextWrapped("Additional info about building, poggers");
 
                         ImGui::Dummy(ImVec2(0, 10));
                         ImGui::Header2("Fixes and updates");
 
-                        ImGui::Text("- Nothing was fixed. Absolutely nothing.");
-                        ImGui::Text("- Did I mention that nothing got fixed? Get fucked.");
+                        ImGui::BoldText("- Polaris v2 codebase is now in action! ");
+                        ImGui::TextWrapped("The Polaris v2 codebase is a remastered version of the Polaris codebase with many improvements that contribute to a better experience.");
 
                         ImGui::Dummy(ImVec2(0, 10));
                         ImGui::Header2("Notes");
 
-                        ImGui::Text("- Coca");
+                        ImGui::BoldText("- Join our discord! ");
+                        ImGui::TextWrapped("Join and talk to us at discord.gg/polaris");
 
                         ImGui::End();
                     }
