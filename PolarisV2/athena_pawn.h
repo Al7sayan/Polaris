@@ -15,6 +15,15 @@ namespace polaris
             {
             public:
                 bool m_bTryingToDeployGlider = false;
+                bool m_bPressedF1 = false;
+                bool m_bPressedF2 = false;
+                bool m_bPressedF3 = false;
+                bool m_bPressedF4 = false;
+
+                SDK::ABuildingPlayerPrimitivePreview* pBuildPreviewRoof;
+                SDK::ABuildingPlayerPrimitivePreview* pBuildPreviewFloor;
+                SDK::ABuildingPlayerPrimitivePreview* pBuildPreviewStair;
+                SDK::ABuildingPlayerPrimitivePreview* pBuildPreviewWall;
                 std::map<std::string, std::string> mPickaxeAsWid
                 {
                     {"DefaultPickaxe", "FortWeaponMeleeItemDefinition WID_Harvest_Pickaxe_Athena_C_T01.WID_Harvest_Pickaxe_Athena_C_T01"},
@@ -35,6 +44,7 @@ namespace polaris
                 void Update() override;
                 void ApplyCustomizationLoadout(); //!< Applies skin, pickaxe and glider to pawn.
                 void EquipWeapon(const char* cItemDef, int iGuid);
+                void CreateBuildPreviews(); //!< Creates building previews.
             };
         }
     }
