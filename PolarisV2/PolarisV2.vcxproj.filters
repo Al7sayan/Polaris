@@ -183,7 +183,6 @@
     <ClCompile Include="watermark.cpp">
       <Filter>UI\Window\Windows\Watermark</Filter>
     </ClCompile>
-    <ClCompile Include="SDK\FN_GameplayAbilities_functions.cpp" />
     <ClCompile Include="changelog_window.cpp">
       <Filter>UI\Window\Windows\Changelog Window</Filter>
     </ClCompile>
