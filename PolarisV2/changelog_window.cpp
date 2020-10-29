@@ -1,6 +1,7 @@
 ﻿#include "changelog_window.h"
 #include "build.h"
 #include "imgui_text_extension.h"
+#include "ui_renderer.h"
 
 #include <string>
 
@@ -15,40 +16,66 @@ namespace polaris
                 ChangelogWindow::ChangelogWindow()
                 {
                     m_bIsOpen = true;
+                    gpRenderer->m_bLockFortInput = true;
                 }
 
                 void ChangelogWindow::Draw()
                 {
-                    ImGuiWindow* window = ImGui::GetCurrentWindow();
-                    std::string verNum = POLARIS_VER;
-                    std::string verEnv = POLARIS_ID;
-                    std::string combined = verNum + "-" + verEnv;
+                    ImGuiStyle* style = &ImGui::GetStyle();
+                    auto prevSpacing = style->ItemSpacing.y;
 
+                    style->ItemSpacing = ImVec2(style->ItemSpacing.x, 0.15f);
+
+                    ImGui::SetNextWindowSize(ImVec2(405, 540), ImGuiCond_Appearing);
                     ImGui::Begin("Changelog", &m_bIsOpen, ImGuiWindowFlags_NoTitleBar);
                     {
-                        ImGui::Header2("What's new - ");
-                        ImGui::SameLine(0, 0);
-                        ImGui::Header2(combined.c_str());
-                        ImGui::SmallText(ImColor(1.0f, 1.0f, 1.0f, 0.5f), "October 27th, 2020");
+                        ImGui::Header2("What's new");
+                        ImGui::SmallText(ImColor(1.0f, 1.0f, 1.0f, 0.5f), BUILD_DATE);
 
-                        ImGui::Dummy(ImVec2(0, 10));
-                        ImGui::Header2("New features");
+                        auto prevCursorLocation = ImGui::GetCursorPos();
 
-                        ImGui::Text("- Polaris is done. Everything is done.");
-                        ImGui::Text("- Matchmaking is now here!");
+                        ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPosX() + (ImGui::GetWindowWidth() - 70), ImGui::GetCursorPosY() - 35));
+                        if (ImGui::Button("X", ImVec2(33, 33)))
+                        {
+                            m_bIsOpen = false;
+                            m_bShouldUnlockFortUIInput = true;
+                        }
+                        ImGui::SetCursorPos(prevCursorLocation);
 
-                        ImGui::Dummy(ImVec2(0, 10));
-                        ImGui::Header2("Fixes and updates");
+                        for (int i = 0; i < *(&m_aFields + 1) - m_aFields; i++)
+                        {
+                            ChangelogField* field = m_aFields[i];
 
-                        ImGui::Text("- Nothing was fixed. Absolutely nothing.");
-                        ImGui::Text("- Did I mention that nothing got fixed? Get fucked.");
+                            ImGui::Dummy(ImVec2(0, 15));
+                            ImGui::Header2(field->m_sHeader.c_str());
 
-                        ImGui::Dummy(ImVec2(0, 10));
-                        ImGui::Header2("Notes");
+                            for (int j = 0; j < field->m_vEntries.size(); j++)
+                            {
+                                ChangelogEntry* entry = field->m_vEntries[j];
+                                char buffer[2000];
 
-                        ImGui::Text("- Coca");
+                                ImGui::Dummy(ImVec2(0, 5));
+
+                                // Format the field's header and display it.
+                                sprintf_s(buffer, sizeof(buffer), FIELD_HEADER_FORMAT, entry->m_ccHeader);
+                                ImGui::BoldText(buffer);
+
+                                // Format the field's body and display it.
+                                sprintf_s(buffer, sizeof(buffer), FIELD_BODY_FORMAT, entry->m_ccBody);
+                                ImGui::TextWrapped(buffer);
+                            }
+                        }
 
                         ImGui::End();
+                        style->ItemSpacing = ImVec2(style->ItemSpacing.x, prevSpacing);
+                    }
+                }
+                void ChangelogWindow::Update()
+                {
+                    if (m_bShouldUnlockFortUIInput && gpRenderer->m_bLockFortInput)
+                    {
+                        gpRenderer->m_bLockFortInput = false;
+                        m_bShouldUnlockFortUIInput = false;
                     }
                 }
             }

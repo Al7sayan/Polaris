@@ -187,6 +187,9 @@ namespace polaris
 			io.Fonts->AddFontFromFileTTF(utilities::DirectoryUtils::GetConcatPath(utilities::DirectoryUtils::GetFontsDir(), "segoeui.ttf").c_str(), 35);
 			io.Fonts->AddFontFromFileTTF(utilities::DirectoryUtils::GetConcatPath(utilities::DirectoryUtils::GetFontsDir(), "segoeuib.ttf").c_str(), 25);
 
+			// Bold font
+			auto font = io.Fonts->AddFontFromFileTTF(utilities::DirectoryUtils::GetConcatPath(utilities::DirectoryUtils::GetFontsDir(), "segoeuib.ttf").c_str(), 20);
+
 			constexpr auto ColorFromBytes = [](uint8_t r, uint8_t g, uint8_t b)
 			{
 				return ImVec4((float)r / 255.0f, (float)g / 255.0f, (float)b / 255.0f, 1.0f);
