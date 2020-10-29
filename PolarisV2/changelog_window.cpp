@@ -3,6 +3,7 @@
 #include "imgui_text_extension.h"
 #include "ui_renderer.h"
 
+#include <iostream>
 #include <string>
 
 namespace polaris
@@ -22,9 +23,18 @@ namespace polaris
                 void ChangelogWindow::Draw()
                 {
                     ImGuiStyle* style = &ImGui::GetStyle();
+                    ImGuiIO* io = &ImGui::GetIO();
                     auto prevSpacing = style->ItemSpacing.y;
 
                     style->ItemSpacing = ImVec2(style->ItemSpacing.x, 0.15f);
+
+                    ImGui::SetNextWindowSize(ImVec2(5000, 5000));
+                    ImGui::SetNextWindowPos(ImVec2(-(io->DisplaySize.x / 2), -(io->DisplaySize.y / 2)));
+                    ImGui::SetNextWindowBgAlpha(0.6);
+                    ImGui::Begin("Poglaris moment", &m_bIsOpen, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoMouseInputs | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoBringToFrontOnFocus);
+                    {
+                        ImGui::End();
+                    }
 
                     ImGui::SetNextWindowSize(ImVec2(405, 540), ImGuiCond_Appearing);
                     ImGui::Begin("Changelog", &m_bIsOpen, ImGuiWindowFlags_NoTitleBar);
@@ -49,6 +59,7 @@ namespace polaris
                             ImGui::Dummy(ImVec2(0, 15));
                             ImGui::Header2(field->m_sHeader.c_str());
 
+                            std::cout << field->m_vEntries.size() << std::endl;
                             for (int j = 0; j < field->m_vEntries.size(); j++)
                             {
                                 ChangelogEntry* entry = field->m_vEntries[j];
@@ -75,6 +86,12 @@ namespace polaris
                     if (m_bShouldUnlockFortUIInput && gpRenderer->m_bLockFortInput)
                     {
                         gpRenderer->m_bLockFortInput = false;
+                        m_bShouldUnlockFortUIInput = false;
+                    }
+
+                    if (!gpRenderer->m_bLockFortInput && m_bIsOpen)
+                    {
+                        m_bIsOpen = false;
                         m_bShouldUnlockFortUIInput = false;
                     }
                 }

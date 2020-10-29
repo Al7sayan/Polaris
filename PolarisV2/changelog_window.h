@@ -49,20 +49,20 @@ namespace polaris
                 public:
                     const char* FIELD_HEADER_FORMAT = "-  %s";
                     const char* FIELD_BODY_FORMAT = "     %s";
-                    const char* BUILD_DATE = "October 28th, 2020";
+                    const char* BUILD_DATE = "October 30th, 2020";
 
                     ChangelogField* m_aFields[3] = {
-                        new ChangelogField("New features", new ChangelogEntry*[2] {
-                            new ChangelogEntry("Test entry!", "Test body!"),
-                            new ChangelogEntry("Oh no", "There's 2 of them")
+                        new ChangelogField("New features", new ChangelogEntry * [2] {
+                            new ChangelogEntry("Building!", "Build to your heart's content, and make something unbelievable."),
+                            new ChangelogEntry("Inventory", "The inventory mapper is no longer needed, simply open your inventory (normally the *i* key) and drag your favorite gun onto your hotbar.")
                         }),
-                        new ChangelogField("Fixes and updates", new ChangelogEntry*[2] {
-                            new ChangelogEntry("Test entry!", "Test body!"),
-                            new ChangelogEntry("Oh no", "There's 2 of them")
+                        new ChangelogField("Fixes and updates", new ChangelogEntry * [2] {
+                            new ChangelogEntry("Codebase Rewrite", "The entire Polaris codebase has been rewritten (codenamed v2), and provides more stability and ease of use for the developers."),
+                            new ChangelogEntry("Helmet Bug", "Skins that normally don't have a helmet, should no longer have a helmet when using some private servers.")
                         }),
                         new ChangelogField("Notes", new ChangelogEntry*[2] {
-                            new ChangelogEntry("Test entry!", "Test body!"),
-                            new ChangelogEntry("Oh no", "There's 2 of them")
+                            new ChangelogEntry("Join our Discord!", "Join and talk to us over at discord.gg/polaris!"),
+                            new ChangelogEntry("About that tweet...", "i lied. there's no sex."),
                         })
                     };
 
