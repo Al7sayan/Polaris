@@ -17,12 +17,34 @@ public:
     unsigned char                                      UnknownData00[0x1A88];
     class SDK::AFortQuickBars* QuickBars;
 };
+struct AFortAsBuildPreview
+{
+public:
+    unsigned char UnknownData00[0x1788];
+    class SDK::ABuildingPlayerPrimitivePreview* BuildPreviewMarker;
+};
+struct AFortAsCurrentBuildable
+{
+public:
+    unsigned char UnknownData00[0x1940];
+    class SDK::UClass* CurrentBuildableClass;
+};
 SDK::FGuid pgPickaxe;
 SDK::FGuid pgTrap;
+SDK::FGuid pgTrap2;
 SDK::FGuid pgWallBuild;
 SDK::FGuid pgFloorBuild;
 SDK::FGuid pgStairBuild;
 SDK::FGuid pgRoofBuild;
+SDK::UFortWeaponMeleeItemDefinition* pPickaxeDef;
+SDK::UFortBuildingItemDefinition* pWallBuildDef;
+SDK::UFortBuildingItemDefinition* pFloorBuildDef;
+SDK::UFortBuildingItemDefinition* pStairBuildDef;
+SDK::UFortBuildingItemDefinition* pRoofBuildDef;
+SDK::UFortDecoItemDefinition* pTrapDef;
+SDK::UFortTrapItemDefinition* pTrapDef2;
+SDK::ABuildingActor* pTrapC;
+bool bTrapDone = false;
 namespace polaris
 {
     namespace tables
@@ -48,6 +70,72 @@ namespace polaris
 
                 if (pFunction->GetName().find("ServerLoadingScreenDropped") != std::string::npos)
                     SetupQuickbars();
+                if (pFunction->GetName().find("ServerExecuteInventoryItem") != std::string::npos) {
+                    //printf(" %s, %s, %s, %s\n", /*pObject->GetFullName().c_str(),*/ std::to_string(reinterpret_cast<SDK::FGuid*>(pParams)->A), std::to_string(reinterpret_cast<SDK::FGuid*>(pParams)->B), std::to_string(reinterpret_cast<SDK::FGuid*>(pParams)->C), std::to_string(reinterpret_cast<SDK::FGuid*>(pParams)->D));
+                    SDK::FGuid guid;
+                    SDK::FGuid* paramGuid = reinterpret_cast<SDK::FGuid*>(pParams);
+                    guid.A = paramGuid->A;
+                    guid.B = paramGuid->B;
+                    guid.C = paramGuid->C;
+                    guid.D = paramGuid->D;
+                    if (AreGuidsTheSame(guid, pgPickaxe)) {
+                        m_pPlayerPawn->m_pPawnActor->EquipWeaponDefinition(pPickaxeDef,guid);
+                    }
+                    if (AreGuidsTheSame(guid, pgWallBuild)) {
+                        m_pPlayerPawn->m_pPawnActor->EquipWeaponDefinition(pWallBuildDef, guid);
+                        reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass = SDK::APBWA_W1_Solid_C::StaticClass();
+                        reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker = m_pPlayerPawn->pBuildPreviewWall;
+                        m_pPlayerPawn->pBuildPreviewWall->SetActorHiddenInGame(false);
+                        m_pPlayerPawn->pBuildPreviewFloor->SetActorHiddenInGame(true);
+                        m_pPlayerPawn->pBuildPreviewStair->SetActorHiddenInGame(true);
+                        m_pPlayerPawn->pBuildPreviewRoof->SetActorHiddenInGame(true);
+                    }
+                    if (AreGuidsTheSame(guid, pgFloorBuild)) {
+                        m_pPlayerPawn->m_pPawnActor->EquipWeaponDefinition(pFloorBuildDef, guid);
+                        reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass = SDK::APBWA_W1_Floor_C::StaticClass();
+                        reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker = m_pPlayerPawn->pBuildPreviewFloor;
+                        m_pPlayerPawn->pBuildPreviewWall->SetActorHiddenInGame(true);
+                        m_pPlayerPawn->pBuildPreviewFloor->SetActorHiddenInGame(false);
+                        m_pPlayerPawn->pBuildPreviewStair->SetActorHiddenInGame(true);
+                        m_pPlayerPawn->pBuildPreviewRoof->SetActorHiddenInGame(true);
+                    }
+                    if (AreGuidsTheSame(guid, pgStairBuild)) {
+                        m_pPlayerPawn->m_pPawnActor->EquipWeaponDefinition(pStairBuildDef, guid);
+                        reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass = SDK::APBWA_W1_StairW_C::StaticClass();
+                        reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker = m_pPlayerPawn->pBuildPreviewStair;
+                        m_pPlayerPawn->pBuildPreviewWall->SetActorHiddenInGame(true);
+                        m_pPlayerPawn->pBuildPreviewFloor->SetActorHiddenInGame(true);
+                        m_pPlayerPawn->pBuildPreviewStair->SetActorHiddenInGame(false);
+                        m_pPlayerPawn->pBuildPreviewRoof->SetActorHiddenInGame(true);
+                    }
+                    if (AreGuidsTheSame(guid, pgRoofBuild)) {
+                        m_pPlayerPawn->m_pPawnActor->EquipWeaponDefinition(pRoofBuildDef, guid);
+                        reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass = SDK::APBWA_W1_RoofC_C::StaticClass();
+                        reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker = m_pPlayerPawn->pBuildPreviewRoof;
+                        m_pPlayerPawn->pBuildPreviewWall->SetActorHiddenInGame(true);
+                        m_pPlayerPawn->pBuildPreviewFloor->SetActorHiddenInGame(true);
+                        m_pPlayerPawn->pBuildPreviewStair->SetActorHiddenInGame(true);
+                        m_pPlayerPawn->pBuildPreviewRoof->SetActorHiddenInGame(false);
+                    }
+                    if (AreGuidsTheSame(guid, pgTrap)) {
+                        if (bTrapDone == false) {
+                            globals::gpPlayerController->CheatManager->Summon(TEXT("Trap_Floor_Spikes_C"));
+                            pTrapC = SDK::UObject::FindObject<SDK::ABuildingActor>("Trap_Floor_Player_Jump_Free_Direction_Pad_C Athena_Terrain.Athena_Terrain.PersistentLevel.Trap_Floor_Player_Jump_Free_Direction_Pad_C_1");
+                            bTrapDone = true;
+                        }
+                        m_pPlayerPawn->m_pPawnActor->PickUpActor(pTrapC, pTrapDef);
+                        m_pPlayerPawn->m_pPawnActor->CurrentWeapon->ItemEntryGuid = pgTrap;
+                    }
+                    //if (AreGuidsTheSame(guid, pgTrap2)) {
+                    //    if (bTrapDone == false) {
+                    //        globals::gpPlayerController->CheatManager->Summon(TEXT("Trap_Floor_Spikes_C"));
+                    //        pTrapC = SDK::UObject::FindObject<SDK::ABuildingActor>("Trap_Floor_Player_Jump_Free_Direction_Pad_C Athena_Terrain.Athena_Terrain.PersistentLevel.Trap_Floor_Player_Jump_Free_Direction_Pad_C_1");
+                    //        bTrapDone = true;
+                    //    }
+                    //    m_pPlayerPawn->m_pPawnActor->PickUpActor(pTrapC, pTrapDef2);
+                    //    m_pPlayerPawn->m_pPawnActor->CurrentWeapon->ItemEntryGuid = pgTrap2;
+                    //}
+                }
             }
             void AthenaPlate::Update()
             {
@@ -91,7 +179,13 @@ namespace polaris
                 static_cast<SDK::AFortPlayerController*>(globals::gpPlayerController)->ServerReadyToStartMatch();
                 static_cast<SDK::AGameMode*>((*globals::gpWorld)->AuthorityGameMode)->StartMatch();
             }
-
+            bool AthenaPlate::AreGuidsTheSame(SDK::FGuid guidA, SDK::FGuid guidB)
+            {
+                if (guidA.A == guidB.A && guidA.B == guidB.B && guidA.C == guidB.C && guidA.D == guidB.D) 
+                    return true;
+                else
+                    return false;
+            }
             SDK::FGuid AthenaPlate::GenerateGuid()
             {
                 SDK::FGuid Guid;
@@ -121,18 +215,19 @@ namespace polaris
                 pQuickBars->ServerAddItemInternal(pgFloorBuild, SDK::EFortQuickBars::Secondary, 1);
                 pQuickBars->ServerAddItemInternal(pgStairBuild, SDK::EFortQuickBars::Secondary, 2);
                 pQuickBars->ServerAddItemInternal(pgRoofBuild, SDK::EFortQuickBars::Secondary, 3);
-                pQuickBars->ServerAddItemInternal(pgTrap, SDK::EFortQuickBars::Secondary, 4);
+                pQuickBars->ServerAddItemInternal(pgTrap2, SDK::EFortQuickBars::Secondary, 4);
                 pQuickBars->ServerAddItemInternal(pgPickaxe, SDK::EFortQuickBars::Primary, 0);
             }
             void AthenaPlate::SetupInventory()
             {
                 //Defining Item Definitions
-                auto pTrapDef = SDK::UObject::FindObject<SDK::UFortItemDefinition>("FortTrapItemDefinition TID_Floor_Player_Jump_Pad_Free_Direction.TID_Floor_Player_Jump_Pad_Free_Direction");
-                auto pPickaxeDef = SDK::UObject::FindObject<SDK::UFortItemDefinition>("FortWeaponMeleeItemDefinition WID_Harvest_Pickaxe_Athena_C_T01.WID_Harvest_Pickaxe_Athena_C_T01");
-                auto pWallBuildDef = SDK::UObject::FindObject<SDK::UFortItemDefinition>("FortBuildingItemDefinition BuildingItemData_Wall.BuildingItemData_Wall");
-                auto pFloorBuildDef = SDK::UObject::FindObject<SDK::UFortItemDefinition>("FortBuildingItemDefinition BuildingItemData_Floor.BuildingItemData_Floor");
-                auto pStairBuildDef = SDK::UObject::FindObject<SDK::UFortItemDefinition>("FortBuildingItemDefinition BuildingItemData_Stair_W.BuildingItemData_Stair_W");
-                auto pRoofBuildDef = SDK::UObject::FindObject<SDK::UFortItemDefinition>("FortBuildingItemDefinition BuildingItemData_RoofS.BuildingItemData_RoofS");
+                pTrapDef = SDK::UObject::FindObject<SDK::UFortDecoItemDefinition>("FortTrapItemDefinition TID_Floor_Spikes_Athena_R_T03.TID_Floor_Spikes_Athena_R_T03");
+                pTrapDef2 = SDK::UObject::FindObject<SDK::UFortTrapItemDefinition>("FortTrapItemDefinition TID_Wall_Electric_Athena_R_T03.TID_Wall_Electric_Athena_R_T03");
+                pPickaxeDef = SDK::UObject::FindObject<SDK::UFortWeaponMeleeItemDefinition>(m_pPlayerPawn->mPickaxeAsWid[static_cast<SDK::AFortPlayerPawnAthena*>(m_pPlayerPawn->m_pPawnActor)->CustomizationLoadout.Character->GetName()].c_str());
+                pWallBuildDef = SDK::UObject::FindObject<SDK::UFortBuildingItemDefinition>("FortBuildingItemDefinition BuildingItemData_Wall.BuildingItemData_Wall");
+                pFloorBuildDef = SDK::UObject::FindObject<SDK::UFortBuildingItemDefinition>("FortBuildingItemDefinition BuildingItemData_Floor.BuildingItemData_Floor");
+                pStairBuildDef = SDK::UObject::FindObject<SDK::UFortBuildingItemDefinition>("FortBuildingItemDefinition BuildingItemData_Stair_W.BuildingItemData_Stair_W");
+                pRoofBuildDef = SDK::UObject::FindObject<SDK::UFortBuildingItemDefinition>("FortBuildingItemDefinition BuildingItemData_RoofS.BuildingItemData_RoofS");
                 auto pWood = SDK::UObject::FindObject<SDK::UFortItemDefinition>("FortResourceItemDefinition WoodItemData.WoodItemData");
                 auto pMetal = SDK::UObject::FindObject<SDK::UFortItemDefinition>("FortResourceItemDefinition MetalItemData.MetalItemData");
                 auto pStone = SDK::UObject::FindObject<SDK::UFortItemDefinition>("FortResourceItemDefinition StoneItemData.StoneItemData");
@@ -156,6 +251,7 @@ namespace polaris
                 aItemDefs[10] = pMed;
                 aItemDefs[11] = pShot;
                 aItemDefs[12] = pHeavy;
+                aItemDefs[13] = pTrapDef2;
                 aGuids[0] = GenerateGuid();
                 aGuids[1] = GenerateGuid();
                 aGuids[2] = GenerateGuid();
@@ -169,12 +265,14 @@ namespace polaris
                 aGuids[10] = GenerateGuid();
                 aGuids[11] = GenerateGuid();
                 aGuids[12] = GenerateGuid();
+                aGuids[13] = GenerateGuid();
                 pgPickaxe = aGuids[1];
                 pgTrap = aGuids[0];
                 pgWallBuild = aGuids[2];
                 pgFloorBuild = aGuids[3];
                 pgStairBuild = aGuids[4];
                 pgRoofBuild = aGuids[5];
+                pgTrap2 = aGuids[13];
                 auto pInventory1 = static_cast<SDK::AFortInventory*>(polaris::utilities::SDKUtils::FindActor(SDK::AFortInventory::StaticClass()));
                 auto pInventory2 = static_cast<SDK::AFortInventory*>(polaris::utilities::SDKUtils::FindActor(SDK::AFortInventory::StaticClass(), 1));
                 SDK::AFortInventory* pActualInv = nullptr;
@@ -196,14 +294,20 @@ namespace polaris
                     auto myInventory = pActualInv;
                     SDK::FFortItemList* inv = &myInventory->Inventory;
                     SDK::TArray<class SDK::UFortWorldItem*>* pItemInsts = &inv->ItemInstances;
-                    pItemInsts->Count = 12;
-                    pItemInsts->Max = 12;
+                    pItemInsts->Count = 14;
+                    pItemInsts->Max = 14;
                     pItemInsts->Data = (class SDK::UFortWorldItem**)::malloc(pItemInsts->Count * sizeof(SDK::UFortWorldItem*));
-                    for (int i = 0; SDK::UFortItemDefinition * pItemdef = aItemDefs[i]; i <= 12) {
+                    //for (int i = 0; SDK::UFortItemDefinition* pItemdef = aItemDefs[i]; /*i < 13*/) {
+                    for (int i = 0; i < 14; i++) {
+                        auto pItemdef = aItemDefs[i];
+                        printf(std::to_string(i).c_str());
                         auto pItemEntry = new SDK::FFortItemEntry;
                         switch (i) {
                         default:
                             pItemEntry->Count = 100;
+                            break;
+                        case 0:
+                            pItemEntry->Count = 1;
                             break;
                         case 1:
                             pItemEntry->Count = 1;
@@ -220,6 +324,9 @@ namespace polaris
                         case 5:
                             pItemEntry->Count = 1;
                             break;
+                        case 13:
+                            pItemEntry->Count = 1;
+                            break;
                         }
                         pItemEntry->ItemDefinition = pItemdef;
                         pItemEntry->Durability = 1000;
@@ -230,7 +337,6 @@ namespace polaris
                         pWorldItem->OwnerInventory = myInventory;
                         pWorldItem->ItemEntry = *pItemEntry;
                         pItemInsts->operator[](i) = pWorldItem;
-                        i++;
                     }
                 }
             }

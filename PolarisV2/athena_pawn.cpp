@@ -110,6 +110,7 @@ namespace polaris
 
                 // Glider redeploy keybind
                 auto athenaPawn = static_cast<SDK::AFortPlayerPawnAthena*>(m_pPawnActor);
+                
                 if (GetAsyncKeyState(VK_SPACE) & 0x8000)
                 {
                     // We do this hacky bool check to avoid the holding button issue.
@@ -127,94 +128,6 @@ namespace polaris
                 }
                 else
                     m_bTryingToDeployGlider = false;
-                if (GetAsyncKeyState(VK_F1) & 0x8000)
-                {
-                    // We do this hacky bool check to avoid the holding button issue.
-                    if (m_bPressedF1 == false)
-                    {
-                        m_bPressedF1 = true;
-                        SDK::FGuid guid;
-                        guid.A = 1;
-                        guid.B = 2;
-                        guid.C = 1;
-                        guid.D = 1;
-                        m_pPawnActor->EquipWeaponDefinition(m_pWallBuildDef, guid);
-                        reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass = SDK::APBWA_W1_Solid_C::StaticClass();
-                        reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker = pBuildPreviewWall;
-                        pBuildPreviewWall->SetActorHiddenInGame(false);
-                        pBuildPreviewFloor->SetActorHiddenInGame(true);
-                        pBuildPreviewStair->SetActorHiddenInGame(true);
-                        pBuildPreviewRoof->SetActorHiddenInGame(true);
-                    }
-                }
-                else
-                    m_bPressedF1 = false;
-                if (GetAsyncKeyState(VK_F2) & 0x8000)
-                {
-                    // We do this hacky bool check to avoid the holding button issue.
-                    if (m_bPressedF2 == false)
-                    {
-                        m_bPressedF2 = true;
-                        SDK::FGuid guid;
-                        guid.A = 1;
-                        guid.B = 1;
-                        guid.C = 2;
-                        guid.D = 1;
-                        m_pPawnActor->EquipWeaponDefinition(m_pFloorBuildDef, guid);
-                        reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass = SDK::APBWA_W1_Floor_C::StaticClass();
-                        reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker = pBuildPreviewFloor;
-                        pBuildPreviewWall->SetActorHiddenInGame(true);
-                        pBuildPreviewFloor->SetActorHiddenInGame(false);
-                        pBuildPreviewStair->SetActorHiddenInGame(true);
-                        pBuildPreviewRoof->SetActorHiddenInGame(true);
-                    }
-                }
-                else
-                    m_bPressedF2 = false;
-                if (GetAsyncKeyState(VK_F3) & 0x8000)
-                {
-                    // We do this hacky bool check to avoid the holding button issue.
-                    if (m_bPressedF3 == false)
-                    {
-                        m_bPressedF3 = true;
-                        SDK::FGuid guid;
-                        guid.A = 1;
-                        guid.B = 1;
-                        guid.C = 1;
-                        guid.D = 2;
-                        m_pPawnActor->EquipWeaponDefinition(m_pStairBuildDef, guid);
-                        reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass = SDK::APBWA_W1_StairW_C::StaticClass();
-                        reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker = pBuildPreviewStair;
-                        pBuildPreviewWall->SetActorHiddenInGame(true);
-                        pBuildPreviewFloor->SetActorHiddenInGame(true);
-                        pBuildPreviewStair->SetActorHiddenInGame(false);
-                        pBuildPreviewRoof->SetActorHiddenInGame(true);
-                    }
-                }
-                else
-                    m_bPressedF3 = false;
-                if (GetAsyncKeyState(VK_F4) & 0x8000)
-                {
-                    // We do this hacky bool check to avoid the holding button issue.
-                    if (m_bPressedF4 == false)
-                    {
-                        m_bPressedF4 = true;
-                        SDK::FGuid guid;
-                        guid.A = 2;
-                        guid.B = 1;
-                        guid.C = 1;
-                        guid.D = 1;
-                        m_pPawnActor->EquipWeaponDefinition(m_pRoofBuildDef, guid);
-                        reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass = SDK::APBWA_W1_RoofC_C::StaticClass();
-                        reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker = pBuildPreviewRoof;
-                        pBuildPreviewWall->SetActorHiddenInGame(true);
-                        pBuildPreviewFloor->SetActorHiddenInGame(true);
-                        pBuildPreviewStair->SetActorHiddenInGame(true);
-                        pBuildPreviewRoof->SetActorHiddenInGame(false);
-                    }
-                }
-                else
-                    m_bPressedF4 = false;
             }
             void AthenaPawn::ApplyCustomizationLoadout()
             {

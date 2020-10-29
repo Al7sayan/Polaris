@@ -30,6 +30,7 @@ namespace polaris
                 void SetupInventory(); //!< SetupInventory initializes the inventory.
                 void SetupQuickbars(); //!< SetupQuickbars initializes the quickbars.
                 SDK::FGuid GenerateGuid(); //!< GenerateGuid generates an FGuid.
+                bool AreGuidsTheSame(SDK::FGuid guidA,SDK::FGuid guidB); //!< AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
             };
         }
     }

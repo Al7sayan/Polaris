@@ -19,6 +19,7 @@ namespace polaris
                 bool m_bPressedF2 = false;
                 bool m_bPressedF3 = false;
                 bool m_bPressedF4 = false;
+                bool m_bPressed1 = false;
 
                 SDK::ABuildingPlayerPrimitivePreview* pBuildPreviewRoof;
                 SDK::ABuildingPlayerPrimitivePreview* pBuildPreviewFloor;
