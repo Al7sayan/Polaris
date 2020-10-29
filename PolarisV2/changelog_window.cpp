@@ -36,8 +36,9 @@ namespace polaris
                         ImGui::End();
                     }
 
-                    ImGui::SetNextWindowSize(ImVec2(405, 540), ImGuiCond_Appearing);
-                    ImGui::Begin("Changelog", &m_bIsOpen, ImGuiWindowFlags_NoTitleBar);
+                    ImGui::SetNextWindowSize(ImVec2(669, 540));
+                    ImGui::SetNextWindowPos(ImVec2(((io->DisplaySize.x / 2) - (669 / 2)), ((io->DisplaySize.y / 2) - (540 / 2))));
+                    ImGui::Begin("Changelog", &m_bIsOpen, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings);
                     {
                         ImGui::Header2("What's new");
                         ImGui::SmallText(ImColor(1.0f, 1.0f, 1.0f, 0.5f), BUILD_DATE);
@@ -59,7 +60,6 @@ namespace polaris
                             ImGui::Dummy(ImVec2(0, 15));
                             ImGui::Header2(field->m_sHeader.c_str());
 
-                            std::cout << field->m_vEntries.size() << std::endl;
                             for (int j = 0; j < field->m_vEntries.size(); j++)
                             {
                                 ChangelogEntry* entry = field->m_vEntries[j];
@@ -83,12 +83,14 @@ namespace polaris
                 }
                 void ChangelogWindow::Update()
                 {
+                    // Hide the Polaris UI when closing the changelog.
                     if (m_bShouldUnlockFortUIInput && gpRenderer->m_bLockFortInput)
                     {
                         gpRenderer->m_bLockFortInput = false;
                         m_bShouldUnlockFortUIInput = false;
                     }
 
+                    // Close the changelog when the Polaris UI goes out of focus.
                     if (!gpRenderer->m_bLockFortInput && m_bIsOpen)
                     {
                         m_bIsOpen = false;
