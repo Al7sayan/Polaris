@@ -69,7 +69,15 @@ namespace polaris
 
 			return nullptr;
 		}
-
+		SDK::FGuid SDKUtils::GenerateGuid()
+		{
+			SDK::FGuid Guid;
+			Guid.A = rand() % 100;
+			Guid.B = rand() % 100;
+			Guid.C = rand() % 100;
+			Guid.D = rand() % 100;
+			return Guid;
+		}
 		VOID SDKUtils::InitConsole()
 		{
 			AllocConsole();

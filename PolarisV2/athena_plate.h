@@ -21,6 +21,7 @@ namespace polaris
                 bool m_bIsInitialized;
 
             public:
+                
                 void ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams) override;
                 void Update() override;
 
@@ -29,7 +30,7 @@ namespace polaris
                 void Initialize(); //!< Initialize spawns a pawn and drops the loading screen.
                 void SetupInventory(); //!< SetupInventory initializes the inventory.
                 void SetupQuickbars(); //!< SetupQuickbars initializes the quickbars.
-                SDK::FGuid GenerateGuid(); //!< GenerateGuid generates an FGuid.
+
                 bool AreGuidsTheSame(SDK::FGuid guidA,SDK::FGuid guidB); //!< AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
             };
         }

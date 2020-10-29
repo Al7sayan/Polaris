@@ -32,6 +32,7 @@ namespace polaris
 			static VOID InitSdk(); //!< InitSdk loads the SDK's properties.
 			static VOID InitGlobals(); //!< InitGlobals puts the SDK's properties in globals.
 			static VOID InitPatches(); //!< InitPatches patches Fortnite to circumvent errors.
+			static SDK::FGuid GenerateGuid(); //!< Generates a guid.
 		};
 	}
 }
