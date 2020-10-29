@@ -29,6 +29,7 @@ namespace polaris
                     style->ItemSpacing = ImVec2(style->ItemSpacing.x, 0.15f);
 
                     // Background darkener window
+                    // TODO: make this better later
                     ImGui::SetNextWindowSize(ImVec2(5000, 5000));
                     ImGui::SetNextWindowPos(ImVec2(-(io->DisplaySize.x / 2), -(io->DisplaySize.y / 2)));
                     ImGui::SetNextWindowBgAlpha(0.6);
