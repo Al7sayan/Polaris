@@ -47,6 +47,10 @@ bool bTrapDone = false;
 std::map<SDK::FGuid*, SDK::UFortWeaponItemDefinition*> mItems;
 std::map<SDK::FGuid*, SDK::UFortTrapItemDefinition*> mTraps;
 int iInventoryIteration = 0;
+bool bOnWall = false;
+bool bOnFloor = false;
+bool bOnStair = false;
+bool bOnRoof = false;
 namespace polaris
 {
     namespace tables
@@ -82,56 +86,87 @@ namespace polaris
                     guid.C = paramGuid->C;
                     guid.D = paramGuid->D;
                     for (auto it = mItems.begin(); it != mItems.end(); it++) {
-                        //printf(" %s, %s, %s, %s\n", std::to_string(it->first->A), std::to_string(it->first->B), std::to_string(it->first->C), std::to_string(it->first->D));
-                        if (AreGuidsTheSame((*it->first), (*paramGuid))) {
-                            //printf("\n Attempting To Equip item! \n");
+                        if (AreGuidsTheSame((*it->first), (*paramGuid)) && !AreGuidsTheSame((*pgWallBuild), (*paramGuid)) && !AreGuidsTheSame((*pgFloorBuild), (*paramGuid)) && !AreGuidsTheSame((*pgStairBuild), (*paramGuid)) && !AreGuidsTheSame((*pgRoofBuild), (*paramGuid))) {
                             m_pPlayerPawn->m_pPawnActor->EquipWeaponDefinition(it->second, (*it->first));
+                            bOnWall = false;
+                            bOnFloor = false;
+                            bOnStair = false;
+                            bOnRoof = false;
                         }
                     }
                     for (auto it = mTraps.begin(); it != mTraps.end(); it++) {
-                        //printf(" %s, %s, %s, %s\n", std::to_string(it->first->A), std::to_string(it->first->B), std::to_string(it->first->C), std::to_string(it->first->D));
                         if (AreGuidsTheSame((*it->first), (*paramGuid))) {
-                            //printf("\n Attempting To Equip item! \n");
                             if (bTrapDone == false) {
                                 pTrapC = SDK::UObject::FindObject<SDK::ABuildingActor>("Trap_Floor_Player_Jump_Free_Direction_Pad_C Athena_Terrain.Athena_Terrain.PersistentLevel.Trap_Floor_Player_Jump_Free_Direction_Pad_C_1");
                                 bTrapDone = true;
                             }
                             m_pPlayerPawn->m_pPawnActor->PickUpActor(pTrapC, it->second);
                             m_pPlayerPawn->m_pPawnActor->CurrentWeapon->ItemEntryGuid = (*it->first);
-                            //m_pPlayerPawn->m_pPawnActor->EquipWeaponDefinition(it->second, (*it->first));
+                            bOnWall = false;
+                            bOnFloor = false;
+                            bOnStair = false;
+                            bOnRoof = false;
                         }
                     }
                     if (AreGuidsTheSame(guid, (*pgWallBuild))) {
-                        reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass = SDK::APBWA_W1_Solid_C::StaticClass();
-                        reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker = m_pPlayerPawn->pBuildPreviewWall;
-                        m_pPlayerPawn->pBuildPreviewWall->SetActorHiddenInGame(false);
-                        m_pPlayerPawn->pBuildPreviewFloor->SetActorHiddenInGame(true);
-                        m_pPlayerPawn->pBuildPreviewStair->SetActorHiddenInGame(true);
-                        m_pPlayerPawn->pBuildPreviewRoof->SetActorHiddenInGame(true);
+                        if (!bOnWall) {
+                            m_pPlayerPawn->m_pPawnActor->EquipWeaponDefinition(pWallBuildDef, (*paramGuid));
+                            reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass = SDK::APBWA_W1_Solid_C::StaticClass();
+                            reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker = m_pPlayerPawn->pBuildPreviewWall;
+                            m_pPlayerPawn->pBuildPreviewWall->SetActorHiddenInGame(false);
+                            m_pPlayerPawn->pBuildPreviewFloor->SetActorHiddenInGame(true);
+                            m_pPlayerPawn->pBuildPreviewStair->SetActorHiddenInGame(true);
+                            m_pPlayerPawn->pBuildPreviewRoof->SetActorHiddenInGame(true);
+                            bOnWall = true;
+                            bOnFloor = false;
+                            bOnStair = false;
+                            bOnRoof = false;
+                        }
                     }
                     if (AreGuidsTheSame(guid, (*pgFloorBuild))) {
-                        reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass = SDK::APBWA_W1_Floor_C::StaticClass();
-                        reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker = m_pPlayerPawn->pBuildPreviewFloor;
-                        m_pPlayerPawn->pBuildPreviewWall->SetActorHiddenInGame(true);
-                        m_pPlayerPawn->pBuildPreviewFloor->SetActorHiddenInGame(false);
-                        m_pPlayerPawn->pBuildPreviewStair->SetActorHiddenInGame(true);
-                        m_pPlayerPawn->pBuildPreviewRoof->SetActorHiddenInGame(true);
+                        if (!bOnFloor) {
+                            m_pPlayerPawn->m_pPawnActor->EquipWeaponDefinition(pFloorBuildDef, (*paramGuid));
+                            reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass = SDK::APBWA_W1_Floor_C::StaticClass();
+                            reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker = m_pPlayerPawn->pBuildPreviewFloor;
+                            m_pPlayerPawn->pBuildPreviewWall->SetActorHiddenInGame(true);
+                            m_pPlayerPawn->pBuildPreviewFloor->SetActorHiddenInGame(false);
+                            m_pPlayerPawn->pBuildPreviewStair->SetActorHiddenInGame(true);
+                            m_pPlayerPawn->pBuildPreviewRoof->SetActorHiddenInGame(true);
+                            bOnWall = false;
+                            bOnFloor = true;
+                            bOnStair = false;
+                            bOnRoof = false;
+                        }
                     }
                     if (AreGuidsTheSame(guid, (*pgStairBuild))) {
-                        reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass = SDK::APBWA_W1_StairW_C::StaticClass();
-                        reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker = m_pPlayerPawn->pBuildPreviewStair;
-                        m_pPlayerPawn->pBuildPreviewWall->SetActorHiddenInGame(true);
-                        m_pPlayerPawn->pBuildPreviewFloor->SetActorHiddenInGame(true);
-                        m_pPlayerPawn->pBuildPreviewStair->SetActorHiddenInGame(false);
-                        m_pPlayerPawn->pBuildPreviewRoof->SetActorHiddenInGame(true);
+                        if (!bOnStair) {
+                            m_pPlayerPawn->m_pPawnActor->EquipWeaponDefinition(pStairBuildDef, (*paramGuid));
+                            reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass = SDK::APBWA_W1_StairW_C::StaticClass();
+                            reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker = m_pPlayerPawn->pBuildPreviewStair;
+                            m_pPlayerPawn->pBuildPreviewWall->SetActorHiddenInGame(true);
+                            m_pPlayerPawn->pBuildPreviewFloor->SetActorHiddenInGame(true);
+                            m_pPlayerPawn->pBuildPreviewStair->SetActorHiddenInGame(false);
+                            m_pPlayerPawn->pBuildPreviewRoof->SetActorHiddenInGame(true);
+                            bOnWall = false;
+                            bOnFloor = false;
+                            bOnStair = true;
+                            bOnRoof = false;
+                        }
                     }
                     if (AreGuidsTheSame(guid, (*pgRoofBuild))) {
-                        reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass = SDK::APBWA_W1_RoofC_C::StaticClass();
-                        reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker = m_pPlayerPawn->pBuildPreviewRoof;
-                        m_pPlayerPawn->pBuildPreviewWall->SetActorHiddenInGame(true);
-                        m_pPlayerPawn->pBuildPreviewFloor->SetActorHiddenInGame(true);
-                        m_pPlayerPawn->pBuildPreviewStair->SetActorHiddenInGame(true);
-                        m_pPlayerPawn->pBuildPreviewRoof->SetActorHiddenInGame(false);
+                        if (!bOnRoof) {
+                            m_pPlayerPawn->m_pPawnActor->EquipWeaponDefinition(pRoofBuildDef, (*paramGuid));
+                            reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass = SDK::APBWA_W1_RoofC_C::StaticClass();
+                            reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker = m_pPlayerPawn->pBuildPreviewRoof;
+                            m_pPlayerPawn->pBuildPreviewWall->SetActorHiddenInGame(true);
+                            m_pPlayerPawn->pBuildPreviewFloor->SetActorHiddenInGame(true);
+                            m_pPlayerPawn->pBuildPreviewStair->SetActorHiddenInGame(true);
+                            m_pPlayerPawn->pBuildPreviewRoof->SetActorHiddenInGame(false);
+                            bOnWall = false;
+                            bOnFloor = false;
+                            bOnStair = false;
+                            bOnRoof = true;
+                        }
                     }
                 }
             }
