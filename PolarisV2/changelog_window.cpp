@@ -32,7 +32,7 @@ namespace polaris
                     // TODO: make this better later
                     ImGui::SetNextWindowSize(ImVec2(5000, 5000));
                     ImGui::SetNextWindowPos(ImVec2(-(io->DisplaySize.x / 2), -(io->DisplaySize.y / 2)));
-                    ImGui::SetNextWindowBgAlpha(0.6);
+                    ImGui::SetNextWindowBgAlpha(0.6f);
                     ImGui::Begin("Poglaris moment", &m_bIsOpen, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoMouseInputs | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoBringToFrontOnFocus);
                     {
                         ImGui::End();
