@@ -18,7 +18,8 @@ namespace polaris
 					std::string verEnv = POLARIS_ID;
 					std::string combined = verNum + "-" + verEnv;
 
-					ImGui::Begin("About", &m_bIsOpen, ImGuiWindowFlags_NoTitleBar);
+					ImGui::SetNextWindowSize(ImVec2(370, 600));
+					ImGui::Begin("About", &m_bIsOpen, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
 					{
 						ImGui::Header("Polaris");
 						ImGui::SameLine();
@@ -34,23 +35,19 @@ namespace polaris
 
 						ImGui::Dummy(ImVec2(1, 5));
 
-						ImGui::Header2("Developer");
+						ImGui::Header2("Developers");
 						ImGui::Text("irma");
-
-						ImGui::Dummy(ImVec2(1, 5));
-
-						ImGui::Header2("Contributor");
-						ImGui::Text("kanner");
-						ImGui::Text("pivotman319");
 						ImGui::Text("wiktorwiktor12");
+						ImGui::Text("pivotman319");
 
 						ImGui::Dummy(ImVec2(1, 5));
 
 						ImGui::Header2("Special Thanks");
 						ImGui::Text("BattleDash");
+						ImGui::Text("Chase");
 						ImGui::Text("Crush");
 						ImGui::Text("Darkblade");
-						ImGui::Text("Chase");
+						ImGui::Text("kanner");
 						ImGui::Text("Samicc");
 						ImGui::Text("Slushia");
 
