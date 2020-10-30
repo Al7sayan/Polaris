@@ -56,8 +56,7 @@ namespace polaris
                 for (int i = 0; i < SDK::UObject::GetGlobalObjects().Num(); ++i)
                 {
                     auto pObject = SDK::UObject::GetGlobalObjects().GetByIndex(i);
-                    if (pObject != nullptr && pObject->GetFullName().find("F_Med_Head1") == std::string::npos
-                        && pObject->GetFullName().find("Helmet") == std::string::npos)
+                    if (pObject != nullptr && pObject->GetFullName().find("F_Med_Head1") == std::string::npos)
                     {
                         if (pObject->GetFullName().rfind(sClassName, 0) == 0 && pObject->GetFullName().find(sQuery) != std::string::npos)
                             return static_cast<T*>(pObject);
@@ -72,9 +71,6 @@ namespace polaris
                 globals::gpPlayerController->CheatManager->Summon(TEXT("PlayerPawn_Athena_C"));
                 m_pPawnActor = static_cast<SDK::AFortPlayerPawn*>(utilities::SDKUtils::FindActor(SDK::AFortPlayerPawn::StaticClass()));
                 globals::gpPlayerController->Possess(m_pPawnActor);
-
-                // Apply customization loadout.
-                ApplyCustomizationLoadout();
 
                 auto playerState = static_cast<SDK::AFortPlayerStateAthena*>(globals::gpPlayerController->PlayerState);
                 playerState->TeamIndex = SDK::EFortTeam::HumanPvP_Team69; // funny number go brrrrrr
@@ -93,6 +89,9 @@ namespace polaris
                 // Give the player a pickaxe.
                 EquipWeapon(mPickaxeAsWid[pawn->CustomizationLoadout.Character->GetName()].c_str(), 0);
                 CreateBuildPreviews();
+
+                // Apply customization loadout.
+                ApplyCustomizationLoadout();
             }
             AthenaPawn::~AthenaPawn()
             {
