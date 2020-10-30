@@ -105,7 +105,10 @@ namespace polaris
 
                 // Sprinting keybind
                 bool wantsToSprint = static_cast<SDK::AFortPlayerControllerAthena*>(globals::gpPlayerController)->bWantsToSprint;
-                m_pPawnActor->CurrentMovementStyle = wantsToSprint ? SDK::EFortMovementStyle::Sprinting : SDK::EFortMovementStyle::Running;
+                if (m_pPawnActor->CurrentWeapon && (!m_pPawnActor->CurrentWeapon->IsReloading() || !m_pPawnActor->CurrentWeapon->bIsTargeting))
+                {
+                    m_pPawnActor->CurrentMovementStyle = wantsToSprint ? SDK::EFortMovementStyle::Sprinting : SDK::EFortMovementStyle::Running;
+                }
 
                 // Glider redeploy keybind
                 auto athenaPawn = static_cast<SDK::AFortPlayerPawnAthena*>(m_pPawnActor);
