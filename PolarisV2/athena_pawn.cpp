@@ -166,129 +166,71 @@ namespace polaris
             }
             void AthenaPawn::CreateBuildPreviews()
             {
-                m_pEditToolDef = SDK::UObject::FindObject<SDK::UFortWeaponItemDefinition>("FortEditToolItemDefinition EditTool.EditTool");
-                m_pWallBuildDef = SDK::UObject::FindObject<SDK::UFortWeaponItemDefinition>("FortBuildingItemDefinition BuildingItemData_Wall.BuildingItemData_Wall");
-                m_pFloorBuildDef = SDK::UObject::FindObject<SDK::UFortWeaponItemDefinition>("FortBuildingItemDefinition BuildingItemData_Floor.BuildingItemData_Floor");
-                m_pStairBuildDef = SDK::UObject::FindObject<SDK::UFortWeaponItemDefinition>("FortBuildingItemDefinition BuildingItemData_Stair_W.BuildingItemData_Stair_W");
-                m_pRoofBuildDef = SDK::UObject::FindObject<SDK::UFortWeaponItemDefinition>("FortBuildingItemDefinition BuildingItemData_RoofS.BuildingItemData_RoofS");
                 SDK::AFortPlayerController* playerController = static_cast<SDK::AFortPlayerController*>(globals::gpPlayerController);
                 playerController->CheatManager->Summon(TEXT("BuildingPlayerPrimitivePreview"));
-                pBuildPreviewRoof = static_cast<SDK::ABuildingPlayerPrimitivePreview*>(polaris::utilities::SDKUtils::FindActor(SDK::ABuildingPlayerPrimitivePreview::StaticClass()));
+                m_pBuildPreviewRoof = static_cast<SDK::ABuildingPlayerPrimitivePreview*>(polaris::utilities::SDKUtils::FindActor(SDK::ABuildingPlayerPrimitivePreview::StaticClass()));
                 auto pBuildingEditSupportRoof = reinterpret_cast<SDK::UBuildingEditModeSupport_Roof*>(globals::StaticConstructObject_Internal(SDK::UBuildingEditModeSupport_Roof::StaticClass(), (*globals::gpWorld), SDK::FName("None"), 0, SDK::FUObjectItem::ObjectFlags::None, NULL, false, NULL, false));
-                pBuildingEditSupportRoof->Outer = pBuildPreviewRoof;
-
-                pBuildPreviewRoof->EditModeSupport = pBuildingEditSupportRoof;
-
-                auto pComponent = pBuildPreviewRoof->GetBuildingMeshComponent();
-
-                if (!m_pStaticRoof)
-                {
-                    m_pStaticRoof = SDK::UObject::FindObject<SDK::UStaticMesh>("StaticMesh PBW_W1_RoofC.PBW_W1_RoofC");
-                }
-
+                pBuildingEditSupportRoof->Outer = m_pBuildPreviewRoof;
+                m_pBuildPreviewRoof->EditModeSupport = pBuildingEditSupportRoof;
+                auto pComponent = m_pBuildPreviewRoof->GetBuildingMeshComponent();
+                m_pStaticRoof = SDK::UObject::FindObject<SDK::UStaticMesh>("StaticMesh PBW_W1_RoofC.PBW_W1_RoofC");
                 pComponent->SetStaticMesh(m_pStaticRoof);
                 pComponent->SetMaterial(0, reinterpret_cast<AFortAsBuildPreviewMID*>(globals::gpPlayerController)->BuildPreviewMarkerMID);
+                m_pBuildPreviewRoof->BuildingType = SDK::EFortBuildingType::Roof;
+                m_pMetadataRoof = SDK::UObject::FindObject<SDK::UBuildingEditModeMetadata_Roof>("BuildingEditModeMetadata_Roof EMP_Roof_RoofC.EMP_Roof_RoofC");
+                m_pBuildPreviewRoof->EditModePatternData = m_pMetadataRoof;
+                m_pBuildPreviewRoof->EditModeSupportClass = SDK::UBuildingEditModeSupport_Roof::StaticClass();
+                m_pBuildPreviewRoof->OnBuildingActorInitialized(SDK::EFortBuildingInitializationReason::PlacementTool, SDK::EFortBuildingPersistentState::New);
 
-                pBuildPreviewRoof->BuildingType = SDK::EFortBuildingType::Roof;
-
-                if (!m_pMetadataRoof)
-                {
-                    m_pMetadataRoof = SDK::UObject::FindObject<SDK::UBuildingEditModeMetadata_Roof>("BuildingEditModeMetadata_Roof EMP_Roof_RoofC.EMP_Roof_RoofC");
-                }
-
-                pBuildPreviewRoof->EditModePatternData = m_pMetadataRoof;
-                pBuildPreviewRoof->EditModeSupportClass = SDK::UBuildingEditModeSupport_Roof::StaticClass();
-                pBuildPreviewRoof->OnBuildingActorInitialized(SDK::EFortBuildingInitializationReason::PlacementTool, SDK::EFortBuildingPersistentState::New);
-
-                
                 playerController->CheatManager->Summon(TEXT("BuildingPlayerPrimitivePreview"));
-                pBuildPreviewStair = static_cast<SDK::ABuildingPlayerPrimitivePreview*>(polaris::utilities::SDKUtils::FindActor(SDK::ABuildingPlayerPrimitivePreview::StaticClass(),1));
+                m_pBuildPreviewStair = static_cast<SDK::ABuildingPlayerPrimitivePreview*>(polaris::utilities::SDKUtils::FindActor(SDK::ABuildingPlayerPrimitivePreview::StaticClass(), 1));
                 auto pBuildingEditSupportStair = reinterpret_cast<SDK::UBuildingEditModeSupport_Stair*>(globals::StaticConstructObject_Internal(SDK::UBuildingEditModeSupport_Stair::StaticClass(), (*globals::gpWorld), SDK::FName("None"), 0, SDK::FUObjectItem::ObjectFlags::None, NULL, false, NULL, false));
-                pBuildingEditSupportStair->Outer = pBuildPreviewStair;
-
-                pBuildPreviewStair->EditModeSupport = pBuildingEditSupportStair;
-
-                auto pComponent1 = pBuildPreviewStair->GetBuildingMeshComponent();
-
-                if (!m_pStaticStair)
-                {
-                    m_pStaticStair = SDK::UObject::FindObject<SDK::UStaticMesh>("StaticMesh PBW_W1_StairW.PBW_W1_StairW");
-                }
-
+                pBuildingEditSupportStair->Outer = m_pBuildPreviewStair;
+                m_pBuildPreviewStair->EditModeSupport = pBuildingEditSupportStair;
+                auto pComponent1 = m_pBuildPreviewStair->GetBuildingMeshComponent();
+                m_pStaticStair = SDK::UObject::FindObject<SDK::UStaticMesh>("StaticMesh PBW_W1_StairW.PBW_W1_StairW");
                 pComponent1->SetStaticMesh(m_pStaticStair);
                 pComponent1->SetMaterial(0, reinterpret_cast<AFortAsBuildPreviewMID*>(globals::gpPlayerController)->BuildPreviewMarkerMID);
+                m_pBuildPreviewStair->BuildingType = SDK::EFortBuildingType::Stairs;
+                m_pMetadataStair = SDK::UObject::FindObject<SDK::UBuildingEditModeMetadata_Stair>("BuildingEditModeMetadata_Stair EMP_Stair_StairW.EMP_Stair_StairW");
+                m_pBuildPreviewStair->EditModePatternData = m_pMetadataStair;
+                m_pBuildPreviewStair->EditModeSupportClass = SDK::UBuildingEditModeSupport_Stair::StaticClass();
+                m_pBuildPreviewStair->OnBuildingActorInitialized(SDK::EFortBuildingInitializationReason::PlacementTool, SDK::EFortBuildingPersistentState::New);
 
-                pBuildPreviewStair->BuildingType = SDK::EFortBuildingType::Stairs;
-
-                if (!m_pMetadataStair)
-                {
-                    m_pMetadataStair = SDK::UObject::FindObject<SDK::UBuildingEditModeMetadata_Stair>("BuildingEditModeMetadata_Stair EMP_Stair_StairW.EMP_Stair_StairW");
-                }
-
-                pBuildPreviewStair->EditModePatternData = m_pMetadataStair;
-                pBuildPreviewStair->EditModeSupportClass = SDK::UBuildingEditModeSupport_Stair::StaticClass();
-                pBuildPreviewStair->OnBuildingActorInitialized(SDK::EFortBuildingInitializationReason::PlacementTool, SDK::EFortBuildingPersistentState::New);
-
-                
                 playerController->CheatManager->Summon(TEXT("BuildingPlayerPrimitivePreview"));
-                pBuildPreviewFloor = static_cast<SDK::ABuildingPlayerPrimitivePreview*>(polaris::utilities::SDKUtils::FindActor(SDK::ABuildingPlayerPrimitivePreview::StaticClass(),2));
+                m_pBuildPreviewFloor = static_cast<SDK::ABuildingPlayerPrimitivePreview*>(polaris::utilities::SDKUtils::FindActor(SDK::ABuildingPlayerPrimitivePreview::StaticClass(), 2));
                 auto pBuildingEditSupportFloor = reinterpret_cast<SDK::UBuildingEditModeSupport_Floor*>(globals::StaticConstructObject_Internal(SDK::UBuildingEditModeSupport_Floor::StaticClass(), (*globals::gpWorld), SDK::FName("None"), 0, SDK::FUObjectItem::ObjectFlags::None, NULL, false, NULL, false));
                 pBuildingEditSupportFloor->Outer = reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker;
-
-                pBuildPreviewFloor->EditModeSupport = pBuildingEditSupportFloor;
-
-                auto pComponent2 = pBuildPreviewFloor->GetBuildingMeshComponent();
-
-                if (!m_pStaticFloor)
-                {
-                    m_pStaticFloor = SDK::UObject::FindObject<SDK::UStaticMesh>("StaticMesh PBW_W1_Floor.PBW_W1_Floor");
-                }
-
+                m_pBuildPreviewFloor->EditModeSupport = pBuildingEditSupportFloor;
+                auto pComponent2 = m_pBuildPreviewFloor->GetBuildingMeshComponent();
+                m_pStaticFloor = SDK::UObject::FindObject<SDK::UStaticMesh>("StaticMesh PBW_W1_Floor.PBW_W1_Floor");
                 pComponent2->SetStaticMesh(m_pStaticFloor);
                 pComponent2->SetMaterial(0, reinterpret_cast<AFortAsBuildPreviewMID*>(globals::gpPlayerController)->BuildPreviewMarkerMID);
-
-                pBuildPreviewFloor->BuildingType = SDK::EFortBuildingType::Floor;
-
-                if (!m_pMetadataFloor)
-                {
-                    m_pMetadataFloor = SDK::UObject::FindObject<SDK::UBuildingEditModeMetadata_Floor>("BuildingEditModeMetadata_Floor EMP_Floor_Floor.EMP_Floor_Floor");
-                }
-
-                pBuildPreviewFloor->EditModePatternData = m_pMetadataFloor;
-                pBuildPreviewFloor->EditModeSupportClass = SDK::UBuildingEditModeSupport_Floor::StaticClass();
-                pBuildPreviewFloor->OnBuildingActorInitialized(SDK::EFortBuildingInitializationReason::PlacementTool, SDK::EFortBuildingPersistentState::New);
+                m_pBuildPreviewFloor->BuildingType = SDK::EFortBuildingType::Floor;
+                m_pMetadataFloor = SDK::UObject::FindObject<SDK::UBuildingEditModeMetadata_Floor>("BuildingEditModeMetadata_Floor EMP_Floor_Floor.EMP_Floor_Floor");
+                m_pBuildPreviewFloor->EditModePatternData = m_pMetadataFloor;
+                m_pBuildPreviewFloor->EditModeSupportClass = SDK::UBuildingEditModeSupport_Floor::StaticClass();
+                m_pBuildPreviewFloor->OnBuildingActorInitialized(SDK::EFortBuildingInitializationReason::PlacementTool, SDK::EFortBuildingPersistentState::New);
 
                 playerController->CheatManager->Summon(TEXT("BuildingPlayerPrimitivePreview"));
-                pBuildPreviewWall = static_cast<SDK::ABuildingPlayerPrimitivePreview*>(polaris::utilities::SDKUtils::FindActor(SDK::ABuildingPlayerPrimitivePreview::StaticClass(),3));
+                m_pBuildPreviewWall = static_cast<SDK::ABuildingPlayerPrimitivePreview*>(polaris::utilities::SDKUtils::FindActor(SDK::ABuildingPlayerPrimitivePreview::StaticClass(), 3));
                 auto pBuildingEditSupportWall = reinterpret_cast<SDK::UBuildingEditModeSupport_Wall*>(globals::StaticConstructObject_Internal(SDK::UBuildingEditModeSupport_Wall::StaticClass(), (*globals::gpWorld), SDK::FName("None"), 0, SDK::FUObjectItem::ObjectFlags::None, NULL, false, NULL, false));
-                pBuildingEditSupportWall->Outer = pBuildPreviewWall;
-
-                pBuildPreviewWall->EditModeSupport = pBuildingEditSupportWall;
-
-                auto pComponent3 = pBuildPreviewWall->GetBuildingMeshComponent();
-
-                if (!m_pStaticWall)
-                {
-                    m_pStaticWall = SDK::UObject::FindObject<SDK::UStaticMesh>("StaticMesh PBW_W1_Solid.PBW_W1_Solid");
-                }
-
+                pBuildingEditSupportWall->Outer = m_pBuildPreviewWall;
+                m_pBuildPreviewWall->EditModeSupport = pBuildingEditSupportWall;
+                auto pComponent3 = m_pBuildPreviewWall->GetBuildingMeshComponent();
+                m_pStaticWall = SDK::UObject::FindObject<SDK::UStaticMesh>("StaticMesh PBW_W1_Solid.PBW_W1_Solid");
                 pComponent3->SetStaticMesh(m_pStaticWall);
                 pComponent3->SetMaterial(0, reinterpret_cast<AFortAsBuildPreviewMID*>(globals::gpPlayerController)->BuildPreviewMarkerMID);
-
-                pBuildPreviewWall->BuildingType = SDK::EFortBuildingType::Wall;
-
-                if (!m_pMetadataWall)
-                {
-                    m_pMetadataWall = SDK::UObject::FindObject<SDK::UBuildingEditModeMetadata_Wall>("BuildingEditModeMetadata_Wall EMP_Wall_Solid.EMP_Wall_Solid");
-                }
-
-                pBuildPreviewWall->EditModePatternData = m_pMetadataWall;
-                pBuildPreviewWall->EditModeSupportClass = SDK::UBuildingEditModeSupport_Wall::StaticClass();
-                pBuildPreviewWall->OnBuildingActorInitialized(SDK::EFortBuildingInitializationReason::PlacementTool, SDK::EFortBuildingPersistentState::New);
-                pBuildPreviewWall->SetActorHiddenInGame(true);
-                pBuildPreviewFloor->SetActorHiddenInGame(true);
-                pBuildPreviewStair->SetActorHiddenInGame(true);
-                pBuildPreviewRoof->SetActorHiddenInGame(true);
+                m_pBuildPreviewWall->BuildingType = SDK::EFortBuildingType::Wall;
+                m_pMetadataWall = SDK::UObject::FindObject<SDK::UBuildingEditModeMetadata_Wall>("BuildingEditModeMetadata_Wall EMP_Wall_Solid.EMP_Wall_Solid");
+                m_pBuildPreviewWall->EditModePatternData = m_pMetadataWall;
+                m_pBuildPreviewWall->EditModeSupportClass = SDK::UBuildingEditModeSupport_Wall::StaticClass();
+                m_pBuildPreviewWall->OnBuildingActorInitialized(SDK::EFortBuildingInitializationReason::PlacementTool, SDK::EFortBuildingPersistentState::New);
+                
+                m_pBuildPreviewWall->SetActorHiddenInGame(true);
+                m_pBuildPreviewFloor->SetActorHiddenInGame(true);
+                m_pBuildPreviewStair->SetActorHiddenInGame(true);
+                m_pBuildPreviewRoof->SetActorHiddenInGame(true);
             }
         }
     }

@@ -21,10 +21,18 @@ namespace polaris
                 bool m_bPressedF4 = false;
                 bool m_bPressed1 = false;
 
-                SDK::ABuildingPlayerPrimitivePreview* pBuildPreviewRoof;
-                SDK::ABuildingPlayerPrimitivePreview* pBuildPreviewFloor;
-                SDK::ABuildingPlayerPrimitivePreview* pBuildPreviewStair;
-                SDK::ABuildingPlayerPrimitivePreview* pBuildPreviewWall;
+                SDK::UStaticMesh* m_pStaticRoof;
+                SDK::UStaticMesh* m_pStaticWall;
+                SDK::UStaticMesh* m_pStaticFloor;
+                SDK::UBuildingEditModeMetadata_Wall* m_pMetadataWall;
+                SDK::UBuildingEditModeMetadata_Roof* m_pMetadataRoof;
+                SDK::UBuildingEditModeMetadata_Stair* m_pMetadataStair;
+                SDK::UBuildingEditModeMetadata_Floor* m_pMetadataFloor;
+                SDK::UStaticMesh* m_pStaticStair;
+                SDK::ABuildingPlayerPrimitivePreview* m_pBuildPreviewRoof;
+                SDK::ABuildingPlayerPrimitivePreview* m_pBuildPreviewFloor;
+                SDK::ABuildingPlayerPrimitivePreview* m_pBuildPreviewStair;
+                SDK::ABuildingPlayerPrimitivePreview* m_pBuildPreviewWall;
                 std::map<std::string, std::string> mPickaxeAsWid
                 {
                     {"DefaultPickaxe", "FortWeaponMeleeItemDefinition WID_Harvest_Pickaxe_Athena_C_T01.WID_Harvest_Pickaxe_Athena_C_T01"},
