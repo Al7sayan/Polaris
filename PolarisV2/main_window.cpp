@@ -1,5 +1,7 @@
 #include "main_window.h"
 #include "program.h"
+#include "sdk_utils.h"
+#include "globals.h"
 #include "ui_renderer.h"
 #include "changelog_window.h"
 
@@ -18,6 +20,7 @@ namespace polaris
                     m_pWatermark = new Watermark;
                     new ChangelogWindow;
 
+                    m_bIsUE4ConsoleEnabled = false;
                     m_pAboutWindow->m_bIsOpen = false;
                     m_pWorldInspector->m_bIsOpen = false;
                 }
@@ -28,6 +31,23 @@ namespace polaris
                     {
                         if (ImGui::BeginMenu("Player"))
                         {
+                            if (!globals::gpLocalPlayer->ViewportClient->ViewportConsole || !m_bIsUE4ConsoleEnabled)
+                            {
+                                if (ImGui::MenuItem("Enable Console"))
+                                {
+                                    utilities::SDKUtils::ToggleUnrealConsole(true);
+                                    m_bIsUE4ConsoleEnabled = true;
+                                }
+                            }
+                            else if(globals::gpLocalPlayer->ViewportClient->ViewportConsole || m_bIsUE4ConsoleEnabled)
+                            {
+                                if (ImGui::MenuItem("Disable Console"))
+                                {
+                                    utilities::SDKUtils::ToggleUnrealConsole(false);
+                                    m_bIsUE4ConsoleEnabled = false;
+                                }
+                            }
+
                             if (ImGui::MenuItem("Exit"))
                             {
                                 gpProgram->~Program();

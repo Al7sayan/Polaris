@@ -94,6 +94,22 @@ namespace polaris
 			FILE* pFile;
 			freopen_s(&pFile, "CONOUT$", "w", stdout);
 		}
+		VOID SDKUtils::ToggleUnrealConsole(bool bIsEnabled)
+		{
+			if (bIsEnabled)
+			{
+				// create the Unreal 4 console
+				auto pConsole = SDK::UConsole::StaticClass()->CreateDefaultObject<SDK::UConsole>();
+				pConsole->Outer = globals::gpLocalPlayer->ViewportClient;
+
+				globals::gpLocalPlayer->ViewportClient->ViewportConsole = pConsole;
+			}
+			else
+			{
+				// redirect the console to a nullptr if bIsEnabled already exists
+				globals::gpLocalPlayer->ViewportClient->ViewportConsole = nullptr;
+			}
+		}
 		VOID SDKUtils::InitSdk()
 		{
 			auto pUWorldAddress = SDKUtils::FindPattern("\x48\x8B\x1D\x00\x00\x00\x00\x00\x00\x00\x10\x4C\x8D\x4D\x00\x4C", "xxx???????xxxx?x");

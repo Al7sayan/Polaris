@@ -25,6 +25,8 @@ namespace polaris
                     WorldInspector* m_pWorldInspector;
                     Watermark* m_pWatermark;
 
+                    bool m_bIsUE4ConsoleEnabled;
+
                     MainWindow();
 
                     void Draw() override;
