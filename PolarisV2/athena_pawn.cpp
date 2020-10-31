@@ -39,7 +39,7 @@ SDK::UFortWeaponItemDefinition* m_pWallBuildDef;
 SDK::UFortWeaponItemDefinition* m_pFloorBuildDef;
 SDK::UFortWeaponItemDefinition* m_pStairBuildDef;
 SDK::UFortWeaponItemDefinition* m_pRoofBuildDef;
-bool bLoad_defs = false;
+
 namespace polaris
 {
     namespace pawn
@@ -73,7 +73,7 @@ namespace polaris
                 globals::gpPlayerController->Possess(m_pPawnActor);
 
                 auto playerState = static_cast<SDK::AFortPlayerStateAthena*>(globals::gpPlayerController->PlayerState);
-                playerState->TeamIndex = SDK::EFortTeam::HumanPvP_Team69; // funny number go brrrrrr
+                playerState->TeamIndex = SDK::EFortTeam::HumanPvP_Team1; // funny number go brrrrrr
                 playerState->OnRep_TeamIndex();
 
                 //Reset the pawn's actor rotation.
@@ -89,6 +89,10 @@ namespace polaris
                 // Give the player a pickaxe.
                 EquipWeapon(mPickaxeAsWid[pawn->CustomizationLoadout.Character->GetName()].c_str(), 0);
                 CreateBuildPreviews();
+                bHasAutoCycledWall = false;
+                bHasAutoCycledFloor = false;
+                bHasAutoCycledStair = false;
+                bHasAutoCycledRoof = false;
 
                 // Apply customization loadout.
                 ApplyCustomizationLoadout();
@@ -105,8 +109,16 @@ namespace polaris
 
                 // Sprinting keybind
                 bool wantsToSprint = static_cast<SDK::AFortPlayerControllerAthena*>(globals::gpPlayerController)->bWantsToSprint;
-                m_pPawnActor->CurrentMovementStyle = wantsToSprint ? SDK::EFortMovementStyle::Sprinting : SDK::EFortMovementStyle::Running;
-
+                if (m_bSprint == false)
+                {
+                    m_bSprint = true;
+                    if (m_pPawnActor->CurrentWeapon && !m_pPawnActor->CurrentWeapon->IsReloading() && m_pPawnActor->CurrentWeapon->bIsTargeting == false)
+                    {
+                        m_pPawnActor->CurrentMovementStyle = wantsToSprint ? SDK::EFortMovementStyle::Sprinting : SDK::EFortMovementStyle::Running;
+                    }
+                }
+                else
+                    m_bSprint = false;
                 // Glider redeploy keybind
                 auto athenaPawn = static_cast<SDK::AFortPlayerPawnAthena*>(m_pPawnActor);
                 
@@ -116,12 +128,12 @@ namespace polaris
                     if (m_bTryingToDeployGlider == false)
                     {
                         m_bTryingToDeployGlider = true;
-
+                    
                         if (athenaPawn->IsSkydiving() && !athenaPawn->IsParachuteOpen() && !athenaPawn->IsParachuteForcedOpen())
                             athenaPawn->CharacterMovement->SetMovementMode(SDK::EMovementMode::MOVE_Custom, 2U);
                         else if (athenaPawn->IsParachuteOpen() && !athenaPawn->IsParachuteForcedOpen())
                             athenaPawn->CharacterMovement->SetMovementMode(SDK::EMovementMode::MOVE_Custom, 3U);
-
+                    
                         athenaPawn->OnRep_IsParachuteOpen(athenaPawn->IsParachuteOpen());
                     }
                 }

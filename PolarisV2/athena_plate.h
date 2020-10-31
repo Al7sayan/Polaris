@@ -35,7 +35,6 @@ namespace polaris
                 std::map<SDK::FGuid*, SDK::UFortWeaponItemDefinition*> m_mItems;
                 std::map<SDK::FGuid*, SDK::UFortTrapItemDefinition*> m_mTraps;
                 int iInventoryIteration = 0;
-                bool bHasAutoCycledMats = false;
                 bool bOnWall = false;
                 bool bOnFloor = false;
                 bool bOnStair = false;
