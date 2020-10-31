@@ -226,7 +226,7 @@ namespace polaris
                 m_pBuildPreviewWall->EditModePatternData = m_pMetadataWall;
                 m_pBuildPreviewWall->EditModeSupportClass = SDK::UBuildingEditModeSupport_Wall::StaticClass();
                 m_pBuildPreviewWall->OnBuildingActorInitialized(SDK::EFortBuildingInitializationReason::PlacementTool, SDK::EFortBuildingPersistentState::New);
-                
+
                 m_pBuildPreviewWall->SetActorHiddenInGame(true);
                 m_pBuildPreviewFloor->SetActorHiddenInGame(true);
                 m_pBuildPreviewStair->SetActorHiddenInGame(true);

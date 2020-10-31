@@ -58,7 +58,7 @@ namespace polaris
                         }),
                         new ChangelogField("Fixes and updates", new ChangelogEntry * [2] {
                             new ChangelogEntry("Codebase Rewrite", "The entire Polaris codebase has been rewritten (codenamed v2), and provides more stability and ease of use for the developers."),
-                            new ChangelogEntry("Helmet Bug", "Skins that normally don't have a helmet, should no longer have a helmet when using some private servers.")
+                            new ChangelogEntry("Jumping.", "You will no longer spam jump when holding space.")
                         }),
                         new ChangelogField("Notes", new ChangelogEntry*[2] {
                             new ChangelogEntry("Join our Discord!", "Join and talk to us over at discord.gg/polaris!"),
