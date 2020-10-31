@@ -92,10 +92,22 @@ namespace polaris
                             m_pPlayerPawn->m_pBuildPreviewFloor->SetActorHiddenInGame(true);
                             m_pPlayerPawn->m_pBuildPreviewStair->SetActorHiddenInGame(true);
                             m_pPlayerPawn->m_pBuildPreviewRoof->SetActorHiddenInGame(true);
+
+                            // building position fix
+                            if (!bHasAutoCycledMats)
+                            {
+                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Wood"));
+                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Stone"));
+                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Metal"));
+                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Wood"));
+                                bHasAutoCycledMats = true;
+                            }
+                            
                             bOnWall = true;
                             bOnFloor = false;
                             bOnStair = false;
                             bOnRoof = false;
+                            bHasAutoCycledMats = false;
                         }
                     }
                     if (AreGuidsTheSame((*paramGuid), (*m_pgFloorBuild))) {
@@ -107,10 +119,22 @@ namespace polaris
                             m_pPlayerPawn->m_pBuildPreviewFloor->SetActorHiddenInGame(false);
                             m_pPlayerPawn->m_pBuildPreviewStair->SetActorHiddenInGame(true);
                             m_pPlayerPawn->m_pBuildPreviewRoof->SetActorHiddenInGame(true);
+
+                            // building position fix
+                            if (!bHasAutoCycledMats)
+                            {
+                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Wood"));
+                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Stone"));
+                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Metal"));
+                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Wood"));
+                                bHasAutoCycledMats = true;
+                            }
+
                             bOnWall = false;
                             bOnFloor = true;
                             bOnStair = false;
                             bOnRoof = false;
+                            bHasAutoCycledMats = false;
                         }
                     }
                     if (AreGuidsTheSame((*paramGuid), (*m_pgStairBuild))) {
@@ -122,10 +146,22 @@ namespace polaris
                             m_pPlayerPawn->m_pBuildPreviewFloor->SetActorHiddenInGame(true);
                             m_pPlayerPawn->m_pBuildPreviewStair->SetActorHiddenInGame(false);
                             m_pPlayerPawn->m_pBuildPreviewRoof->SetActorHiddenInGame(true);
+
+                            // building position fix
+                            if (!bHasAutoCycledMats)
+                            {
+                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Wood"));
+                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Stone"));
+                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Metal"));
+                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Wood"));
+                                bHasAutoCycledMats = true;
+                            }
+
                             bOnWall = false;
                             bOnFloor = false;
                             bOnStair = true;
                             bOnRoof = false;
+                            bHasAutoCycledMats = false;
                         }
                     }
                     if (AreGuidsTheSame((*paramGuid), (*m_pgRoofBuild))) {
@@ -137,10 +173,22 @@ namespace polaris
                             m_pPlayerPawn->m_pBuildPreviewFloor->SetActorHiddenInGame(true);
                             m_pPlayerPawn->m_pBuildPreviewStair->SetActorHiddenInGame(true);
                             m_pPlayerPawn->m_pBuildPreviewRoof->SetActorHiddenInGame(false);
+
+                            // building position fix
+                            if (!bHasAutoCycledMats)
+                            {
+                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Wood"));
+                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Stone"));
+                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Metal"));
+                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Wood"));
+                                bHasAutoCycledMats = true;
+                            }
+
                             bOnWall = false;
                             bOnFloor = false;
                             bOnStair = false;
                             bOnRoof = true;
+                            bHasAutoCycledMats = false;
                         }
                     }
                 }

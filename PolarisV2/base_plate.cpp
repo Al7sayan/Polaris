@@ -31,12 +31,6 @@ namespace polaris
                 utilities::SDKUtils::InitGlobals();
                 gpProgram->m_pMainTable->PushPlate(new FrontendPlate);
 
-                // Initialize the console.
-                auto pConsole = SDK::UConsole::StaticClass()->CreateDefaultObject<SDK::UConsole>();
-
-                pConsole->Outer = globals::gpLocalPlayer->ViewportClient;
-                globals::gpLocalPlayer->ViewportClient->ViewportConsole = pConsole;
-
                 // Initialize the renderer and main window.
                 std::cout << "Initializing UI." << std::endl;
                 new ui::UIRenderer;
