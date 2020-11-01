@@ -49,20 +49,20 @@ namespace polaris
                 public:
                     const char* FIELD_HEADER_FORMAT = "-  %s";
                     const char* FIELD_BODY_FORMAT = "     %s";
-                    const char* BUILD_DATE = "October 30th, 2020";
+                    const char* BUILD_DATE = "November 1st, 2020";
 
                     ChangelogField* m_aFields[3] = {
-                        new ChangelogField("New features", new ChangelogEntry * [2] {
-                            new ChangelogEntry("Building!", "Build to your heart's content, and make something unbelievable."),
-                            new ChangelogEntry("Inventory", "The inventory mapper is no longer needed, simply open your inventory (normally the *i* key) and drag your favorite gun onto your hotbar.")
+                        new ChangelogField("New Features", new ChangelogEntry* [1] {
+                            new ChangelogEntry("Building", "It's finally here, build to your heart's content. Make something unbelievable!")
                         }),
-                        new ChangelogField("Fixes and updates", new ChangelogEntry * [2] {
-                            new ChangelogEntry("Codebase Rewrite", "The entire Polaris codebase has been rewritten (codenamed v2), and provides more stability and ease of use for the developers."),
-                            new ChangelogEntry("Jumping.", "You will no longer spam jump when holding space.")
+                        new ChangelogField("Fixes and Updates", new ChangelogEntry* [3] {
+                            new ChangelogEntry("Inventory", "The Inventory Mapper has been replaced, simply open your Inventory (normally the \"I\" key) and drag your favorite weapon onto your quickbar."),
+                            new ChangelogEntry("Codebase", "The entire Polaris codebase has been rewritten (codenamed PolarisV2), and provides more stability and ease-of-use for developers."),
+                            new ChangelogEntry("Jumping", "You will no longer constantly jump while holding space.")
                         }),
-                        new ChangelogField("Notes", new ChangelogEntry*[2] {
-                            new ChangelogEntry("Join our Discord!", "Join and talk to us over at discord.gg/polaris!"),
-                            new ChangelogEntry("About that tweet...", "i lied. there's no sex."),
+                        new ChangelogField("Notes", new ChangelogEntry* [2] {
+                            new ChangelogEntry("Discord", "Join and Talk to us over at discord.gg/polaris!"),
+                            new ChangelogEntry("Issues", "There *might* be some issues, while we iron out the new codebase.")
                         })
                     };
 

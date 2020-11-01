@@ -1,6 +1,6 @@
 #pragma once
 
-#define POLARIS_VER "v0.4.0"
+#define POLARIS_VER "v1.0.0"
 #ifdef _PROD
 #define POLARIS_ID "prod"
 #elif _BETA

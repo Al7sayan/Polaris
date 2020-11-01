@@ -44,9 +44,9 @@ namespace polaris
 
 						ImGui::Header2("Special Thanks");
 						ImGui::Text("BattleDash");
-						ImGui::Text("Chase");
-						ImGui::Text("Crush");
-						ImGui::Text("Darkblade");
+						ImGui::Text("chase");
+						ImGui::Text("crush");
+						ImGui::Text("darkblade");
 						ImGui::Text("kanner");
 						ImGui::Text("Samicc");
 						ImGui::Text("Slushia");

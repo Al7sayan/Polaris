@@ -33,7 +33,7 @@ namespace polaris
                     ImGui::SetNextWindowSize(ImVec2(5000, 5000));
                     ImGui::SetNextWindowPos(ImVec2(-(io->DisplaySize.x / 2), -(io->DisplaySize.y / 2)));
                     ImGui::SetNextWindowBgAlpha(0.6f);
-                    ImGui::Begin("Poglaris moment", &m_bIsOpen, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoMouseInputs | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoBringToFrontOnFocus);
+                    ImGui::Begin("Poglaris Moment", &m_bIsOpen, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoMouseInputs | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoBringToFrontOnFocus);
                     {
                         ImGui::End();
                     }
@@ -42,7 +42,7 @@ namespace polaris
                     ImGui::SetNextWindowPos(ImVec2(((io->DisplaySize.x / 2) - (669 / 2)), ((io->DisplaySize.y / 2) - (540 / 2))));
                     ImGui::Begin("Changelog", &m_bIsOpen, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings);
                     {
-                        ImGui::Header2("What's new");
+                        ImGui::Header2("What's New");
                         ImGui::SmallText(ImColor(1.0f, 1.0f, 1.0f, 0.5f), BUILD_DATE);
 
                         auto prevCursorLocation = ImGui::GetCursorPos();
