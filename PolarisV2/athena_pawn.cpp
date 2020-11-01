@@ -26,19 +26,6 @@ public:
     unsigned char UnknownData00[0x1940];
     class SDK::UClass* CurrentBuildableClass;
 };
-SDK::UStaticMesh* m_pStaticRoof;
-SDK::UStaticMesh* m_pStaticWall;
-SDK::UStaticMesh* m_pStaticFloor;
-SDK::UBuildingEditModeMetadata_Wall* m_pMetadataWall;
-SDK::UBuildingEditModeMetadata_Roof* m_pMetadataRoof;
-SDK::UBuildingEditModeMetadata_Stair* m_pMetadataStair;
-SDK::UBuildingEditModeMetadata_Floor* m_pMetadataFloor;
-SDK::UStaticMesh* m_pStaticStair;
-SDK::UFortWeaponItemDefinition* m_pEditToolDef;
-SDK::UFortWeaponItemDefinition* m_pWallBuildDef;
-SDK::UFortWeaponItemDefinition* m_pFloorBuildDef;
-SDK::UFortWeaponItemDefinition* m_pStairBuildDef;
-SDK::UFortWeaponItemDefinition* m_pRoofBuildDef;
 
 namespace polaris
 {
@@ -89,10 +76,10 @@ namespace polaris
                 // Give the player a pickaxe.
                 EquipWeapon(mPickaxeAsWid[pawn->CustomizationLoadout.Character->GetName()].c_str(), 0);
                 CreateBuildPreviews();
-                bHasAutoCycledWall = false;
-                bHasAutoCycledFloor = false;
-                bHasAutoCycledStair = false;
-                bHasAutoCycledRoof = false;
+                m_bHasAutoCycledWall = false;
+                m_bHasAutoCycledFloor = false;
+                m_bHasAutoCycledStair = false;
+                m_bHasAutoCycledRoof = false;
 
                 // Apply customization loadout.
                 ApplyCustomizationLoadout();

@@ -21,10 +21,10 @@ namespace polaris
                 bool m_bPressedF4 = false;
                 bool m_bPressed1 = false;
                 bool m_bSprint = false; // naming it sprint because i have no idea what to name it stay mad
-                bool bHasAutoCycledWall = false;
-                bool bHasAutoCycledFloor = false;
-                bool bHasAutoCycledStair = false;
-                bool bHasAutoCycledRoof = false;
+                bool m_bHasAutoCycledWall = false;
+                bool m_bHasAutoCycledFloor = false;
+                bool m_bHasAutoCycledStair = false;
+                bool m_bHasAutoCycledRoof = false;
 
                 SDK::UStaticMesh* m_pStaticRoof;
                 SDK::UStaticMesh* m_pStaticWall;

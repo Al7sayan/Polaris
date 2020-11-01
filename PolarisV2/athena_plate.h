@@ -35,10 +35,10 @@ namespace polaris
                 std::map<SDK::FGuid*, SDK::UFortWeaponItemDefinition*> m_mItems;
                 std::map<SDK::FGuid*, SDK::UFortTrapItemDefinition*> m_mTraps;
                 int iInventoryIteration = 0;
-                bool bOnWall = false;
-                bool bOnFloor = false;
-                bool bOnStair = false;
-                bool bOnRoof = false;
+                bool m_bOnWall = false;
+                bool m_bOnFloor = false;
+                bool m_bOnStair = false;
+                bool m_bOnRoof = false;
 
                 void ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams) override;
                 void Update() override;

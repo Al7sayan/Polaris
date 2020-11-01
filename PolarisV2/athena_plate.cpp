@@ -63,10 +63,10 @@ namespace polaris
                     for (auto it = m_mItems.begin(); it != m_mItems.end(); it++) {
                         if (AreGuidsTheSame((*it->first), (*paramGuid)) && !AreGuidsTheSame((*m_pgWallBuild), (*paramGuid)) && !AreGuidsTheSame((*m_pgFloorBuild), (*paramGuid)) && !AreGuidsTheSame((*m_pgStairBuild), (*paramGuid)) && !AreGuidsTheSame((*m_pgRoofBuild), (*paramGuid))) {
                             m_pPlayerPawn->m_pPawnActor->EquipWeaponDefinition(it->second, (*it->first));
-                            bOnWall = false;
-                            bOnFloor = false;
-                            bOnStair = false;
-                            bOnRoof = false;
+                            m_bOnWall = false;
+                            m_bOnFloor = false;
+                            m_bOnStair = false;
+                            m_bOnRoof = false;
                         }
                     }
                     for (auto it = m_mTraps.begin(); it != m_mTraps.end(); it++) {
@@ -77,14 +77,14 @@ namespace polaris
                             }
                             m_pPlayerPawn->m_pPawnActor->PickUpActor(m_pTrapC, it->second);
                             m_pPlayerPawn->m_pPawnActor->CurrentWeapon->ItemEntryGuid = (*it->first);
-                            bOnWall = false;
-                            bOnFloor = false;
-                            bOnStair = false;
-                            bOnRoof = false;
+                            m_bOnWall = false;
+                            m_bOnFloor = false;
+                            m_bOnStair = false;
+                            m_bOnRoof = false;
                         }
                     }
                     if (AreGuidsTheSame((*paramGuid), (*m_pgWallBuild))) {
-                        if (!bOnWall) {
+                        if (!m_bOnWall) {
                             m_pPlayerPawn->m_pPawnActor->EquipWeaponDefinition(m_pWallBuildDef, (*paramGuid));
                             reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass = SDK::APBWA_W1_Solid_C::StaticClass();
                             reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker = m_pPlayerPawn->m_pBuildPreviewWall;
@@ -94,23 +94,23 @@ namespace polaris
                             m_pPlayerPawn->m_pBuildPreviewRoof->SetActorHiddenInGame(true);
 
                             // building position fix
-                            if (!m_pPlayerPawn->bHasAutoCycledWall)
+                            if (!m_pPlayerPawn->m_bHasAutoCycledWall)
                             {
                                 static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Wood"));
                                 static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Stone"));
                                 static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Metal"));
                                 static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Wood"));
-                                m_pPlayerPawn->bHasAutoCycledWall = true;
+                                m_pPlayerPawn->m_bHasAutoCycledWall = true;
                             }
 
-                            bOnWall = true;
-                            bOnFloor = false;
-                            bOnStair = false;
-                            bOnRoof = false;
+                            m_bOnWall = true;
+                            m_bOnFloor = false;
+                            m_bOnStair = false;
+                            m_bOnRoof = false;
                         }
                     }
                     if (AreGuidsTheSame((*paramGuid), (*m_pgFloorBuild))) {
-                        if (!bOnFloor) {
+                        if (!m_bOnFloor) {
                             m_pPlayerPawn->m_pPawnActor->EquipWeaponDefinition(m_pFloorBuildDef, (*paramGuid));
                             reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass = SDK::APBWA_W1_Floor_C::StaticClass();
                             reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker = m_pPlayerPawn->m_pBuildPreviewFloor;
@@ -120,23 +120,23 @@ namespace polaris
                             m_pPlayerPawn->m_pBuildPreviewRoof->SetActorHiddenInGame(true);
 
                             // building position fix
-                            if (!m_pPlayerPawn->bHasAutoCycledFloor)
+                            if (!m_pPlayerPawn->m_bHasAutoCycledFloor)
                             {
                                 static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Wood"));
                                 static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Stone"));
                                 static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Metal"));
                                 static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Wood"));
-                                m_pPlayerPawn->bHasAutoCycledFloor = true;
+                                m_pPlayerPawn->m_bHasAutoCycledFloor = true;
                             }
 
-                            bOnWall = false;
-                            bOnFloor = true;
-                            bOnStair = false;
-                            bOnRoof = false;
+                            m_bOnWall = false;
+                            m_bOnFloor = true;
+                            m_bOnStair = false;
+                            m_bOnRoof = false;
                         }
                     }
                     if (AreGuidsTheSame((*paramGuid), (*m_pgStairBuild))) {
-                        if (!bOnStair) {
+                        if (!m_bOnStair) {
                             m_pPlayerPawn->m_pPawnActor->EquipWeaponDefinition(m_pStairBuildDef, (*paramGuid));
                             reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass = SDK::APBWA_W1_StairW_C::StaticClass();
                             reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker = m_pPlayerPawn->m_pBuildPreviewStair;
@@ -146,23 +146,23 @@ namespace polaris
                             m_pPlayerPawn->m_pBuildPreviewRoof->SetActorHiddenInGame(true);
 
                             // building position fix
-                            if (!m_pPlayerPawn->bHasAutoCycledStair)
+                            if (!m_pPlayerPawn->m_bHasAutoCycledStair)
                             {
                                 static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Wood"));
                                 static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Stone"));
                                 static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Metal"));
                                 static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Wood"));
-                                m_pPlayerPawn->bHasAutoCycledStair = true;
+                                m_pPlayerPawn->m_bHasAutoCycledStair = true;
                             }
 
-                            bOnWall = false;
-                            bOnFloor = false;
-                            bOnStair = true;
-                            bOnRoof = false;
+                            m_bOnWall = false;
+                            m_bOnFloor = false;
+                            m_bOnStair = true;
+                            m_bOnRoof = false;
                         }
                     }
                     if (AreGuidsTheSame((*paramGuid), (*m_pgRoofBuild))) {
-                        if (!bOnRoof) {
+                        if (!m_bOnRoof) {
                             m_pPlayerPawn->m_pPawnActor->EquipWeaponDefinition(m_pRoofBuildDef, (*paramGuid));
                             reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass = SDK::APBWA_W1_RoofC_C::StaticClass();
                             reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker = m_pPlayerPawn->m_pBuildPreviewRoof;
@@ -172,19 +172,19 @@ namespace polaris
                             m_pPlayerPawn->m_pBuildPreviewRoof->SetActorHiddenInGame(false);
 
                             // building position fix
-                            if (!m_pPlayerPawn->bHasAutoCycledRoof)
+                            if (!m_pPlayerPawn->m_bHasAutoCycledRoof)
                             {
                                 static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Wood"));
                                 static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Stone"));
                                 static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Metal"));
                                 static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Wood"));
-                                m_pPlayerPawn->bHasAutoCycledRoof = true;
+                                m_pPlayerPawn->m_bHasAutoCycledRoof = true;
                             }
 
-                            bOnWall = false;
-                            bOnFloor = false;
-                            bOnStair = false;
-                            bOnRoof = true;
+                            m_bOnWall = false;
+                            m_bOnFloor = false;
+                            m_bOnStair = false;
+                            m_bOnRoof = true;
                         }
                     }
                 }
@@ -314,7 +314,7 @@ namespace polaris
                         }
                         if (pObject->GetFullName().rfind("FortWeaponRangedItemDefinition", 0) == 0)
                         {
-                            if (pObject->GetFullName().find("Athena") != std::string::npos)
+                            if (pObject->GetFullName().find("Athena") != std::string::npos || pObject->GetFullName().find("Test") != std::string::npos)
                                 m_mItems[utilities::SDKUtils::GenerateGuidPtr()] = reinterpret_cast<SDK::UFortWeaponItemDefinition*>(pObject);
                         }
                         if (pObject->GetFullName().rfind("FortTrapItemDefinition", 0) == 0)
