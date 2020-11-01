@@ -52,11 +52,11 @@ namespace polaris
                     const char* BUILD_DATE = "November 1st, 2020";
 
                     ChangelogField* m_aFields[3] = {
-                        new ChangelogField("New Features", new ChangelogEntry* [1] {
-                            new ChangelogEntry("Building", "It's finally here, build to your heart's content. Make something unbelievable!")
+                        new ChangelogField("New Features", new ChangelogEntry* [2] {
+                            new ChangelogEntry("Building", "It's finally here, build to your heart's content. Make something unbelievable!"),
+                            new ChangelogEntry("Inventory", "The Inventory Mapper has been replaced, simply open your Inventory (normally the \"I\" key) and drag your favorite weapon onto your quickbar.")
                         }),
-                        new ChangelogField("Fixes and Updates", new ChangelogEntry* [3] {
-                            new ChangelogEntry("Inventory", "The Inventory Mapper has been replaced, simply open your Inventory (normally the \"I\" key) and drag your favorite weapon onto your quickbar."),
+                        new ChangelogField("Fixes and Updates", new ChangelogEntry* [2] {
                             new ChangelogEntry("Codebase", "The entire Polaris codebase has been rewritten (codenamed PolarisV2), and provides more stability and ease-of-use for developers."),
                             new ChangelogEntry("Jumping", "You will no longer constantly jump while holding space.")
                         }),
