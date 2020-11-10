@@ -89,6 +89,9 @@
     <Filter Include="UI\Window\Windows\Changelog Window">
       <UniqueIdentifier>{f49e568a-860a-4a16-83ea-3ccdb0f2533b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Inventory">
+      <UniqueIdentifier>{61300b7d-62a9-40e7-b379-71bbfd6b0941}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SDK\FN_Basic.cpp">
@@ -186,6 +189,12 @@
     <ClCompile Include="changelog_window.cpp">
       <Filter>UI\Window\Windows\Changelog Window</Filter>
     </ClCompile>
+    <ClCompile Include="inventory.cpp">
+      <Filter>Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="quickbars.cpp">
+      <Filter>Inventory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDK.hpp">
@@ -263,6 +272,12 @@
     </ClInclude>
     <ClInclude Include="changelog_window.h">
       <Filter>UI\Window\Windows\Changelog Window</Filter>
+    </ClInclude>
+    <ClInclude Include="inventory.h">
+      <Filter>Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="quickbars.h">
+      <Filter>Inventory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

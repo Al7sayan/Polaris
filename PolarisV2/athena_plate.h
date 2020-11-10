@@ -3,6 +3,8 @@
 
 #include "peh_plate.h"
 #include "athena_pawn.h"
+#include "inventory.h"
+#include "quickbars.h"
 
 namespace polaris
 {
@@ -18,23 +20,10 @@ namespace polaris
             {
             private:
                 pawn::pawns::AthenaPawn* m_pPlayerPawn;
+                inventory::Inventory* m_pInventory;
+                inventory::quickbars* m_pQuickbars;
                 bool m_bIsInitialized;
             public:
-                SDK::FGuid* m_pgPickaxe;
-                SDK::FGuid* m_pgWallBuild;
-                SDK::FGuid* m_pgFloorBuild;
-                SDK::FGuid* m_pgStairBuild;
-                SDK::FGuid* m_pgRoofBuild;
-                SDK::UFortWeaponMeleeItemDefinition* m_pPickaxeDef;
-                SDK::UFortBuildingItemDefinition* m_pWallBuildDef;
-                SDK::UFortBuildingItemDefinition* m_pFloorBuildDef;
-                SDK::UFortBuildingItemDefinition* m_pStairBuildDef;
-                SDK::UFortBuildingItemDefinition* m_pRoofBuildDef;
-                SDK::ABuildingActor* m_pTrapC;
-                bool bTrapDone = false;
-                std::map<SDK::FGuid*, SDK::UFortWeaponItemDefinition*> m_mItems;
-                std::map<SDK::FGuid*, SDK::UFortTrapItemDefinition*> m_mTraps;
-                int iInventoryIteration = 0;
                 bool m_bOnWall = false;
                 bool m_bOnFloor = false;
                 bool m_bOnStair = false;
@@ -46,8 +35,6 @@ namespace polaris
                 void OnEnabled() override;
 
                 void Initialize(); //!< Initialize spawns a pawn and drops the loading screen.
-                void SetupInventory(); //!< SetupInventory initializes the inventory.
-                void SetupQuickbars(); //!< SetupQuickbars initializes the quickbars.
 
                 bool AreGuidsTheSame(SDK::FGuid guidA,SDK::FGuid guidB); //!< AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
             };

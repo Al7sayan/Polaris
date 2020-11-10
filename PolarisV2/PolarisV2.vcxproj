@@ -165,6 +165,8 @@
     <ClCompile Include="SDK\FN_CoreUObject_functions.cpp" />
     <ClCompile Include="SDK\FN_Engine_functions.cpp" />
     <ClCompile Include="SDK\FN_FortniteGame_functions.cpp" />
+    <ClCompile Include="inventory.cpp" />
+    <ClCompile Include="quickbars.cpp" />
     <ClCompile Include="table.cpp" />
     <ClCompile Include="ui_renderer.cpp" />
     <ClCompile Include="ui_window.cpp" />
@@ -184,6 +186,8 @@
     <ClInclude Include="farmstead_plate.h" />
     <ClInclude Include="frontend_plate.h" />
     <ClInclude Include="globals.h" />
+    <ClInclude Include="quickbars.h" />
+    <ClInclude Include="inventory.h" />
     <ClInclude Include="imgui_text_extension.h" />
     <ClInclude Include="main_window.h" />
     <ClInclude Include="pawn.h" />
