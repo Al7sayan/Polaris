@@ -24,10 +24,11 @@ namespace polaris
                 inventory::quickbars* m_pQuickbars;
                 bool m_bIsInitialized;
             public:
-                bool m_bOnWall = false;
-                bool m_bOnFloor = false;
-                bool m_bOnStair = false;
-                bool m_bOnRoof = false;
+                int m_iCurrentBuildPiece = 0;
+                SDK::UClass* m_pLastBuildClassForWall = SDK::APBWA_W1_Solid_C::StaticClass();
+                SDK::UClass* m_pLastBuildClassForFloor = SDK::APBWA_W1_Floor_C::StaticClass();
+                SDK::UClass* m_pLastBuildClassForStair = SDK::APBWA_W1_StairW_C::StaticClass();
+                SDK::UClass* m_pLastBuildClassForRoof = SDK::APBWA_W1_RoofC_C::StaticClass();
 
                 void ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams) override;
                 void Update() override;
