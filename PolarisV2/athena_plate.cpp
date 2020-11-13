@@ -54,27 +54,21 @@ namespace polaris
                     auto controller = static_cast<SDK::AFortPlayerController*>(globals::gpPlayerController);
                     auto buildtool = reinterpret_cast<SDK::AFortWeap_BuildingTool*>(controller->MyFortPawn->CurrentWeapon);
                     auto cba = reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass;
-                    auto resourcetype = reinterpret_cast<SDK::ABuildingSMActor*>(cba)->ResourceType;
                     switch (buildtool->LastResourceType) {
                         case SDK::EFortResourceType::Wood: //stone
-                            m_pLastBuildClassForWall = SDK::APBWA_S1_Solid_C::StaticClass();
-                            m_pLastBuildClassForFloor = SDK::APBWA_S1_Floor_C::StaticClass();
-                            m_pLastBuildClassForStair = SDK::APBWA_S1_StairW_C::StaticClass();
-                            m_pLastBuildClassForRoof = SDK::APBWA_S1_RoofC_C::StaticClass();
+                            m_pPlayerPawn->m_sPendingMaterials = TEXT("Stone");
                             break;
                         case SDK::EFortResourceType::Stone: //metal
-                            m_pLastBuildClassForWall = SDK::APBWA_M1_Solid_C::StaticClass();
-                            m_pLastBuildClassForFloor = SDK::APBWA_M1_Floor_C::StaticClass();
-                            m_pLastBuildClassForStair = SDK::APBWA_M1_StairW_C::StaticClass();
-                            m_pLastBuildClassForRoof = SDK::APBWA_M1_RoofC_C::StaticClass();
+                            m_pPlayerPawn->m_sPendingMaterials = TEXT("Metal");
                             break;
                         case SDK::EFortResourceType::Metal: //wood
-                            m_pLastBuildClassForWall = SDK::APBWA_W1_Solid_C::StaticClass();
-                            m_pLastBuildClassForFloor = SDK::APBWA_W1_Floor_C::StaticClass();
-                            m_pLastBuildClassForStair = SDK::APBWA_W1_StairW_C::StaticClass();
-                            m_pLastBuildClassForRoof = SDK::APBWA_W1_RoofC_C::StaticClass();
+                            m_pPlayerPawn->m_sPendingMaterials = TEXT("Wood");
                             break;
                     }
+                    m_pPlayerPawn->m_bHasCycledWall = false;
+                    m_pPlayerPawn->m_bHasCycledFloor = false;
+                    m_pPlayerPawn->m_bHasCycledStair = false;
+                    m_pPlayerPawn->m_bHasCycledRoof = false;
                 }
                 if (pFunction->GetName().find("ServerHandleMissionEvent_ToggledEditMode") != std::string::npos) {
                     auto cba = reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass;
@@ -115,7 +109,7 @@ namespace polaris
                         }
                     }
                     if (AreGuidsTheSame((*paramGuid), (*m_pInventory->m_pgWallBuild))) {
-                        if (!m_bOnWall) {
+                        if (m_iCurrentBuildPiece != 1) {
                             m_pPlayerPawn->m_pPawnActor->EquipWeaponDefinition(m_pInventory->m_pWallBuildDef, (*paramGuid));
                             reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass = m_pLastBuildClassForWall;
                             reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker = m_pPlayerPawn->m_pBuildPreviewWall;
@@ -125,20 +119,24 @@ namespace polaris
                             m_pPlayerPawn->m_pBuildPreviewRoof->SetActorHiddenInGame(true);
 
                             // building position fix
-                            if (!m_pPlayerPawn->m_bHasAutoCycledWall)
-                            {
-                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Wood"));
-                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Stone"));
-                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Metal"));
-                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Wood"));
-                                m_pPlayerPawn->m_bHasAutoCycledWall = true;
+                            auto cheatman = static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager);
+                            if (!m_pPlayerPawn->m_bHasCycledWallOnce) {
+                                cheatman->BuildWith(TEXT("Wood"));
+                                cheatman->BuildWith(TEXT("Stone"));
+                                cheatman->BuildWith(TEXT("Metal"));
+                                cheatman->BuildWith(TEXT("Wood"));
+                                m_pPlayerPawn->m_bHasCycledWallOnce = true;
+                            }
+                            if (m_pPlayerPawn->m_bHasCycledWall != true) {
+                                cheatman->BuildWith(m_pPlayerPawn->m_sPendingMaterials);
+                                m_pPlayerPawn->m_bHasCycledWall = true;
                             }
                             m_iCurrentBuildPiece = 1;
                             m_pLastBuildClassForWall = reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass;
                         }
                     }
                     if (AreGuidsTheSame((*paramGuid), (*m_pInventory->m_pgFloorBuild))) {
-                        if (!m_bOnFloor) {
+                        if (m_iCurrentBuildPiece != 2) {
                             m_pPlayerPawn->m_pPawnActor->EquipWeaponDefinition(m_pInventory->m_pFloorBuildDef, (*paramGuid));
                             reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass = m_pLastBuildClassForFloor;
                             reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker = m_pPlayerPawn->m_pBuildPreviewFloor;
@@ -148,20 +146,24 @@ namespace polaris
                             m_pPlayerPawn->m_pBuildPreviewRoof->SetActorHiddenInGame(true);
 
                             // building position fix
-                            if (!m_pPlayerPawn->m_bHasAutoCycledFloor)
-                            {
-                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Wood"));
-                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Stone"));
-                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Metal"));
-                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Wood"));
-                                m_pPlayerPawn->m_bHasAutoCycledFloor = true;
+                            auto cheatman = static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager);
+                            if (!m_pPlayerPawn->m_bHasCycledFloorOnce) {
+                                cheatman->BuildWith(TEXT("Wood"));
+                                cheatman->BuildWith(TEXT("Stone"));
+                                cheatman->BuildWith(TEXT("Metal"));
+                                cheatman->BuildWith(TEXT("Wood"));
+                                m_pPlayerPawn->m_bHasCycledFloorOnce = true;
+                            }
+                            if (m_pPlayerPawn->m_bHasCycledFloor != true) {
+                                cheatman->BuildWith(m_pPlayerPawn->m_sPendingMaterials);
+                                m_pPlayerPawn->m_bHasCycledFloor = true;
                             }
                             m_iCurrentBuildPiece = 2;
                             m_pLastBuildClassForFloor = reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass;
                         }
                     }
                     if (AreGuidsTheSame((*paramGuid), (*m_pInventory->m_pgStairBuild))) {
-                        if (!m_bOnStair) {
+                        if (m_iCurrentBuildPiece != 3) {
                             m_pPlayerPawn->m_pPawnActor->EquipWeaponDefinition(m_pInventory->m_pStairBuildDef, (*paramGuid));
                             reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass = m_pLastBuildClassForStair;
                             reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker = m_pPlayerPawn->m_pBuildPreviewStair;
@@ -171,20 +173,24 @@ namespace polaris
                             m_pPlayerPawn->m_pBuildPreviewRoof->SetActorHiddenInGame(true);
 
                             // building position fix
-                            if (!m_pPlayerPawn->m_bHasAutoCycledStair)
-                            {
-                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Wood"));
-                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Stone"));
-                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Metal"));
-                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Wood"));
-                                m_pPlayerPawn->m_bHasAutoCycledStair = true;
+                            auto cheatman = static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager);
+                            if (!m_pPlayerPawn->m_bHasCycledStairOnce) {
+                                cheatman->BuildWith(TEXT("Wood"));
+                                cheatman->BuildWith(TEXT("Stone"));
+                                cheatman->BuildWith(TEXT("Metal"));
+                                cheatman->BuildWith(TEXT("Wood"));
+                                m_pPlayerPawn->m_bHasCycledStairOnce = true;
+                            }
+                            if (m_pPlayerPawn->m_bHasCycledStair != true) {
+                                cheatman->BuildWith(m_pPlayerPawn->m_sPendingMaterials);
+                                m_pPlayerPawn->m_bHasCycledStair = true;
                             }
                             m_iCurrentBuildPiece = 3;
                             m_pLastBuildClassForStair = reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass;
                         }
                     }
                     if (AreGuidsTheSame((*paramGuid), (*m_pInventory->m_pgRoofBuild))) {
-                        if (!m_bOnRoof) {
+                        if (m_iCurrentBuildPiece != 4) {
                             m_pPlayerPawn->m_pPawnActor->EquipWeaponDefinition(m_pInventory->m_pRoofBuildDef, (*paramGuid));
                             reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass = m_pLastBuildClassForRoof;
                             reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker = m_pPlayerPawn->m_pBuildPreviewRoof;
@@ -194,13 +200,17 @@ namespace polaris
                             m_pPlayerPawn->m_pBuildPreviewRoof->SetActorHiddenInGame(false);
 
                             // building position fix
-                            if (!m_pPlayerPawn->m_bHasAutoCycledRoof)
-                            {
-                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Wood"));
-                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Stone"));
-                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Metal"));
-                                static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager)->BuildWith(TEXT("Wood"));
-                                m_pPlayerPawn->m_bHasAutoCycledRoof = true;
+                            auto cheatman = static_cast<SDK::UFortCheatManager*>(polaris::globals::gpPlayerController->CheatManager);
+                            if (!m_pPlayerPawn->m_bHasCycledRoofOnce) {
+                                cheatman->BuildWith(TEXT("Wood"));
+                                cheatman->BuildWith(TEXT("Stone"));
+                                cheatman->BuildWith(TEXT("Metal"));
+                                cheatman->BuildWith(TEXT("Wood"));
+                                m_pPlayerPawn->m_bHasCycledRoofOnce = true;
+                            }
+                            if (m_pPlayerPawn->m_bHasCycledRoof != true) {
+                                cheatman->BuildWith(m_pPlayerPawn->m_sPendingMaterials);
+                                m_pPlayerPawn->m_bHasCycledRoof = true;
                             }
                             m_iCurrentBuildPiece = 4;
                             m_pLastBuildClassForRoof = reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass;

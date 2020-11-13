@@ -76,10 +76,14 @@ namespace polaris
                 // Give the player a pickaxe.
                 EquipWeapon(mPickaxeAsWid[pawn->CustomizationLoadout.Character->GetName()].c_str(), 0);
                 CreateBuildPreviews();
-                m_bHasAutoCycledWall = false;
-                m_bHasAutoCycledFloor = false;
-                m_bHasAutoCycledStair = false;
-                m_bHasAutoCycledRoof = false;
+                m_bHasCycledWall = false;
+                m_bHasCycledFloor = false;
+                m_bHasCycledStair = false;
+                m_bHasCycledRoof = false;
+                m_bHasCycledWallOnce = false;
+                m_bHasCycledFloorOnce = false;
+                m_bHasCycledStairOnce = false;
+                m_bHasCycledRoofOnce = false;
 
                 // Apply customization loadout.
                 ApplyCustomizationLoadout();

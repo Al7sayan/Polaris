@@ -21,10 +21,17 @@ namespace polaris
                 bool m_bPressedF4 = false;
                 bool m_bPressed1 = false;
                 bool m_bSprint = false; // naming it sprint because i have no idea what to name it stay mad
-                bool m_bHasAutoCycledWall = false;
-                bool m_bHasAutoCycledFloor = false;
-                bool m_bHasAutoCycledStair = false;
-                bool m_bHasAutoCycledRoof = false;
+                bool m_bHasCycledWall = false;
+                bool m_bHasCycledFloor = false;
+                bool m_bHasCycledStair = false;
+                bool m_bHasCycledRoof = false;
+
+                bool m_bHasCycledWallOnce = false;
+                bool m_bHasCycledFloorOnce = false;
+                bool m_bHasCycledStairOnce = false;
+                bool m_bHasCycledRoofOnce = false;
+                SDK::FString m_sPendingMaterials = TEXT("WOOD");
+
 
                 SDK::UStaticMesh* m_pStaticRoof;
                 SDK::UStaticMesh* m_pStaticWall;
