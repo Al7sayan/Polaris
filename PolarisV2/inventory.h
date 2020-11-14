@@ -14,11 +14,13 @@ namespace polaris
             private:
                 int foo = 0;
             public:
+                SDK::FGuid* m_pgEditToolDef;
                 SDK::FGuid* m_pgPickaxe;
                 SDK::FGuid* m_pgWallBuild;
                 SDK::FGuid* m_pgFloorBuild;
                 SDK::FGuid* m_pgStairBuild;
                 SDK::FGuid* m_pgRoofBuild;
+                SDK::UFortEditToolItemDefinition* m_pEditToolDef;
                 SDK::UFortWeaponMeleeItemDefinition* m_pPickaxeDef;
                 SDK::UFortBuildingItemDefinition* m_pWallBuildDef;
                 SDK::UFortBuildingItemDefinition* m_pFloorBuildDef;

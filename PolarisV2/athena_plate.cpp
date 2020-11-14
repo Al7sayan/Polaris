@@ -27,6 +27,18 @@ public:
     unsigned char UnknownData00[0x1940];
     class SDK::UClass* CurrentBuildableClass;
 };
+struct AFortAsLastBuildable
+{
+public:
+    unsigned char UnknownData00[0x1948];
+    class SDK::UClass* PreviousBuildableClass;
+};
+struct AFortAsEditActor
+{
+public:
+    unsigned char UnknownData00[0x1A48];
+    class SDK::ABuildingSMActor* EditBuildingActor;
+};
 
 namespace polaris
 {
@@ -70,21 +82,45 @@ namespace polaris
                     m_pPlayerPawn->m_bHasCycledStair = false;
                     m_pPlayerPawn->m_bHasCycledRoof = false;
                 }
+                if (pFunction->GetName().find("ServerEditBuildingActor") != std::string::npos) {
+                    auto editactor = reinterpret_cast<AFortAsEditActor*>(globals::gpPlayerController);
+                    if (editactor->EditBuildingActor != reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker) 
+                        m_iCurrentBuildPiece = 0;
+                }
+                if (pFunction->GetName().find("OnSuccessfulMatchInteractComplete") != std::string::npos) {
+                    auto editactor = reinterpret_cast<AFortAsEditActor*>(globals::gpPlayerController);
+                    if (editactor->EditBuildingActor != reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker) 
+                        m_iCurrentBuildPiece = 0;
+                }
+                if (pFunction->GetName().find("ServerEndEditingBuildingActor") != std::string::npos) {
+                    auto editactor = reinterpret_cast<AFortAsEditActor*>(globals::gpPlayerController);
+                    if (editactor->EditBuildingActor != reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker) 
+                        m_iCurrentBuildPiece = 0;
+                }
                 if (pFunction->GetName().find("ServerHandleMissionEvent_ToggledEditMode") != std::string::npos) {
                     auto cba = reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass;
-                    switch (m_iCurrentBuildPiece) {
-                    case 1:
-                        m_pLastBuildClassForWall = cba;
-                        break;
-                    case 2:
-                        m_pLastBuildClassForFloor = cba;
-                        break;
-                    case 3:
-                        m_pLastBuildClassForStair = cba;
-                        break;
-                    case 4:
-                        m_pLastBuildClassForRoof = cba;
-                        break;
+                    auto lba = reinterpret_cast<AFortAsLastBuildable*>(globals::gpPlayerController)->PreviousBuildableClass;
+                    auto controller = reinterpret_cast<SDK::AFortPlayerController*>(globals::gpPlayerController);
+                    auto editactor = reinterpret_cast<AFortAsEditActor*>(globals::gpPlayerController);
+                    if (editactor->EditBuildingActor == reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker) {
+                        switch (m_iCurrentBuildPiece) {
+                        case 1:
+                            m_pLastBuildClassForWall = cba;
+                            lba = m_pLastBuildClassForWall;
+                            break;
+                        case 2:
+                            m_pLastBuildClassForFloor = cba;
+                            lba = m_pLastBuildClassForFloor;
+                            break;
+                        case 3:
+                            m_pLastBuildClassForStair = cba;
+                            lba = m_pLastBuildClassForStair;
+                            break;
+                        case 4:
+                            m_pLastBuildClassForRoof = cba;
+                            lba = m_pLastBuildClassForRoof;
+                            break;
+                        }
                     }
                 }
                 if (pFunction->GetName().find("ServerLoadingScreenDropped") != std::string::npos)

@@ -15,6 +15,7 @@ namespace polaris
         void Inventory::SetupInventory()
         {
             // Defining Item Definitions
+            m_pEditToolDef = SDK::UObject::FindObject<SDK::UFortEditToolItemDefinition>("FortEditToolItemDefinition EditTool.EditTool");
             m_pWallBuildDef = SDK::UObject::FindObject<SDK::UFortBuildingItemDefinition>("FortBuildingItemDefinition BuildingItemData_Wall.BuildingItemData_Wall");
             m_pFloorBuildDef = SDK::UObject::FindObject<SDK::UFortBuildingItemDefinition>("FortBuildingItemDefinition BuildingItemData_Floor.BuildingItemData_Floor");
             m_pStairBuildDef = SDK::UObject::FindObject<SDK::UFortBuildingItemDefinition>("FortBuildingItemDefinition BuildingItemData_Stair_W.BuildingItemData_Stair_W");
@@ -23,6 +24,7 @@ namespace polaris
             auto pMetal = SDK::UObject::FindObject<SDK::UFortWeaponItemDefinition>("FortResourceItemDefinition MetalItemData.MetalItemData");
             auto pStone = SDK::UObject::FindObject<SDK::UFortWeaponItemDefinition>("FortResourceItemDefinition StoneItemData.StoneItemData");
             auto pRockets = SDK::UObject::FindObject<SDK::UFortWeaponMeleeItemDefinition>("FortAmmoItemDefinition AmmoDataRockets.AmmoDataRockets");
+            m_pgEditToolDef = utilities::SDKUtils::GenerateGuidPtr();
             m_pgPickaxe = utilities::SDKUtils::GenerateGuidPtr();
             m_pgWallBuild = utilities::SDKUtils::GenerateGuidPtr();
             m_pgFloorBuild = utilities::SDKUtils::GenerateGuidPtr();
@@ -37,6 +39,7 @@ namespace polaris
             m_mItems.insert_or_assign(m_pgFloorBuild, m_pFloorBuildDef);
             m_mItems.insert_or_assign(m_pgStairBuild, m_pStairBuildDef);
             m_mItems.insert_or_assign(m_pgRoofBuild, m_pRoofBuildDef);
+            m_mItems.insert_or_assign(m_pgEditToolDef, m_pEditToolDef);
             for (int i = 0; i < SDK::UObject::GetGlobalObjects().Num(); ++i)
             {
                 auto pObject = SDK::UObject::GetGlobalObjects().GetByIndex(i);
@@ -95,6 +98,7 @@ namespace polaris
                     pItemEntry->ItemGuid = (*it->first);
                     pItemEntry->bIsDirty = false;
                     pItemEntry->LoadedAmmo = 0;
+                    pItemEntry->ParentInventory.ObjectIndex = myInventory->InternalIndex;
                     auto pWorldItem = reinterpret_cast<SDK::UFortWorldItem*>(polaris::globals::StaticConstructObject_Internal(SDK::UFortWorldItem::StaticClass(), myInventory, SDK::FName("None"), 0, SDK::FUObjectItem::ObjectFlags::None, NULL, false, NULL, false));
                     pWorldItem->OwnerInventory = myInventory;
                     pWorldItem->ItemEntry = *pItemEntry;
