@@ -95,6 +95,9 @@
     <Filter Include="Third Party\JSON">
       <UniqueIdentifier>{ff324944-2672-4f95-946b-d05f2b28c0be}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI\Window\Windows\Creative Menu">
+      <UniqueIdentifier>{80858ca5-33eb-4c20-8711-83c243d562c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SDK\FN_Basic.cpp">
@@ -198,6 +201,9 @@
     <ClCompile Include="quickbars.cpp">
       <Filter>Inventory</Filter>
     </ClCompile>
+    <ClCompile Include="creative_menu.cpp">
+      <Filter>UI\Window\Windows\Creative Menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDK.hpp">
@@ -282,10 +288,10 @@
     <ClInclude Include="quickbars.h">
       <Filter>Inventory</Filter>
     </ClInclude>
-    <ClInclude Include="building.h">
-      <Filter>UI\Window\Windows\World Inspector</Filter>
+    <ClInclude Include="creative_menu.h">
+      <Filter>UI\Window\Windows\Creative Menu</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\json.hpp">
+    <ClInclude Include="json.hpp">
       <Filter>Third Party\JSON</Filter>
     </ClInclude>
   </ItemGroup>

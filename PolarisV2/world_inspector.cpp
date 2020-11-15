@@ -3,10 +3,10 @@
 #include "globals.h"
 #include "imgui_text_extension.h"
 #include "sdk_utils.h"
+#include "json.hpp"
 
 #include <iostream>
 #include <fstream>
-#include "..\..\..\..\json.hpp"
 
 using json = nlohmann::json;
 
@@ -96,7 +96,6 @@ namespace polaris
                                 rotation.Yaw = j[std::to_string(i)]["rotation"]["yaw"];
                                 rotation.Roll = j[std::to_string(i)]["rotation"]["roll"];
 
-                                FActorSpawnParameters params{};
                                 SDK::UBlueprintGeneratedClass* buildClass = nullptr;
                                 if (classCache.find(j[std::to_string(i)]["name"]) == classCache.end())
                                 {
@@ -106,8 +105,9 @@ namespace polaris
                                 else
                                     buildClass = classCache[j[std::to_string(i)]["name"]];
 
-                                auto build = SpawnActor(*globals::gpWorld, buildClass, &location, &rotation, params);
-                                static_cast<SDK::ABuildingSMActor*>(build)->ForceBuildingHealth(j[std::to_string(i)]["health"]);
+                                FActorSpawnParameters params{};
+                                auto build = static_cast<SDK::ABuildingSMActor*>(SpawnActor(*globals::gpWorld, buildClass, &location, &rotation, params));
+                                build->ForceBuildingHealth(j[std::to_string(i)]["health"]);
                             }
                             i.close();
                         }

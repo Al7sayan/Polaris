@@ -141,6 +141,7 @@
     <ClCompile Include="athena_pawn.cpp" />
     <ClCompile Include="athena_plate.cpp" />
     <ClCompile Include="changelog_window.cpp" />
+    <ClCompile Include="creative_menu.cpp" />
     <ClCompile Include="directory_utils.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="base_plate.cpp" />
@@ -174,19 +175,20 @@
     <ClCompile Include="world_inspector.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\json.hpp" />
     <ClInclude Include="about_window.h" />
     <ClInclude Include="athena_pawn.h" />
     <ClInclude Include="athena_plate.h" />
     <ClInclude Include="build.h" />
     <ClInclude Include="base_plate.h" />
     <ClInclude Include="changelog_window.h" />
+    <ClInclude Include="creative_menu.h" />
     <ClInclude Include="directory_utils.h" />
     <ClInclude Include="error_utils.h" />
     <ClInclude Include="farmstead_pawn.h" />
     <ClInclude Include="farmstead_plate.h" />
     <ClInclude Include="frontend_plate.h" />
     <ClInclude Include="globals.h" />
+    <ClInclude Include="json.hpp" />
     <ClInclude Include="quickbars.h" />
     <ClInclude Include="inventory.h" />
     <ClInclude Include="imgui_text_extension.h" />
