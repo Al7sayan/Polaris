@@ -39,7 +39,13 @@ public:
     unsigned char UnknownData00[0x1A48];
     class SDK::ABuildingSMActor* EditBuildingActor;
 };
-
+struct paramstruct
+{
+public:
+    class SDK::AFortPlayerController* PlayerThatToggledEditMode;
+    class SDK::ABuildingSMActor* EditableActor;
+    bool bOpened;
+};
 namespace polaris
 {
     namespace tables
@@ -98,11 +104,12 @@ namespace polaris
                         m_iCurrentBuildPiece = 0;
                 }
                 if (pFunction->GetName().find("ServerHandleMissionEvent_ToggledEditMode") != std::string::npos) {
+                    auto params = reinterpret_cast<paramstruct*>(pParams);
                     auto cba = reinterpret_cast<AFortAsCurrentBuildable*>(globals::gpPlayerController)->CurrentBuildableClass;
                     auto lba = reinterpret_cast<AFortAsLastBuildable*>(globals::gpPlayerController)->PreviousBuildableClass;
                     auto controller = reinterpret_cast<SDK::AFortPlayerController*>(globals::gpPlayerController);
                     auto editactor = reinterpret_cast<AFortAsEditActor*>(globals::gpPlayerController);
-                    if (editactor->EditBuildingActor == reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker) {
+                    if (params->EditableActor == reinterpret_cast<AFortAsBuildPreview*>(globals::gpPlayerController)->BuildPreviewMarker) {
                         switch (m_iCurrentBuildPiece) {
                         case 1:
                             m_pLastBuildClassForWall = cba;
@@ -258,10 +265,6 @@ namespace polaris
             {
                 if (m_pPlayerPawn != nullptr)
                     m_pPlayerPawn->Update();
-
-                // TEMP: Go back to Frontend.
-                if (GetAsyncKeyState(VK_OEM_PLUS) & 0x8000)
-                    gpProgram->m_pMainTable->PopPlate();
             }
 
             void AthenaPlate::OnEnabled()
