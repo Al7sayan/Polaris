@@ -34,6 +34,7 @@ namespace polaris
 			static VOID InitGlobals(); //!< InitGlobals puts the SDK's properties in globals.
 			static VOID InitPatches(); //!< InitPatches patches Fortnite to circumvent errors.
 			static SDK::UObject* FindOrLoadObject(const std::string PathName); //!< Finds an object, if the object isn't found, it'll load it into memory.
+			static SDK::AActor* SpawnActor(SDK::UClass* Class, SDK::FVector* Location, SDK::FRotator* Rotation);
 			static SDK::FGuid GenerateGuid(); //!< Generates a guid.
 			static SDK::FGuid* GenerateGuidPtr(); //!< Generates a guid*.
 		};
