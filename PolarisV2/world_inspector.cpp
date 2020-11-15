@@ -2,7 +2,6 @@
 #include "ui_renderer.h"
 #include "globals.h"
 #include "imgui_text_extension.h"
-#include "building.h"
 #include "sdk_utils.h"
 
 #include <iostream>
