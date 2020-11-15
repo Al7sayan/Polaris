@@ -2,6 +2,10 @@
 #include "globals.h"
 #include "sdk_utils.h"
 
+#include <iostream>
+#include <fstream>
+#include "..\..\..\..\json.hpp"
+
 struct AFortAsQuickBars
 {
 public:
@@ -112,7 +116,7 @@ namespace polaris
                     m_bSprint = false;
                 // Glider redeploy keybind
                 auto athenaPawn = static_cast<SDK::AFortPlayerPawnAthena*>(m_pPawnActor);
-                
+
                 if (GetAsyncKeyState(VK_SPACE) & 0x8000)
                 {
                     // We do this hacky bool check to avoid the holding button issue.

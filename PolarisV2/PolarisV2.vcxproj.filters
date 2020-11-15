@@ -92,6 +92,9 @@
     <Filter Include="Inventory">
       <UniqueIdentifier>{61300b7d-62a9-40e7-b379-71bbfd6b0941}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Third Party\JSON">
+      <UniqueIdentifier>{ff324944-2672-4f95-946b-d05f2b28c0be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SDK\FN_Basic.cpp">
@@ -278,6 +281,12 @@
     </ClInclude>
     <ClInclude Include="quickbars.h">
       <Filter>Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="building.h">
+      <Filter>UI\Window\Windows\World Inspector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\json.hpp">
+      <Filter>Third Party\JSON</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
