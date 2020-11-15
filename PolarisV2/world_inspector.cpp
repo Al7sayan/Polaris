@@ -107,11 +107,7 @@ namespace polaris
                                     buildClass = classCache[j[std::to_string(i)]["name"]];
 
                                 auto build = SpawnActor(*globals::gpWorld, buildClass, &location, &rotation, params);
-                                auto damageType = new SDK::UDamageType;
-                                damageType->bCausedByWorld = true;
-
                                 static_cast<SDK::ABuildingSMActor*>(build)->ForceBuildingHealth(j[std::to_string(i)]["health"]);
-                                static_cast<SDK::ABuildingSMActor*>(build)->ForceBuildingHealth(static_cast<SDK::ABuildingSMActor*>(build)->GetMaxHealth());
                             }
                             i.close();
                         }
