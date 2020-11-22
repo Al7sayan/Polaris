@@ -3,8 +3,10 @@
 
 #include "peh_plate.h"
 #include "athena_pawn.h"
+#include "bot_pawn.h"
 #include "inventory.h"
 #include "quickbars.h"
+#include "equip.h"
 
 namespace polaris
 {
@@ -22,6 +24,8 @@ namespace polaris
                 pawn::pawns::AthenaPawn* m_pPlayerPawn;
                 inventory::Inventory* m_pInventory;
                 inventory::quickbars* m_pQuickbars;
+                inventory::equip* m_pEquip;
+                SDK::UAthenaHUD_C* hud;
                 bool m_bIsInitialized;
             public:
                 bool m_bHasLoadingScreenDropped = false;

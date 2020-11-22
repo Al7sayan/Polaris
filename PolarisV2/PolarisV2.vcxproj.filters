@@ -98,11 +98,11 @@
     <Filter Include="UI\Window\Windows\Creative Menu">
       <UniqueIdentifier>{80858ca5-33eb-4c20-8711-83c243d562c2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Models">
-      <UniqueIdentifier>{476ee0bd-be46-4d77-98a5-15d9e727aff8}</UniqueIdentifier>
+    <Filter Include="Inventory\Equipping">
+      <UniqueIdentifier>{a520d6cd-bb93-412f-91e4-a6392851a544}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Models\OffsetFixes">
-      <UniqueIdentifier>{9c490988-b68b-437a-a0b4-1007ca825cb3}</UniqueIdentifier>
+    <Filter Include="Pawn\Pawns\BotPawn">
+      <UniqueIdentifier>{7c0a8da8-6739-4f62-ba71-f69c6662aa45}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -210,8 +210,23 @@
     <ClCompile Include="creative_menu.cpp">
       <Filter>UI\Window\Windows\Creative Menu</Filter>
     </ClCompile>
-    <ClCompile Include="SDK\FN_GameplayAbilities_functions.cpp">
+    <ClCompile Include="SDK\FN_UMG_functions.cpp">
       <Filter>Third Party\SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="SDK\FN_QuickbarSlot_functions.cpp">
+      <Filter>Third Party\SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="SDK\FN_FortniteUI_functions.cpp">
+      <Filter>Third Party\SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="SDK\FN_AthenaQuickbarPrimary_functions.cpp">
+      <Filter>Third Party\SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="equip.cpp">
+      <Filter>Inventory\Equipping</Filter>
+    </ClCompile>
+    <ClCompile Include="bot_pawn.cpp">
+      <Filter>Pawn\Pawns\BotPawn</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -303,11 +318,14 @@
     <ClInclude Include="json.hpp">
       <Filter>Third Party\JSON</Filter>
     </ClInclude>
-    <ClInclude Include="trap_build.h">
-      <Filter>Models\OffsetFixes</Filter>
+    <ClInclude Include="SDK\FN_UMG_classes.hpp">
+      <Filter>Third Party\SDK</Filter>
     </ClInclude>
-    <ClInclude Include="trap_abilityset.h">
-      <Filter>Models\OffsetFixes</Filter>
+    <ClInclude Include="equip.h">
+      <Filter>Inventory\Equipping</Filter>
+    </ClInclude>
+    <ClInclude Include="bot_pawn.h">
+      <Filter>Pawn\Pawns\BotPawn</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
