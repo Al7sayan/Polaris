@@ -50,9 +50,6 @@
     <Filter Include="UI\Renderer">
       <UniqueIdentifier>{810e235e-a48c-4402-aef0-6d3da7c14626}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tables\Plates\Farmstead">
-      <UniqueIdentifier>{9ed2ec0b-a63e-4963-ab74-3180b7f32bdd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="UI\Extensions">
       <UniqueIdentifier>{d8b4d04d-d840-4b9d-93ad-e976ccb6bad6}</UniqueIdentifier>
     </Filter>
@@ -76,9 +73,6 @@
     </Filter>
     <Filter Include="Pawn\Pawns\Athena">
       <UniqueIdentifier>{e66c5246-8a94-4d03-a99f-55b04d8c2b5f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pawn\Pawns\Farmstead">
-      <UniqueIdentifier>{af725836-dac5-4299-8292-5c6a898ed62d}</UniqueIdentifier>
     </Filter>
     <Filter Include="UI\Window\Windows\World Inspector">
       <UniqueIdentifier>{4828f76c-1dd5-4f34-92dc-09354dd0c308}</UniqueIdentifier>
@@ -109,6 +103,21 @@
     </Filter>
     <Filter Include="Models\OffsetFixes">
       <UniqueIdentifier>{8202df7d-86a1-42a1-8252-a9db80f1cc15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Services">
+      <UniqueIdentifier>{9422752b-2611-4dc5-b2e7-d0bf93fdf6e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Services\CreativeService">
+      <UniqueIdentifier>{7b6fdd1c-b629-43da-858a-9441d832c86f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Services\InventoryService">
+      <UniqueIdentifier>{381e7440-162a-42e2-8833-fa7e9575f9c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Services\QuickbarService">
+      <UniqueIdentifier>{e4f24864-1d07-42f2-97f3-0ae047ad7767}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ServiceProvider">
+      <UniqueIdentifier>{40bd2503-8cd8-465c-97db-5d152011ed89}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -183,12 +192,6 @@
     <ClCompile Include="main_window.cpp">
       <Filter>UI\Window\Windows\Main Window</Filter>
     </ClCompile>
-    <ClCompile Include="farmstead_plate.cpp">
-      <Filter>Tables\Plates\Farmstead</Filter>
-    </ClCompile>
-    <ClCompile Include="farmstead_pawn.cpp">
-      <Filter>Pawn\Pawns\Farmstead</Filter>
-    </ClCompile>
     <ClCompile Include="about_window.cpp">
       <Filter>UI\Window\Windows\About Window</Filter>
     </ClCompile>
@@ -233,6 +236,9 @@
     </ClCompile>
     <ClCompile Include="bot_pawn.cpp">
       <Filter>Pawn\Pawns\BotPawn</Filter>
+    </ClCompile>
+    <ClCompile Include="service_provider.cpp">
+      <Filter>ServiceProvider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -288,12 +294,6 @@
     <ClInclude Include="main_window.h">
       <Filter>UI\Window\Windows\Main Window</Filter>
     </ClInclude>
-    <ClInclude Include="farmstead_plate.h">
-      <Filter>Tables\Plates\Farmstead</Filter>
-    </ClInclude>
-    <ClInclude Include="farmstead_pawn.h">
-      <Filter>Pawn\Pawns\Farmstead</Filter>
-    </ClInclude>
     <ClInclude Include="about_window.h">
       <Filter>UI\Window\Windows\About Window</Filter>
     </ClInclude>
@@ -338,6 +338,9 @@
     </ClInclude>
     <ClInclude Include="trap_build.h">
       <Filter>Models\OffsetFixes</Filter>
+    </ClInclude>
+    <ClInclude Include="service_provider.h">
+      <Filter>ServiceProvider</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

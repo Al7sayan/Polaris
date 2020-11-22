@@ -7,36 +7,27 @@
 #include "watermark.h"
 #include "creative_menu.h"
 
-namespace polaris
+namespace polaris::ui::window::windows
 {
-    namespace ui
+    //!  The main menu bar.
+    /*!
+     * In charge of giving users access to the Polaris tools.
+     */
+    class MainWindow : public UIWindow
     {
-        namespace window
-        {
-            namespace windows
-            {
-                //!  The main menu bar.
-                /*!
-                * In charge of giving users access to the Polaris tools.
-                */
-                class MainWindow : public UIWindow
-                {
-                public:
-                    AboutWindow* m_pAboutWindow;
-                    WorldInspector* m_pWorldInspector;
-                    Watermark* m_pWatermark;
-                    CreativeMenu* m_pCreativeMenu;
+    public:
+        AboutWindow* m_pAboutWindow;
+        WorldInspector* m_pWorldInspector;
+        Watermark* m_pWatermark;
+        CreativeMenu* m_pCreativeMenu;
 
-                    bool m_bIsUE4ConsoleEnabled;
+        bool m_bIsUE4ConsoleEnabled;
 
-                    MainWindow();
+        MainWindow();
 
-                    void Draw() override;
-                    void Update() override;
-                };
-            }
-        }
-    }
+        void Draw() override;
+        void Update() override;
+    };
 }
 
 #endif // !MAIN_WINDOW_H

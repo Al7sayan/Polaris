@@ -8,44 +8,38 @@
 #include "quickbars.h"
 #include "equip.h"
 
-namespace polaris
+namespace polaris::tables::plates
 {
-    namespace tables
+    //!  Manages Athena's custom behavior.
+    /*!
+     * This Plate is in charge of essential Athena stuff, like spawning a pawn or dropping the loading screen.
+     */
+    class AthenaPlate : public PehPlate
     {
-        namespace plates
-        {
-            //!  Manages Athena's custom behavior.
-            /*!
-            * This Plate is in charge of essential Athena stuff, like spawning a pawn or dropping the loading screen.
-            */
-            class AthenaPlate : public PehPlate
-            {
-            private:
-                pawn::pawns::AthenaPawn* m_pPlayerPawn;
-                inventory::Inventory* m_pInventory;
-                inventory::quickbars* m_pQuickbars;
-                inventory::equip* m_pEquip;
-                SDK::UAthenaHUD_C* hud;
-                bool m_bIsInitialized;
-            public:
-                bool m_bHasLoadingScreenDropped = false;
-                int m_iCurrentBuildPiece = 0;
-                SDK::UClass* m_pLastBuildClassForWall = SDK::APBWA_W1_Solid_C::StaticClass();
-                SDK::UClass* m_pLastBuildClassForFloor = SDK::APBWA_W1_Floor_C::StaticClass();
-                SDK::UClass* m_pLastBuildClassForStair = SDK::APBWA_W1_StairW_C::StaticClass();
-                SDK::UClass* m_pLastBuildClassForRoof = SDK::APBWA_W1_RoofC_C::StaticClass();
+    private:
+        pawn::pawns::AthenaPawn* m_pPlayerPawn;
+        inventory::Inventory* m_pInventory;
+        inventory::quickbars* m_pQuickbars;
+        inventory::equip* m_pEquip;
+        SDK::UAthenaHUD_C* hud;
+        bool m_bIsInitialized;
+    public:
+        bool m_bHasLoadingScreenDropped = false;
+        int m_iCurrentBuildPiece = 0;
+        SDK::UClass* m_pLastBuildClassForWall = SDK::APBWA_W1_Solid_C::StaticClass();
+        SDK::UClass* m_pLastBuildClassForFloor = SDK::APBWA_W1_Floor_C::StaticClass();
+        SDK::UClass* m_pLastBuildClassForStair = SDK::APBWA_W1_StairW_C::StaticClass();
+        SDK::UClass* m_pLastBuildClassForRoof = SDK::APBWA_W1_RoofC_C::StaticClass();
 
-                void ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams) override;
-                void Update() override;
+        void ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams) override;
+        void Update() override;
 
-                void OnEnabled() override;
+        void OnEnabled() override;
 
-                void Initialize(); //!< Initialize spawns a pawn and drops the loading screen.
+        void Initialize(); //!< Initialize spawns a pawn and drops the loading screen.
 
-                bool AreGuidsTheSame(SDK::FGuid guidA,SDK::FGuid guidB); //!< AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-            };
-        }
-    }
+        bool AreGuidsTheSame(SDK::FGuid guidA, SDK::FGuid guidB); //!< AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    };
 }
 
 #endif // !ATHENA_PLATE_H

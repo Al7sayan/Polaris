@@ -148,8 +148,6 @@
     <ClCompile Include="base_plate.cpp" />
     <ClCompile Include="equip.cpp" />
     <ClCompile Include="error_utils.cpp" />
-    <ClCompile Include="farmstead_pawn.cpp" />
-    <ClCompile Include="farmstead_plate.cpp" />
     <ClCompile Include="frontend_plate.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="imgui\examples\imgui_impl_dx11.cpp" />
@@ -174,6 +172,7 @@
     <ClCompile Include="SDK\FN_FortniteGame_functions.cpp" />
     <ClCompile Include="inventory.cpp" />
     <ClCompile Include="quickbars.cpp" />
+    <ClCompile Include="service_provider.cpp" />
     <ClCompile Include="table.cpp" />
     <ClCompile Include="ui_renderer.cpp" />
     <ClCompile Include="ui_window.cpp" />
@@ -192,8 +191,6 @@
     <ClInclude Include="directory_utils.h" />
     <ClInclude Include="equip.h" />
     <ClInclude Include="error_utils.h" />
-    <ClInclude Include="farmstead_pawn.h" />
-    <ClInclude Include="farmstead_plate.h" />
     <ClInclude Include="frontend_plate.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="json.hpp" />
@@ -208,6 +205,7 @@
     <ClInclude Include="SDK.hpp" />
     <ClInclude Include="plate.h" />
     <ClInclude Include="SDK\FN_UMG_classes.hpp" />
+    <ClInclude Include="service_provider.h" />
     <ClInclude Include="table.h" />
     <ClInclude Include="sdk_utils.h" />
     <ClInclude Include="trap_abilityset.h" />

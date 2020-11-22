@@ -6,23 +6,17 @@
 
 #include <windows.h>
 
-namespace polaris
+namespace polaris::tables::plates
 {
-    namespace tables
+    //!  The base class for a PehPlate.
+    /*!
+     * A PehPlate is a type of Plate which can subscribe to a PehTable (ProcessEventHook Table).
+     */
+    class PehPlate : public Plate
     {
-        namespace plates
-        {
-            //!  The base class for a PehPlate.
-            /*!
-            * A PehPlate is a type of Plate which can subscribe to a PehTable (ProcessEventHook Table).
-            */
-            class PehPlate : public Plate
-            {
-            public:
-                virtual void ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams); //!< ProcessEventHook is called every time an event is triggered while the plate is primary on the stack.
-            };
-        }
-    }
+    public:
+        virtual void ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams); //!< ProcessEventHook is called every time an event is triggered while the plate is primary on the stack.
+    };
 }
 
 #endif // !PEH_PLATE_H

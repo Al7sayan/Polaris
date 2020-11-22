@@ -6,25 +6,16 @@
 #include <string>
 #include <filesystem>
 
-namespace polaris
+namespace polaris::ui::window::windows
 {
-    namespace ui
+    class CreativeMenu : public UIWindow
     {
-        namespace window
-        {
-            namespace windows
-            {
-                class CreativeMenu : public UIWindow
-                {
-                public:
-                    void Draw() override;
+    public:
+        void Draw() override;
 
-                    void LoadCreation(std::filesystem::path path);
-                    void SaveCreation(std::string name);
-                };
-            }
-        }
-    }
+        void LoadCreation(std::filesystem::path path);
+        void SaveCreation(std::string name);
+    };
 }
 
 #endif // !CREATIVE_MENU

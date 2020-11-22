@@ -1,14 +1,8 @@
 #include "peh_plate.h"
 
-namespace polaris
+namespace polaris::tables::plates
 {
-    namespace tables
+    void PehPlate::ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams)
     {
-        namespace plates
-        {
-            void PehPlate::ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams)
-            {
-            }
-        }
     }
 }

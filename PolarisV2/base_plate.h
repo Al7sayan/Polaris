@@ -3,24 +3,18 @@
 
 #include "peh_plate.h"
 
-namespace polaris
+namespace polaris::tables::plates
 {
-    namespace tables
+    //!  The base PehPlate.
+    /*!
+     * This Plate is always at the bottom of the Main PehTable.
+     * In charge of initializing Polaris before going into Frontend mode.
+     */
+    class BasePlate : public PehPlate
     {
-        namespace plates
-        {
-            //!  The base PehPlate.
-            /*!
-            * This Plate is always at the bottom of the Main PehTable.
-            * In charge of initializing Polaris before going into Frontend mode.
-            */
-            class BasePlate : public PehPlate
-            {
-            public:
-                void OnEnabled() override;
-            };
-        }
-    }
+    public:
+        void OnEnabled() override;
+    };
 }
 
 #endif // !BASE_PLATE_H

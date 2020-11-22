@@ -3,19 +3,13 @@
 
 #include "SDK.hpp"
 
-namespace polaris
+namespace polaris::models::offsetfixes
 {
-    namespace models
+    struct TrapBuild
     {
-        namespace offsetfixes
-        {
-            struct TrapBuild
-            {
-                unsigned char UnknownData00[0x0FE0];
-                class SDK::UFortTrapItemDefinition* TrapData;
-            };
-        }
-    }
+        unsigned char UnknownData00[0x0FE0];
+        class SDK::UFortTrapItemDefinition* TrapData;
+    };
 }
 
 #endif // !TRAPBUILD_H

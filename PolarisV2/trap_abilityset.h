@@ -3,19 +3,13 @@
 
 #include "SDK.hpp"
 
-namespace polaris
+namespace polaris::models::offsetfixes
 {
-    namespace models
+    struct TrapAbilitySet
     {
-        namespace offsetfixes
-        {
-            struct TrapAbilitySet
-            {
-                unsigned char UnknownData00[0x0030];
-                SDK::TArray<class SDK::UClass*> GameplayAbilities;
-            };
-        }
-    }
+        unsigned char UnknownData00[0x0030];
+        SDK::TArray<class SDK::UClass*> GameplayAbilities;
+    };
 }
 
 #endif // !TRAP_ABILITYSET_H

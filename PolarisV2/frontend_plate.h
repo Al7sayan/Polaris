@@ -3,25 +3,19 @@
 
 #include "peh_plate.h"
 
-namespace polaris
+namespace polaris::tables::plates
 {
-    namespace tables
+    //!  Manages Frontend's custom behavior.
+    /*!
+     * In charge of managing basic interaction like entering a match.
+     */
+    class FrontendPlate : public PehPlate
     {
-        namespace plates
-        {
-            //!  Manages Frontend's custom behavior.
-            /*!
-            * In charge of managing basic interaction like entering a match.
-            */
-            class FrontendPlate : public PehPlate
-            {
-            public:
-                void OnEnabled() override;
+    public:
+        void OnEnabled() override;
 
-                void ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams) override;
-            };
-        }
-    }
+        void ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams) override;
+    };
 }
 
 #endif // !FRONTEND_PLATE_H

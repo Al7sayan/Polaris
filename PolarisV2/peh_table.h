@@ -3,20 +3,17 @@
 
 #include "table.h"
 
-namespace polaris
+namespace polaris::tables
 {
-    namespace tables
+    //!  A custom Table holding an ProcessEventHook.
+    /*!
+     * A PehTable is a singleton table in Program, which holds the ProcessEventHook a PehTable can subscribes to.
+     */
+    class PehTable : public Table
     {
-        //!  A custom Table holding an ProcessEventHook.
-        /*!
-        * A PehTable is a singleton table in Program, which holds the ProcessEventHook a PehTable can subscribes to.
-        */
-        class PehTable : public Table
-        {
-        public:
-            PehTable();
-        };
-    }
+    public:
+        PehTable();
+    };
 }
 
 extern polaris::tables::PehTable* gpPehTable;

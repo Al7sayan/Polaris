@@ -5,25 +5,19 @@
 
 #include <iostream>
 
-namespace polaris
+namespace polaris::tables::plates
 {
-    namespace tables
+    void FrontendPlate::OnEnabled()
     {
-        namespace plates
-        {
-            void FrontendPlate::OnEnabled()
-            {
-                std::cout << "We're now in the Frontend State." << std::endl;
+        std::cout << "We're now in the Frontend State." << std::endl;
 
-                if (globals::gpLevel->URL.Map.ToString() != "/Game/Maps/FortniteEntry")
-                    globals::gpPlayerController->SwitchLevel(TEXT("Frontend"));
-            }
+        if (globals::gpLevel->URL.Map.ToString() != "/Game/Maps/FortniteEntry")
+            globals::gpPlayerController->SwitchLevel(TEXT("Frontend"));
+    }
 
-            void FrontendPlate::ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams)
-            {
-                if (pFunction->GetName().find("BP_PlayButton") != std::string::npos)
-                    gpProgram->m_pMainTable->PushPlate(new AthenaPlate);
-            }
-        }
+    void FrontendPlate::ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams)
+    {
+        if (pFunction->GetName().find("BP_PlayButton") != std::string::npos)
+            gpProgram->m_pMainTable->PushPlate(new AthenaPlate);
     }
 }

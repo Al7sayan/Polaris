@@ -3,25 +3,16 @@
 
 #include "ui_window.h"
 
-namespace polaris
+namespace polaris::ui::window::windows
 {
-    namespace ui
+    //!  Simple tool to view the world's actors.
+    class WorldInspector : public UIWindow
     {
-        namespace window
-        {
-            namespace windows
-            {
-                //!  Simple tool to view the world's actors.
-                class WorldInspector : public UIWindow
-                {
-                public:
-                    WorldInspector();
+    public:
+        WorldInspector();
 
-                    void Draw() override;
-                };
-            }
-        }
-    }
+        void Draw() override;
+    };
 }
 
 #endif // !WORLD_INSPECTOR_H

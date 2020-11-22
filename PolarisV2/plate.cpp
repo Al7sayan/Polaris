@@ -1,21 +1,15 @@
 #include "plate.h"
 
-namespace polaris
+namespace polaris::tables::plates
 {
-    namespace tables
+    void Plate::Update()
     {
-        namespace plates
-        {
-            void Plate::Update()
-            {
-            }
+    }
 
-            void Plate::OnEnabled()
-            {
-            }
-            void Plate::OnDisabled()
-            {
-            }
-        }
+    void Plate::OnEnabled()
+    {
+    }
+    void Plate::OnDisabled()
+    {
     }
 }

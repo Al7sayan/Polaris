@@ -3,23 +3,14 @@
 
 #include "ui_window.h"
 
-namespace polaris
+namespace polaris::ui::window::windows
 {
-    namespace ui
+    //!  Simple window including credits and build id.
+    class AboutWindow : public UIWindow
     {
-        namespace window
-        {
-            namespace windows
-            {
-                //!  Simple window including credits and build id.
-                class AboutWindow : public UIWindow
-                {
-                public:
-                    void Draw() override;
-                };
-            }
-        }
-    }
+    public:
+        void Draw() override;
+    };
 }
 
 #endif // !ABOUT_WINDOW_H
