@@ -134,9 +134,9 @@ namespace polaris
                         SDK::FVector location;
                         SDK::FRotator rotation;
 
-                        std::cout << "Loading trap into memory. Path is " << "/Game/Items/Traps/Blueprints/" + std::string(jsonData["traps"][i]["name"]) + "." + std::string(jsonData["traps"][i]["name"]) << "_C" << std::endl;
-                        auto result = utilities::SDKUtils::FindOrLoadObject("/Game/Items/Traps/Blueprints/" + std::string(jsonData["traps"][i]["name"]) + "." + std::string(jsonData["traps"][i]["name"]) + "_C");
-                        std::cout << "Load complete. Result is " << result->GetName() << std::endl;
+                        //std::cout << "Loading trap into memory. Path is " << "/Game/Items/Traps/Blueprints/" + std::string(jsonData["traps"][i]["name"]) + "." + std::string(jsonData["traps"][i]["name"]) << "_C" << std::endl;
+                        //auto result = utilities::SDKUtils::FindOrLoadObject("/Game/Items/Traps/Blueprints/" + std::string(jsonData["traps"][i]["name"]) + "." + std::string(jsonData["traps"][i]["name"]) + "_C");
+                        //std::cout << "Load complete. Result is " << result->GetName() << std::endl;
 
                         // Place the build in the correct location
                         location.X = jsonData["traps"][i]["location"]["x"];

@@ -104,6 +104,12 @@
     <Filter Include="Pawn\Pawns\BotPawn">
       <UniqueIdentifier>{7c0a8da8-6739-4f62-ba71-f69c6662aa45}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Models">
+      <UniqueIdentifier>{2811638c-9ad2-4b27-a977-42169f490385}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models\OffsetFixes">
+      <UniqueIdentifier>{8202df7d-86a1-42a1-8252-a9db80f1cc15}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SDK\FN_Basic.cpp">
@@ -326,6 +332,12 @@
     </ClInclude>
     <ClInclude Include="bot_pawn.h">
       <Filter>Pawn\Pawns\BotPawn</Filter>
+    </ClInclude>
+    <ClInclude Include="trap_abilityset.h">
+      <Filter>Models\OffsetFixes</Filter>
+    </ClInclude>
+    <ClInclude Include="trap_build.h">
+      <Filter>Models\OffsetFixes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
