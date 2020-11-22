@@ -24,6 +24,7 @@ namespace polaris
                 inventory::quickbars* m_pQuickbars;
                 bool m_bIsInitialized;
             public:
+                bool m_bHasLoadingScreenDropped = false;
                 int m_iCurrentBuildPiece = 0;
                 SDK::UClass* m_pLastBuildClassForWall = SDK::APBWA_W1_Solid_C::StaticClass();
                 SDK::UClass* m_pLastBuildClassForFloor = SDK::APBWA_W1_Floor_C::StaticClass();

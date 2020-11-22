@@ -35,6 +35,8 @@ namespace polaris
                 std::cout << "Initializing UI." << std::endl;
                 new ui::UIRenderer;
                 new ui::window::windows::MainWindow;
+
+                return NULL;
             }
 
             void BasePlate::OnEnabled()

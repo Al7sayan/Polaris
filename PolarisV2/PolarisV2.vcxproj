@@ -161,6 +161,7 @@
     <ClCompile Include="peh_table.cpp" />
     <ClCompile Include="plate.cpp" />
     <ClCompile Include="program.cpp" />
+    <ClCompile Include="SDK\FN_GameplayAbilities_functions.cpp" />
     <ClCompile Include="sdk_utils.cpp" />
     <ClCompile Include="SDK\FN_Basic.cpp" />
     <ClCompile Include="SDK\FN_CoreUObject_functions.cpp" />
@@ -201,6 +202,8 @@
     <ClInclude Include="plate.h" />
     <ClInclude Include="table.h" />
     <ClInclude Include="sdk_utils.h" />
+    <ClInclude Include="trap_abilityset.h" />
+    <ClInclude Include="trap_build.h" />
     <ClInclude Include="ui_renderer.h" />
     <ClInclude Include="ui_window.h" />
     <ClInclude Include="watermark.h" />

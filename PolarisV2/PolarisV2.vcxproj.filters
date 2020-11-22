@@ -98,6 +98,12 @@
     <Filter Include="UI\Window\Windows\Creative Menu">
       <UniqueIdentifier>{80858ca5-33eb-4c20-8711-83c243d562c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Models">
+      <UniqueIdentifier>{476ee0bd-be46-4d77-98a5-15d9e727aff8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models\OffsetFixes">
+      <UniqueIdentifier>{9c490988-b68b-437a-a0b4-1007ca825cb3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SDK\FN_Basic.cpp">
@@ -204,6 +210,9 @@
     <ClCompile Include="creative_menu.cpp">
       <Filter>UI\Window\Windows\Creative Menu</Filter>
     </ClCompile>
+    <ClCompile Include="SDK\FN_GameplayAbilities_functions.cpp">
+      <Filter>Third Party\SDK</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDK.hpp">
@@ -293,6 +302,12 @@
     </ClInclude>
     <ClInclude Include="json.hpp">
       <Filter>Third Party\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="trap_build.h">
+      <Filter>Models\OffsetFixes</Filter>
+    </ClInclude>
+    <ClInclude Include="trap_abilityset.h">
+      <Filter>Models\OffsetFixes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

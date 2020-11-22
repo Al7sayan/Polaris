@@ -98,7 +98,7 @@ namespace polaris
                     pItemEntry->ItemGuid = (*it->first);
                     pItemEntry->bIsDirty = false;
                     pItemEntry->LoadedAmmo = 0;
-                    pItemEntry->ParentInventory.ObjectIndex = myInventory->InternalIndex;
+                    //pItemEntry->ParentInventory.ObjectIndex = myInventory->InternalIndex;
                     auto pWorldItem = reinterpret_cast<SDK::UFortWorldItem*>(polaris::globals::StaticConstructObject_Internal(SDK::UFortWorldItem::StaticClass(), myInventory, SDK::FName("None"), 0, SDK::FUObjectItem::ObjectFlags::None, NULL, false, NULL, false));
                     pWorldItem->OwnerInventory = myInventory;
                     pWorldItem->ItemEntry = *pItemEntry;

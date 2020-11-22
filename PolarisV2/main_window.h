@@ -5,6 +5,7 @@
 #include "about_window.h"
 #include "world_inspector.h"
 #include "watermark.h"
+#include "creative_menu.h"
 
 namespace polaris
 {
@@ -24,6 +25,7 @@ namespace polaris
                     AboutWindow* m_pAboutWindow;
                     WorldInspector* m_pWorldInspector;
                     Watermark* m_pWatermark;
+                    CreativeMenu* m_pCreativeMenu;
 
                     bool m_bIsUE4ConsoleEnabled;
 

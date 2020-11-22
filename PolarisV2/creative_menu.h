@@ -3,6 +3,9 @@
 
 #include "ui_window.h"
 
+#include <string>
+#include <filesystem>
+
 namespace polaris
 {
     namespace ui
@@ -14,7 +17,10 @@ namespace polaris
                 class CreativeMenu : public UIWindow
                 {
                 public:
+                    void Draw() override;
 
+                    void LoadCreation(std::filesystem::path path);
+                    void SaveCreation(std::string name);
                 };
             }
         }

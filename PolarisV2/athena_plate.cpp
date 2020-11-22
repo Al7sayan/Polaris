@@ -319,6 +319,8 @@ namespace polaris
                 // Tell the client that we are ready to start the match, this allows the loading screen to drop.
                 static_cast<SDK::AFortPlayerController*>(globals::gpPlayerController)->ServerReadyToStartMatch();
                 static_cast<SDK::AGameMode*>((*globals::gpWorld)->AuthorityGameMode)->StartMatch();
+
+                m_bHasLoadingScreenDropped = true;
             }
             bool AthenaPlate::AreGuidsTheSame(SDK::FGuid guidA, SDK::FGuid guidB)
             {
