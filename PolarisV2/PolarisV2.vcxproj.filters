@@ -104,21 +104,6 @@
     <Filter Include="Models\OffsetFixes">
       <UniqueIdentifier>{8202df7d-86a1-42a1-8252-a9db80f1cc15}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Services">
-      <UniqueIdentifier>{9422752b-2611-4dc5-b2e7-d0bf93fdf6e4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Services\CreativeService">
-      <UniqueIdentifier>{7b6fdd1c-b629-43da-858a-9441d832c86f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Services\InventoryService">
-      <UniqueIdentifier>{381e7440-162a-42e2-8833-fa7e9575f9c4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Services\QuickbarService">
-      <UniqueIdentifier>{e4f24864-1d07-42f2-97f3-0ae047ad7767}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ServiceProvider">
-      <UniqueIdentifier>{40bd2503-8cd8-465c-97db-5d152011ed89}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SDK\FN_Basic.cpp">
@@ -237,9 +222,6 @@
     <ClCompile Include="bot_pawn.cpp">
       <Filter>Pawn\Pawns\BotPawn</Filter>
     </ClCompile>
-    <ClCompile Include="service_provider.cpp">
-      <Filter>ServiceProvider</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDK.hpp">
@@ -333,14 +315,8 @@
     <ClInclude Include="bot_pawn.h">
       <Filter>Pawn\Pawns\BotPawn</Filter>
     </ClInclude>
-    <ClInclude Include="trap_abilityset.h">
-      <Filter>Models\OffsetFixes</Filter>
-    </ClInclude>
     <ClInclude Include="trap_build.h">
       <Filter>Models\OffsetFixes</Filter>
-    </ClInclude>
-    <ClInclude Include="service_provider.h">
-      <Filter>ServiceProvider</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

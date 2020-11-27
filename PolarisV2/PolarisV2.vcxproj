@@ -172,7 +172,6 @@
     <ClCompile Include="SDK\FN_FortniteGame_functions.cpp" />
     <ClCompile Include="inventory.cpp" />
     <ClCompile Include="quickbars.cpp" />
-    <ClCompile Include="service_provider.cpp" />
     <ClCompile Include="table.cpp" />
     <ClCompile Include="ui_renderer.cpp" />
     <ClCompile Include="ui_window.cpp" />
@@ -205,10 +204,8 @@
     <ClInclude Include="SDK.hpp" />
     <ClInclude Include="plate.h" />
     <ClInclude Include="SDK\FN_UMG_classes.hpp" />
-    <ClInclude Include="service_provider.h" />
     <ClInclude Include="table.h" />
     <ClInclude Include="sdk_utils.h" />
-    <ClInclude Include="trap_abilityset.h" />
     <ClInclude Include="trap_build.h" />
     <ClInclude Include="ui_renderer.h" />
     <ClInclude Include="ui_window.h" />
