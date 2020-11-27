@@ -5,7 +5,7 @@
 #include "program.h"
 #include "json.hpp"
 #include "SDK.hpp"
-#include "trap_build.h";
+#include "trap_build.h"
 
 #include <iostream>
 #include <fstream>
@@ -17,7 +17,9 @@ using json = nlohmann::json;
 namespace polaris::ui::window::windows
 {
     std::map<std::string, SDK::UBlueprintGeneratedClass*> mpClassCache;
+    std::map<std::string, SDK::UFortTrapItemDefinition*> mpTrapCache;
     std::map<SDK::FGuid*, SDK::ABuildingSMActor*> mpBuildActors;
+    std::vector<SDK::AActor*> mpSpawnedActors;
 
     void CreativeMenu::Draw()
     {
@@ -62,18 +64,50 @@ namespace polaris::ui::window::windows
                 ImGui::EndChild();
             }
 
+            if (ImGui::Button("New creation..."))
+            {
+                CreateNew();
+            }
+            ImGui::SameLine();
             ImGui::Button("Open creations folder");
+#ifndef _PROD
             ImGui::SameLine();
             if (ImGui::Button("Debug Quick Save"))
             {
                 SaveCreation("Debug");
             }
+#endif // !_PROD
+
+            ImGui::End();
+        }
+
+        ImGui::Begin("New Creation", &m_bCreatingNewProject);
+        {
+            static char name[128] = "My Epic Creation";
+            ImGui::InputText("Name", name, IM_ARRAYSIZE(name));
+            if (ImGui::Button("Create!"))
+            {
+                SaveCreation(name);
+                m_bCreatingNewProject = false;
+            }
+            ImGui::SameLine();
+            if (ImGui::Button("Cancel"))
+            {
+                m_bCreatingNewProject = false;
+            }
+
             ImGui::End();
         }
     }
 
     void CreativeMenu::LoadCreation(std::filesystem::path path)
     {
+        // Clear out any old actors.
+        for (auto& actor : mpSpawnedActors)
+        {
+            actor->K2_DestroyActor();
+        }
+
         std::ifstream streamData(path);
         json jsonData;
         streamData >> jsonData;
@@ -108,6 +142,7 @@ namespace polaris::ui::window::windows
 
             // Summon the build piece at the correct location and rotation
             buildPiece = static_cast<SDK::ABuildingSMActor*>(utilities::SDKUtils::SpawnActor(buildClass, &location, &rotation));
+            mpSpawnedActors.push_back(buildPiece);
 
             // Apply its health property from storage
             buildPiece->ForceBuildingHealth(jsonData["buildPieces"][i]["health"]);
@@ -126,10 +161,6 @@ namespace polaris::ui::window::windows
             SDK::ABuildingSMActor* buildPiece = nullptr;
             SDK::FVector location;
             SDK::FRotator rotation;
-
-            //std::cout << "Loading trap into memory. Path is " << "/Game/Items/Traps/Blueprints/" + std::string(jsonData["traps"][i]["name"]) + "." + std::string(jsonData["traps"][i]["name"]) << "_C" << std::endl;
-            //auto result = utilities::SDKUtils::FindOrLoadObject("/Game/Items/Traps/Blueprints/" + std::string(jsonData["traps"][i]["name"]) + "." + std::string(jsonData["traps"][i]["name"]) + "_C");
-            //std::cout << "Load complete. Result is " << result->GetName() << std::endl;
 
             // Place the build in the correct location
             location.X = jsonData["traps"][i]["location"]["x"];
@@ -152,6 +183,7 @@ namespace polaris::ui::window::windows
 
             // Summon the build piece at the correct location and rotation
             buildPiece = static_cast<SDK::ABuildingSMActor*>(utilities::SDKUtils::SpawnActor(buildClass, &location, &rotation));
+            mpSpawnedActors.push_back(buildPiece);
 
             auto trapActor = static_cast<SDK::ABuildingTrap*>(buildPiece);
             SDK::FGuid* buildGuid = new SDK::FGuid;
@@ -162,7 +194,17 @@ namespace polaris::ui::window::windows
             buildGuid->D = jsonData["traps"][i]["buildGuid"]["d"];
 
             trapActor->AttachedTo = mpBuildActors[buildGuid];
-            reinterpret_cast<models::offsetfixes::TrapBuild*>(trapActor)->TrapData = SDK::UObject::FindObject<SDK::UFortTrapItemDefinition>(jsonData["traps"][i]["tid"]);
+            if (mpTrapCache.find(jsonData["traps"][i]["tid"]) == mpTrapCache.end())
+            {
+                auto result = SDK::UObject::FindObject<SDK::UFortTrapItemDefinition>(jsonData["traps"][i]["tid"]);
+                reinterpret_cast<models::offsetfixes::TrapBuild*>(trapActor)->TrapData = result;
+
+                mpTrapCache.insert({ jsonData["traps"][i]["tid"], result });
+            }
+            else
+            {
+                reinterpret_cast<models::offsetfixes::TrapBuild*>(trapActor)->TrapData = mpTrapCache[jsonData["traps"][i]["tid"]];
+            }
 
             trapActor->InitializeKismetSpawnedBuildingActor(mpBuildActors[buildGuid], static_cast<SDK::AFortPlayerController*>(globals::gpPlayerController));
         }
@@ -187,7 +229,6 @@ namespace polaris::ui::window::windows
         m_bIsOpen = false;
         globals::gpPlayerController->CheatManager->Slomo(1);
     }
-
     void CreativeMenu::SaveCreation(std::string name)
     {
         auto pawnActor = static_cast<SDK::AFortPlayerPawn*>(utilities::SDKUtils::FindActor(SDK::AFortPlayerPawn::StaticClass()));
@@ -279,5 +320,9 @@ namespace polaris::ui::window::windows
         std::ofstream o("creations\\" + name + ".pcf");
         o << creationJson.dump(4) << std::endl;
         o.close();
+    }
+    void CreativeMenu::CreateNew()
+    {
+        m_bCreatingNewProject = true;
     }
 }

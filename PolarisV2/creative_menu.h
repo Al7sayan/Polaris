@@ -11,10 +11,13 @@ namespace polaris::ui::window::windows
     class CreativeMenu : public UIWindow
     {
     public:
+        bool m_bCreatingNewProject;
+
         void Draw() override;
 
         void LoadCreation(std::filesystem::path path);
         void SaveCreation(std::string name);
+        void CreateNew();
     };
 }
 
