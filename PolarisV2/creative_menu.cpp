@@ -6,7 +6,6 @@
 #include "json.hpp"
 #include "SDK.hpp"
 #include "trap_build.h";
-#include "trap_abilityset.h"
 
 #include <iostream>
 #include <fstream>
