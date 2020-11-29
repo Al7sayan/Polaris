@@ -166,8 +166,7 @@ namespace polaris
 
 			auto pSpawnActorOffset = SDKUtils::FindPattern("\xE8\x00\x00\x00\x00\x0F\x10\x04\x3E", "x????xxxx");
 			if (!pSpawnActorOffset) {
-				MessageBox(NULL, static_cast<LPCWSTR>(L"Finding pattern for SpawnActor has failed, please re-open Fortnite and try again!"), static_cast<LPCWSTR>(L"Error"), MB_ICONERROR);
-				ExitProcess(EXIT_FAILURE);
+				ErrorUtils::ThrowException(L"Finding pattern for SpawnActor has failed. Please relaunch Fortnite and try again!");
 			}
 
 			SpawnActorLong = reinterpret_cast<decltype(SpawnActorLong)>(pSpawnActorOffset + 5 + *reinterpret_cast<uint32_t*>(pSpawnActorOffset + 1));
