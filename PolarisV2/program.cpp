@@ -16,7 +16,8 @@ namespace polaris
 	Program::Program()
 	{
 		if (gpProgram != nullptr || MH_Initialize() != MH_OK)
-			ErrorUtils::ThrowException(L"Initializing failed. Please restart Fortnite and try again!");
+			utilities::ErrorUtils::ThrowException(L"Initializing failed. Please restart Fortnite and try again!");
+
 		gpProgram = this;
 
 		SDKUtils::InitConsole();

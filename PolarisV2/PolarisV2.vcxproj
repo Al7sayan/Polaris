@@ -192,7 +192,11 @@
     <ClCompile Include="peh_plate.cpp" />
     <ClCompile Include="peh_table.cpp" />
     <ClCompile Include="program.cpp" />
+    <ClCompile Include="SDK\FN_AthenaQuickbarPrimary_functions.cpp" />
     <ClCompile Include="SDK\FN_Encryption.cpp" />
+    <ClCompile Include="SDK\FN_FortniteUI_functions.cpp" />
+    <ClCompile Include="SDK\FN_QuickbarSlot_functions.cpp" />
+    <ClCompile Include="SDK\FN_UMG_functions.cpp" />
     <ClCompile Include="sdk_utils.cpp" />
     <ClCompile Include="SDK\FN_Basic.cpp" />
     <ClCompile Include="SDK\FN_CoreUObject_functions.cpp" />
@@ -225,6 +229,7 @@
     <ClInclude Include="plate.h" />
     <ClInclude Include="table.h" />
     <ClInclude Include="sdk_utils.h" />
+    <ClInclude Include="trap_build.h" />
     <ClInclude Include="ui_renderer.h" />
     <ClInclude Include="ui_window.h" />
   </ItemGroup>

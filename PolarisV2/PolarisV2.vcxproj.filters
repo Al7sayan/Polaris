@@ -77,11 +77,38 @@
     <Filter Include="Pawn\Pawns\Farmstead">
       <UniqueIdentifier>{af725836-dac5-4299-8292-5c6a898ed62d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Window\Windows\About Window">
-      <UniqueIdentifier>{43ea6f48-fb7c-443d-90c4-315fe12099cf}</UniqueIdentifier>
+    <Filter Include="UI\Window\Windows\World Inspector">
+      <UniqueIdentifier>{4828f76c-1dd5-4f34-92dc-09354dd0c308}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Extensions">
-      <UniqueIdentifier>{d8b4d04d-d840-4b9d-93ad-e976ccb6bad6}</UniqueIdentifier>
+    <Filter Include="UI\Window\Windows\Watermark">
+      <UniqueIdentifier>{71602d1a-2d6a-41de-bdf6-43c688a52496}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Window\Windows\Changelog Window">
+      <UniqueIdentifier>{f49e568a-860a-4a16-83ea-3ccdb0f2533b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inventory">
+      <UniqueIdentifier>{61300b7d-62a9-40e7-b379-71bbfd6b0941}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Third Party\JSON">
+      <UniqueIdentifier>{ff324944-2672-4f95-946b-d05f2b28c0be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Window\Windows\Creative Menu">
+      <UniqueIdentifier>{80858ca5-33eb-4c20-8711-83c243d562c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inventory\Equipping">
+      <UniqueIdentifier>{a520d6cd-bb93-412f-91e4-a6392851a544}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pawn\Pawns\BotPawn">
+      <UniqueIdentifier>{7c0a8da8-6739-4f62-ba71-f69c6662aa45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models">
+      <UniqueIdentifier>{2811638c-9ad2-4b27-a977-42169f490385}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models\OffsetFixes">
+      <UniqueIdentifier>{8202df7d-86a1-42a1-8252-a9db80f1cc15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ServiceProvider">
+      <UniqueIdentifier>{40bd2503-8cd8-465c-97db-5d152011ed89}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +201,9 @@
     <ClCompile Include="SDK\FN_Encryption.cpp">
       <Filter>Third Party</Filter>
     </ClCompile>
+    <ClCompile Include="SDK\FN_Encryption.cpp">
+      <Filter>Third Party\SDK</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDK.hpp">
@@ -242,6 +272,45 @@
     </ClInclude>
     <ClInclude Include="imgui_text_extension.h">
       <Filter>UI\Extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="peh_plate.h">
+      <Filter>Tables\Plates</Filter>
+    </ClInclude>
+    <ClInclude Include="world_inspector.h">
+      <Filter>UI\Window\Windows\World Inspector</Filter>
+    </ClInclude>
+    <ClInclude Include="watermark.h">
+      <Filter>UI\Window\Windows\Watermark</Filter>
+    </ClInclude>
+    <ClInclude Include="changelog_window.h">
+      <Filter>UI\Window\Windows\Changelog Window</Filter>
+    </ClInclude>
+    <ClInclude Include="inventory.h">
+      <Filter>Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="quickbars.h">
+      <Filter>Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="creative_menu.h">
+      <Filter>UI\Window\Windows\Creative Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="json.hpp">
+      <Filter>Third Party\JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\FN_UMG_classes.hpp">
+      <Filter>Third Party\SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="equip.h">
+      <Filter>Inventory\Equipping</Filter>
+    </ClInclude>
+    <ClInclude Include="bot_pawn.h">
+      <Filter>Pawn\Pawns\BotPawn</Filter>
+    </ClInclude>
+    <ClInclude Include="trap_build.h">
+      <Filter>Models\OffsetFixes</Filter>
+    </ClInclude>
+    <ClInclude Include="service_provider.h">
+      <Filter>ServiceProvider</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

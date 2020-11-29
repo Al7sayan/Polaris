@@ -68,57 +68,17 @@ namespace polaris
 		return nullptr;
 	}
 
-	VOID SDKUtils::InitConsole()
-	{
-		AllocConsole();
-
-		FILE* pFile;
-		freopen_s(&pFile, "CONOUT$", "w", stdout);
-	}
-	VOID SDKUtils::InitSdk()
-	{
-		gpWorld = reinterpret_cast<SDK::UWorld**>(BaseAddress() + 0x4740328); // cant use SDK::GWorld, because its not in a header.
-
-		/*auto pUWorldAddress = SDKUtils::FindPattern("\x48\x8B\x1D\x00\x00\x00\x00\x00\x00\x00\x10\x4C\x8D\x4D\x00\x4C", "xxx???????xxxx?x");
-		auto pUWorldOffset = *reinterpret_cast<uint32_t*>(pUWorldAddress + 3);
-		gpWorld = reinterpret_cast<SDK::UWorld**>(pUWorldAddress + 7 + pUWorldOffset);
-
-		auto pGObjectAddress = SDKUtils::FindPattern("\x48\x8D\x0D\x00\x00\x00\x00\xE8\x00\x00\x00\x00\xE8\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x48\x8B\xD6", "xxx????x????x????x????xxx");
-		auto pGObjectOffset = *reinterpret_cast<uint32_t*>(pGObjectAddress + 3);
-		SDK::UObject::GObjects = reinterpret_cast<SDK::FUObjectArray*>(pGObjectAddress + 7 + pGObjectOffset);
-
-		auto pGNameAddress = SDKUtils::FindPattern("\x48\x8B\x05\x00\x00\x00\x00\x48\x85\xC0\x75\x50\xB9\x00\x00\x00\x00\x48\x89\x5C\x24", "xxx????xxxxxx????xxxx");
-		auto pGNameOffset = *reinterpret_cast<uint32_t*>(pGNameAddress + 3);
-
-		SDK::FName::GNames = *reinterpret_cast<SDK::TNameEntryArray**>(pGNameAddress + 7 + pGNameOffset);*/
-	}
-	VOID SDKUtils::InitGlobals()
-	{
-		polaris::gpLevel = (*polaris::gpWorld)->PersistentLevel;
-		polaris::gpGameInstance = (*polaris::gpWorld)->OwningGameInstance;
-		polaris::gpLocalPlayers = polaris::gpGameInstance->LocalPlayers;
-		polaris::gpLocalPlayer = polaris::gpLocalPlayers[0];
-		polaris::gpActors = &polaris::gpLevel->Actors;
-		polaris::gpPlayerController = polaris::gpLocalPlayer->PlayerController;
-	}
-	VOID SDKUtils::InitPatches()
-	{
-		// Item ownership check patching - allows weapons and other GameplayAbilites to properly function.
-		auto pAbilityPatchAddress = SDKUtils::FindPattern
-		(
-			"\xC0\x0F\x84\x3C\x02\x00\x00\x0F\x2F\xF7\x0F\x86\xF5\x00\x00\x00",
-			"xxxxxxxxxxxxxxxx"
-		);
-		if (pAbilityPatchAddress)
+				globals::gpLocalPlayer->ViewportClient->ViewportConsole = pConsole;
+			}
+			else
+			{
+				// redirect the console to a nullptr if bIsEnabled already exists
+				globals::gpLocalPlayer->ViewportClient->ViewportConsole = nullptr;
+			}
+		}
+		VOID SDKUtils::InitSdk()
 		{
-			DWORD dwProtection;
-			VirtualProtect(pAbilityPatchAddress, 16, PAGE_EXECUTE_READWRITE, &dwProtection);
-
-			reinterpret_cast<uint8_t*>(pAbilityPatchAddress)[2] = 0x85;
-			reinterpret_cast<uint8_t*>(pAbilityPatchAddress)[11] = 0x8D;
-
-			DWORD dwTemp;
-			VirtualProtect(pAbilityPatchAddress, 16, dwProtection, &dwTemp);
+			globals::gpWorld = reinterpret_cast<SDK::UWorld**>(BaseAddress() + 0x4740328); // cant use SDK::GWorld, because its not in a header.
 		}
 	}
 
@@ -126,11 +86,9 @@ namespace polaris
 	{
 		std::string sTemp = sFirst;
 
-		if (sFirst[sFirst.length()] != '\\')
-		{
-			sTemp += '\\';
-
-			return(sTemp + sSecond);
+				DWORD dwTemp;
+				VirtualProtect(pAbilityPatchAddress, 16, dwProtection, &dwTemp);
+			}
 		}
 		else
 			return(sFirst + sSecond);
