@@ -48,7 +48,8 @@ namespace polaris::pawn::pawns
 
     AthenaPawn::AthenaPawn(SDK::FVector pos, SDK::FRotator rot)
     {
-        m_pPawnActor = static_cast<SDK::AFortPlayerPawn*>(utilities::SDKUtils::SpawnActor(SDK::APlayerPawn_Athena_C::StaticClass(), &pos, &rot));
+        (globals::gpPlayerController)->CheatManager->Summon(TEXT("PlayerPawn_Athena_C"));
+        m_pPawnActor = static_cast<SDK::AFortPlayerPawn*>(polaris::utilities::SDKUtils::FindActor(SDK::AFortPlayerPawn::StaticClass()));
         globals::gpPlayerController->Possess(m_pPawnActor);
 
         //Reset the pawn's actor rotation.
@@ -65,6 +66,7 @@ namespace polaris::pawn::pawns
         auto pawn = static_cast<SDK::AFortPlayerPawnAthena*>(m_pPawnActor);
         pawn->OnRep_CustomizationLoadout();
 
+        /*
         // Give the player a pickaxe.
         EquipWeapon(mPickaxeAsWid[pawn->CustomizationLoadout.Character->GetName()].c_str(), 0);
         CreateBuildPreviews();
@@ -76,6 +78,7 @@ namespace polaris::pawn::pawns
         m_bHasCycledFloorOnce = false;
         m_bHasCycledStairOnce = false;
         m_bHasCycledRoofOnce = false;
+        */
 
         // Apply customization loadout.
         ApplyCustomizationLoadout();

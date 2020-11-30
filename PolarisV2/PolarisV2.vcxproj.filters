@@ -201,9 +201,6 @@
     <ClCompile Include="quickbars.cpp">
       <Filter>Inventory</Filter>
     </ClCompile>
-    <ClCompile Include="creative_menu.cpp">
-      <Filter>UI\Window\Windows\Creative Menu</Filter>
-    </ClCompile>
     <ClCompile Include="SDK\FN_UMG_functions.cpp">
       <Filter>Third Party\SDK</Filter>
     </ClCompile>
@@ -218,9 +215,6 @@
     </ClCompile>
     <ClCompile Include="equip.cpp">
       <Filter>Inventory\Equipping</Filter>
-    </ClCompile>
-    <ClCompile Include="bot_pawn.cpp">
-      <Filter>Pawn\Pawns\BotPawn</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -300,9 +294,6 @@
     <ClInclude Include="quickbars.h">
       <Filter>Inventory</Filter>
     </ClInclude>
-    <ClInclude Include="creative_menu.h">
-      <Filter>UI\Window\Windows\Creative Menu</Filter>
-    </ClInclude>
     <ClInclude Include="json.hpp">
       <Filter>Third Party\JSON</Filter>
     </ClInclude>
@@ -311,9 +302,6 @@
     </ClInclude>
     <ClInclude Include="equip.h">
       <Filter>Inventory\Equipping</Filter>
-    </ClInclude>
-    <ClInclude Include="bot_pawn.h">
-      <Filter>Pawn\Pawns\BotPawn</Filter>
     </ClInclude>
     <ClInclude Include="trap_build.h">
       <Filter>Models\OffsetFixes</Filter>

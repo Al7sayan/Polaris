@@ -12,13 +12,11 @@ namespace polaris::ui::window::windows
         m_pAboutWindow = new AboutWindow;
         m_pWorldInspector = new WorldInspector;
         m_pWatermark = new Watermark;
-        m_pCreativeMenu = new CreativeMenu;
         //new ChangelogWindow;
 
         m_bIsUE4ConsoleEnabled = false;
         m_pAboutWindow->m_bIsOpen = false;
         m_pWorldInspector->m_bIsOpen = false;
-        m_pCreativeMenu->m_bIsOpen = false;
     }
 
     void MainWindow::Draw()
@@ -55,10 +53,6 @@ namespace polaris::ui::window::windows
                 if (ImGui::MenuItem("World Inspector"))
                 {
                     m_pWorldInspector->m_bIsOpen = !m_pWorldInspector->m_bIsOpen;
-                }
-                if (ImGui::MenuItem("Creative"))
-                {
-                    m_pCreativeMenu->m_bIsOpen = !m_pCreativeMenu->m_bIsOpen;
                 }
                 ImGui::EndMenu();
             }

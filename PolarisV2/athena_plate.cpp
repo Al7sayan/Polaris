@@ -10,11 +10,13 @@
 #include <map>
 #include <iostream>
 
+/*
 PVOID(*CollectGarbageInternal)(uint32_t, bool) = nullptr;
 PVOID CollectGarbageInternalHook(uint32_t KeepFlags, bool bPerformFullPurge)
 {
     return NULL;
 }
+*/
 namespace polaris::tables::plates
 {
     void AthenaPlate::ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams)
@@ -57,6 +59,7 @@ namespace polaris::tables::plates
 
         if (pFunction->GetName().find("Tick") != std::string::npos)
         {
+            /*
             if (GetAsyncKeyState(VK_OEM_PLUS) & 0x8000)
             {
                 SDK::FVector Pos = m_pPlayerPawn->m_pPawnActor->K2_GetActorLocation();
@@ -65,6 +68,7 @@ namespace polaris::tables::plates
                 Pos.Z = Pos.Z + m_pPlayerPawn->m_pPawnActor->GetActorForwardVector().Z;
                 new pawn::pawns::BotPawn(Pos, m_pPlayerPawn->m_pPawnActor->K2_GetActorRotation(), SDK::EFortTeam::HumanPvP_Team2, nullptr);
             }
+            */
         }
         if (pFunction->GetName().find("ReadyToStartMatch") != std::string::npos && m_bIsInitialized == false)
             Initialize();
@@ -104,8 +108,8 @@ namespace polaris::tables::plates
         m_bIsInitialized = true;
         utilities::SDKUtils::InitSdk();
         utilities::SDKUtils::InitGlobals();
-        utilities::SDKUtils::InitPatches();
         //Load Husks Into Memory.
+        /*
         utilities::SDKUtils::FindOrLoadObject("/Game/Characters/Enemies/Husk/Blueprints/HuskPawn.HuskPawn_C");
         utilities::SDKUtils::FindOrLoadObject("/Game/Characters/Enemies/Husk/Blueprints/HuskPawn_Fire.HuskPawn_Fire_C");
         utilities::SDKUtils::FindOrLoadObject("/Game/Characters/Enemies/Husk/Blueprints/HuskPawn_Ice.HuskPawn_Ice_C");
@@ -117,7 +121,9 @@ namespace polaris::tables::plates
         utilities::SDKUtils::FindOrLoadObject("/Game/Characters/Enemies/Husk/Blueprints/HuskPawn_Dwarf_Fire.HuskPawn_Dwarf_Fire_C");
         utilities::SDKUtils::FindOrLoadObject("/Game/Characters/Enemies/Husk/Blueprints/HuskPawn_Dwarf_Ice.HuskPawn_Dwarf_Ice_C");
         utilities::SDKUtils::FindOrLoadObject("/Game/Characters/Enemies/Husk/Blueprints/HuskPawn_Dwarf_Lightning.HuskPawn_Dwarf_Lightning_C");
+        */
 
+        /*
         // Disable garbage collection.
 
         auto pCollectGarbageInternalAddress = utilities::SDKUtils::FindPattern("\x48\x8B\xC4\x48\x89\x58\x08\x88\x50\x10", "xxxxxxxxxx");
@@ -126,11 +132,13 @@ namespace polaris::tables::plates
 
         MH_CreateHook(static_cast<LPVOID>(pCollectGarbageInternalAddress), CollectGarbageInternalHook, reinterpret_cast<LPVOID*>(&CollectGarbageInternal));
         MH_EnableHook(static_cast<LPVOID>(pCollectGarbageInternalAddress));
+        */
 
         // Spawn a Player Pawn and setup inventory.
         m_pPlayerPawn = new pawn::pawns::AthenaPawn(globals::gpPlayerController->SpectatorPawn->K2_GetActorLocation(),
             globals::gpPlayerController->SpectatorPawn->K2_GetActorRotation());
 
+        /*
         m_pInventory = new inventory::Inventory;
         m_pInventory->m_pPickaxeDef = SDK::UObject::FindObject<SDK::UFortWeaponMeleeItemDefinition>(m_pPlayerPawn->mPickaxeAsWid[static_cast<SDK::AFortPlayerPawnAthena*>(m_pPlayerPawn->m_pPawnActor)->CustomizationLoadout.Character->GetName()].c_str());
         m_pQuickbars = new inventory::quickbars;
@@ -145,6 +153,7 @@ namespace polaris::tables::plates
         m_pEquip = new inventory::equip;
         m_pEquip->m_pInventory = m_pInventory;
         m_pEquip->m_pPlayerPawn = m_pPlayerPawn;
+        */
 
         // Tell the client that we are ready to start the match, this allows the loading screen to drop.
         static_cast<SDK::AFortPlayerController*>(globals::gpPlayerController)->ServerReadyToStartMatch();
