@@ -149,7 +149,8 @@ namespace polaris
 		VOID SDKUtils::InitSdk()
 		{
 			// Missing: UWorldAddress/UWorldOffset, GNameAddress/GNameOffset
-			// The DLL in its current state crashes the game entirely upon injection
+			// The DLL in its current state crashes the game entirely upon injection at line 22 of base_plate.cpp
+			// due to a lack of a UWorld
 
 			//auto pUWorldAddress = SDKUtils::FindPattern("\x48\x8B\x1D\x00\x00\x00\x00\x00\x00\x00\x10\x4C\x8D\x4D\x00\x4C", "xxx???????xxxx?x");
 			//auto pUWorldOffset = *reinterpret_cast<uint32_t*>(pUWorldAddress + 3);
