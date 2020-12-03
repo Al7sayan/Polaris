@@ -4,64 +4,32 @@
 #include "globals.h"
 #include "ui_renderer.h"
 #include "changelog_window.h"
+#include "player_category.h"
+#include "window_category.h"
 
 namespace polaris::ui::window::windows
 {
     MainWindow::MainWindow()
     {
         m_pAboutWindow = new AboutWindow;
-        m_pWorldInspector = new WorldInspector;
         m_pWatermark = new Watermark;
-        m_pCreativeMenu = new CreativeMenu;
-        //new ChangelogWindow;
 
-        m_bIsUE4ConsoleEnabled = false;
         m_pAboutWindow->m_bIsOpen = false;
-        m_pWorldInspector->m_bIsOpen = false;
-        m_pCreativeMenu->m_bIsOpen = false;
+
+        m_vCategories.push_back(new mainwindow::category::categories::PlayerCategory);
+        m_vCategories.push_back(new mainwindow::category::categories::WindowCategory);
     }
 
     void MainWindow::Draw()
     {
         ImGui::BeginMainMenuBar();
         {
-            if (ImGui::BeginMenu("Player"))
+            for (auto& category : m_vCategories)
             {
-                if (!globals::gpLocalPlayer->ViewportClient->ViewportConsole || !m_bIsUE4ConsoleEnabled)
-                {
-                    if (ImGui::MenuItem("Enable Console"))
-                    {
-                        utilities::SDKUtils::ToggleUnrealConsole(true);
-                        m_bIsUE4ConsoleEnabled = true;
-                    }
-                }
-                else if (globals::gpLocalPlayer->ViewportClient->ViewportConsole || m_bIsUE4ConsoleEnabled)
-                {
-                    if (ImGui::MenuItem("Disable Console"))
-                    {
-                        utilities::SDKUtils::ToggleUnrealConsole(false);
-                        m_bIsUE4ConsoleEnabled = false;
-                    }
-                }
+                category->Draw();
+            }
 
-                if (ImGui::MenuItem("Exit"))
-                {
-                    gpProgram->~Program();
-                }
-                ImGui::EndMenu();
-            }
-            if (ImGui::BeginMenu("Windows"))
-            {
-                if (ImGui::MenuItem("World Inspector"))
-                {
-                    m_pWorldInspector->m_bIsOpen = !m_pWorldInspector->m_bIsOpen;
-                }
-                if (ImGui::MenuItem("Creative"))
-                {
-                    m_pCreativeMenu->m_bIsOpen = !m_pCreativeMenu->m_bIsOpen;
-                }
-                ImGui::EndMenu();
-            }
+            // Help remains hardcoded, because we always want it to appear last.
             if (ImGui::BeginMenu("Help"))
             {
                 if (ImGui::MenuItem("About"))

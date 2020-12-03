@@ -12,6 +12,8 @@ namespace polaris::tables::plates
     class FrontendPlate : public PehPlate
     {
     public:
+        bool m_bCreativeMode;
+
         void OnEnabled() override;
 
         void ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams) override;

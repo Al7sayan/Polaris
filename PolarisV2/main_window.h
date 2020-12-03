@@ -6,6 +6,9 @@
 #include "world_inspector.h"
 #include "watermark.h"
 #include "creative_menu.h"
+#include "category.h"
+
+#include <vector>
 
 namespace polaris::ui::window::windows
 {
@@ -16,12 +19,9 @@ namespace polaris::ui::window::windows
     class MainWindow : public UIWindow
     {
     public:
+        std::vector<mainwindow::Category*> m_vCategories;
         AboutWindow* m_pAboutWindow;
-        WorldInspector* m_pWorldInspector;
         Watermark* m_pWatermark;
-        CreativeMenu* m_pCreativeMenu;
-
-        bool m_bIsUE4ConsoleEnabled;
 
         MainWindow();
 

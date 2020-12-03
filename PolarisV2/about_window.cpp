@@ -12,7 +12,7 @@ namespace polaris::ui::window::windows
 		std::string verEnv = POLARIS_ID;
 		std::string combined = verNum + "-" + verEnv;
 
-		ImGui::SetNextWindowSize(ImVec2(370, 600));
+		ImGui::SetNextWindowSize(ImVec2(370, 650));
 		ImGui::Begin("About", &m_bIsOpen, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
 		{
 			ImGui::Header("Polaris");
@@ -24,26 +24,30 @@ namespace polaris::ui::window::windows
 
 			ImGui::Dummy(ImVec2(1, 10));
 
-			ImGui::Header2("Creator");
-			ImGui::Text("Cyuubi");
+			ImGui::Header2("Lead Developer");
+			ImGui::TextColored(ImVec4(1.0f, 1.0f, 1.0f, 0.6f), "Cyuubi");
+			ImGui::Text("irma");
 
 			ImGui::Dummy(ImVec2(1, 5));
 
-			ImGui::Header2("Developers");
-			ImGui::Text("irma");
-			ImGui::Text("wiktorwiktor12");
+			ImGui::Header2("Developer");
+			ImGui::TextColored(ImVec4(1.0f, 1.0f, 1.0f, 0.6f), "BattleDash");
 			ImGui::Text("pivotman319");
+			ImGui::TextColored(ImVec4(1.0f, 1.0f, 1.0f, 0.6f), "kanner");
+			ImGui::TextColored(ImVec4(1.0f, 1.0f, 1.0f, 0.6f), "Samicc");
+			ImGui::Text("wiktorwiktor12");
+
+			ImGui::Dummy(ImVec2(1, 5));
+
+			ImGui::Header2("Relation");
+			ImGui::Text("crush");
+			ImGui::Text("darkblade");
+			ImGui::TextColored(ImVec4(1.0f, 1.0f, 1.0f, 0.6f), "Slushia");
 
 			ImGui::Dummy(ImVec2(1, 5));
 
 			ImGui::Header2("Special Thanks");
-			ImGui::Text("BattleDash");
 			ImGui::Text("chase");
-			ImGui::Text("crush");
-			ImGui::Text("darkblade");
-			ImGui::Text("kanner");
-			ImGui::Text("Samicc");
-			ImGui::Text("Slushia");
 
 			ImGui::Dummy(ImVec2(1, 10));
 

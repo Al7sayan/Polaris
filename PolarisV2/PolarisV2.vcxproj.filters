@@ -104,6 +104,24 @@
     <Filter Include="Models\OffsetFixes">
       <UniqueIdentifier>{8202df7d-86a1-42a1-8252-a9db80f1cc15}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tables\Plates\Creative">
+      <UniqueIdentifier>{2a32369c-553b-4618-9f0b-6bf752401ba7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Window\Windows\Choice Menu">
+      <UniqueIdentifier>{cb2add31-2334-4539-b9a8-20fb636794b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Window\Windows\Main Window\Category">
+      <UniqueIdentifier>{234a26fa-b7a2-4f98-92f5-7857e201635e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Window\Windows\Main Window\Category\Categories">
+      <UniqueIdentifier>{83c3b41d-267f-44b4-902e-dcde5650a416}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Window\Windows\Main Window\Category\Categories\Player">
+      <UniqueIdentifier>{d2ba7182-bea5-4dc4-a207-93854fc46185}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Window\Windows\Main Window\Category\Categories\Window">
+      <UniqueIdentifier>{6c8c4eca-7dfb-44fe-9a7b-62fdb481f6b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SDK\FN_Basic.cpp">
@@ -222,6 +240,22 @@
     <ClCompile Include="bot_pawn.cpp">
       <Filter>Pawn\Pawns\BotPawn</Filter>
     </ClCompile>
+    <ClCompile Include="creative_plate.cpp">
+      <Filter>Tables\Plates\Creative</Filter>
+    </ClCompile>
+    <ClCompile Include="choice_menu.cpp">
+      <Filter>UI\Window\Windows\Choice Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="category.cpp">
+      <Filter>UI\Window\Windows\Main Window\Category</Filter>
+    </ClCompile>
+    <ClCompile Include="player_category.cpp">
+      <Filter>UI\Window\Windows\Main Window\Category\Categories\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="windows_category.cpp" />
+    <ClCompile Include="window_category.cpp">
+      <Filter>UI\Window\Windows\Main Window\Category\Categories\Window</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDK.hpp">
@@ -317,6 +351,24 @@
     </ClInclude>
     <ClInclude Include="trap_build.h">
       <Filter>Models\OffsetFixes</Filter>
+    </ClInclude>
+    <ClInclude Include="creative_plate.h">
+      <Filter>Tables\Plates\Creative</Filter>
+    </ClInclude>
+    <ClInclude Include="choice_menu.h">
+      <Filter>UI\Window\Windows\Choice Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="category.h">
+      <Filter>UI\Window\Windows\Main Window\Category</Filter>
+    </ClInclude>
+    <ClInclude Include="player_category.h">
+      <Filter>UI\Window\Windows\Main Window\Category\Categories\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="windows_category.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="window_category.h">
+      <Filter>UI\Window\Windows\Main Window\Category\Categories\Window</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

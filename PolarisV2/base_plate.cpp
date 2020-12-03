@@ -5,6 +5,7 @@
 #include "error_utils.h"
 #include "ui_renderer.h"
 #include "main_window.h"
+#include "choice_menu.h"
 
 namespace polaris::tables::plates
 {
@@ -25,12 +26,16 @@ namespace polaris::tables::plates
         Sleep(500);
 
         utilities::SDKUtils::InitGlobals();
-        gpProgram->m_pMainTable->PushPlate(new FrontendPlate);
 
         // Initialize the renderer and main window.
         std::cout << "Initializing UI." << std::endl;
         new ui::UIRenderer;
         new ui::window::windows::MainWindow;
+
+        // NOTE: (irma) This is commented out for the commit's sake. Don't touch this!
+        //auto choiceMenu = new ui::window::windows::ChoiceMenu;
+        //choiceMenu->m_bIsOpen = true;
+        gpPehTable->PushPlate(new FrontendPlate);
 
         return NULL;
     }

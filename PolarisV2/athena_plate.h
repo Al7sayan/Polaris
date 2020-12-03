@@ -16,7 +16,7 @@ namespace polaris::tables::plates
      */
     class AthenaPlate : public PehPlate
     {
-    private:
+    protected:
         pawn::pawns::AthenaPawn* m_pPlayerPawn;
         inventory::Inventory* m_pInventory;
         inventory::quickbars* m_pQuickbars;
@@ -31,10 +31,10 @@ namespace polaris::tables::plates
         SDK::UClass* m_pLastBuildClassForStair = SDK::APBWA_W1_StairW_C::StaticClass();
         SDK::UClass* m_pLastBuildClassForRoof = SDK::APBWA_W1_RoofC_C::StaticClass();
 
-        void ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams) override;
-        void Update() override;
+        virtual void ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams) override;
+        virtual void Update() override;
 
-        void OnEnabled() override;
+        virtual void OnEnabled() override;
 
         void Initialize(); //!< Initialize spawns a pawn and drops the loading screen.
 
