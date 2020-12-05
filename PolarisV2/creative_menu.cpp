@@ -25,11 +25,6 @@ namespace polaris::ui::window::windows
 
     void CreativeMenu::Draw()
     {
-        if (m_bIsOpen == true)
-        {
-            globals::gpPlayerController->CheatManager->Slomo(0);
-        }
-
         ImGuiIO* io = &ImGui::GetIO();
 
         // Background darkener window

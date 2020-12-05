@@ -36,7 +36,7 @@ namespace polaris::tables::plates
 
         virtual void OnEnabled() override;
 
-        void Initialize(); //!< Initialize spawns a pawn and drops the loading screen.
+        virtual void Initialize(); //!< Initialize spawns a pawn and drops the loading screen.
 
         bool AreGuidsTheSame(SDK::FGuid guidA, SDK::FGuid guidB); //!< AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
     };

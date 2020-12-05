@@ -122,6 +122,9 @@
     <Filter Include="UI\Window\Windows\Main Window\Category\Categories\Window">
       <UniqueIdentifier>{6c8c4eca-7dfb-44fe-9a7b-62fdb481f6b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI\Window\Windows\Main Window\Category\Categories\Creative">
+      <UniqueIdentifier>{24c88286-6ef3-4b14-a003-e6017efb8fb1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SDK\FN_Basic.cpp">
@@ -256,6 +259,9 @@
     <ClCompile Include="window_category.cpp">
       <Filter>UI\Window\Windows\Main Window\Category\Categories\Window</Filter>
     </ClCompile>
+    <ClCompile Include="creative_category.cpp">
+      <Filter>UI\Window\Windows\Main Window\Category\Categories\Creative</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDK.hpp">
@@ -369,6 +375,9 @@
     </ClInclude>
     <ClInclude Include="window_category.h">
       <Filter>UI\Window\Windows\Main Window\Category\Categories\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="creative_category.h">
+      <Filter>UI\Window\Windows\Main Window\Category\Categories\Creative</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

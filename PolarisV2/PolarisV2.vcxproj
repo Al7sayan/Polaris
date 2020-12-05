@@ -143,6 +143,7 @@
     <ClCompile Include="bot_pawn.cpp" />
     <ClCompile Include="changelog_window.cpp" />
     <ClCompile Include="choice_menu.cpp" />
+    <ClCompile Include="creative_category.cpp" />
     <ClCompile Include="creative_menu.cpp" />
     <ClCompile Include="creative_plate.cpp" />
     <ClCompile Include="directory_utils.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="base_plate.h" />
     <ClInclude Include="changelog_window.h" />
     <ClInclude Include="choice_menu.h" />
+    <ClInclude Include="creative_category.h" />
     <ClInclude Include="creative_menu.h" />
     <ClInclude Include="creative_plate.h" />
     <ClInclude Include="directory_utils.h" />

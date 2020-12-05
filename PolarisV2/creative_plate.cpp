@@ -15,6 +15,16 @@ namespace polaris::tables::plates
     std::map<std::string, SDK::UFortTrapItemDefinition*> mpTrapCache;
     std::map<SDK::FGuid*, SDK::ABuildingSMActor*> mpBuildActors;
 
+    void CreativePlate::Initialize()
+    {
+        AthenaPlate::Initialize();
+
+        auto cheatManager = static_cast<SDK::UFortCheatManager*>(globals::gpPlayerController->CheatManager);
+        cheatManager->AllowRespawn();
+        cheatManager->AthenaEndlessGame();
+        cheatManager->SetSafeZoneRadius(999999.0f);
+    }
+
     void CreativePlate::DestroyAllBuilds()
     {
         for (int i = 0; i < globals::gpLevel->Actors.Count; i++)

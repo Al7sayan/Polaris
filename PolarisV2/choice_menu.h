@@ -8,6 +8,10 @@ namespace polaris::ui::window::windows
     class ChoiceMenu : public UIWindow
     {
     public:
+        const char* m_cChoosingMessage;
+
+        ChoiceMenu();
+
         void Draw() override;
     };
 }

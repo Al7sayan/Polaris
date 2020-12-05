@@ -7,10 +7,13 @@
 #include "player_category.h"
 #include "window_category.h"
 
+polaris::ui::window::windows::MainWindow* gpMainWindow;
+
 namespace polaris::ui::window::windows
 {
     MainWindow::MainWindow()
     {
+        gpMainWindow = this;
         m_pAboutWindow = new AboutWindow;
         m_pWatermark = new Watermark;
 

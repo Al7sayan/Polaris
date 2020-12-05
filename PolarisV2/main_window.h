@@ -30,4 +30,6 @@ namespace polaris::ui::window::windows
     };
 }
 
+extern polaris::ui::window::windows::MainWindow* gpMainWindow;
+
 #endif // !MAIN_WINDOW_H

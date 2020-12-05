@@ -11,6 +11,8 @@ namespace polaris::tables::plates
     class CreativePlate : public AthenaPlate
     {
     public:
+        void Initialize() override;
+
         void DestroyAllBuilds();
 
         void LoadCreation(std::filesystem::path path);

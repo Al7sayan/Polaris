@@ -32,10 +32,8 @@ namespace polaris::tables::plates
         new ui::UIRenderer;
         new ui::window::windows::MainWindow;
 
-        // NOTE: (irma) This is commented out for the commit's sake. Don't touch this!
-        //auto choiceMenu = new ui::window::windows::ChoiceMenu;
-        //choiceMenu->m_bIsOpen = true;
-        gpPehTable->PushPlate(new FrontendPlate);
+        auto choiceMenu = new ui::window::windows::ChoiceMenu;
+        choiceMenu->m_bIsOpen = true;
 
         return NULL;
     }

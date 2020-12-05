@@ -3,6 +3,8 @@
 #include "program.h"
 #include "athena_plate.h"
 #include "creative_plate.h"
+#include "main_window.h"
+#include "creative_category.h"
 
 #include <iostream>
 
@@ -20,8 +22,14 @@ namespace polaris::tables::plates
     {
         if (pFunction->GetName().find("BP_PlayButton") != std::string::npos)
         {
-            if(m_bCreativeMode == true)
-                gpProgram->m_pMainTable->PushPlate(new CreativePlate);
+            if (m_bCreativeMode == true)
+            {
+                CreativePlate* creativePlate = new CreativePlate;
+                auto shit = new ui::window::windows::mainwindow::category::categories::CreativeCategory(creativePlate);
+
+                gpMainWindow->m_vCategories.push_back(shit);
+                gpProgram->m_pMainTable->PushPlate(creativePlate);
+            }
             else
                 gpProgram->m_pMainTable->PushPlate(new AthenaPlate);
         }
