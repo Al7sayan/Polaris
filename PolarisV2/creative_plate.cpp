@@ -23,6 +23,8 @@ namespace polaris::tables::plates
         cheatManager->AllowRespawn();
         cheatManager->AthenaEndlessGame();
         cheatManager->SetSafeZoneRadius(999999.0f);
+
+        cheatManager->DestroyAll(SDK::AFortAthenaMapInfo::StaticClass());
     }
 
     void CreativePlate::DestroyAllBuilds()

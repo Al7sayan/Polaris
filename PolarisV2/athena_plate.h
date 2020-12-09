@@ -22,9 +22,11 @@ namespace polaris::tables::plates
         inventory::quickbars* m_pQuickbars;
         inventory::equip* m_pEquip;
         SDK::UAthenaHUD_C* hud;
+        SDK::UFortGlobalUIContext* uiContext;
         bool m_bIsInitialized;
     public:
         bool m_bHasLoadingScreenDropped = false;
+        bool m_bGameOver = false;
         int m_iCurrentBuildPiece = 0;
         SDK::UClass* m_pLastBuildClassForWall = SDK::APBWA_W1_Solid_C::StaticClass();
         SDK::UClass* m_pLastBuildClassForFloor = SDK::APBWA_W1_Floor_C::StaticClass();

@@ -65,7 +65,27 @@ namespace polaris::tables::plates
                 Pos.Z = Pos.Z + m_pPlayerPawn->m_pPawnActor->GetActorForwardVector().Z;
                 new pawn::pawns::BotPawn(Pos, m_pPlayerPawn->m_pPawnActor->K2_GetActorRotation(), SDK::EFortTeam::HumanPvP_Team2, nullptr);
             }
+            if (GetAsyncKeyState(VK_END) & 0x8000 && !m_bGameOver)
+            {
+                m_bGameOver = true;
+                static_cast<SDK::AFortPlayerControllerAthena*>(globals::gpPlayerController)->ClientNotifyWon();
+                static_cast<SDK::AFortPlayerControllerAthena*>(globals::gpPlayerController)->PlayWinEffects();
+            }
         }
+
+        // Victory Royale screen
+        if (pFunction->GetName().find("BndEvt__LeaveButton_K2Node_ComponentBoundEvent_76_CommonButtonClicked__DelegateSignature") != std::string::npos)
+        {
+            if (!uiContext)
+            {
+                uiContext = SDK::UObject::FindObject<SDK::UFortGlobalUIContext>("FortGlobalUIContext Transient.FortEngine_1.FortLocalPlayer_1.FortGlobalUIContext_1");
+            }
+            // the below function just straight-up exits the engine without any confirmation.
+            // UFortGlobalUIContext::AllowQuit() does jack shit
+            // POSSIBLE ANTI-CRASH SOLUTION: invoke a MessageBox asking to exit the game instead?
+            uiContext->QuitGame();
+        }
+
         if (pFunction->GetName().find("ReadyToStartMatch") != std::string::npos && m_bIsInitialized == false)
             Initialize();
 
