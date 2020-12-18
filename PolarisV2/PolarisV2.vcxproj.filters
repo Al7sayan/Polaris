@@ -125,6 +125,18 @@
     <Filter Include="UI\Window\Windows\Main Window\Category\Categories\Creative">
       <UniqueIdentifier>{24c88286-6ef3-4b14-a003-e6017efb8fb1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI\Window\Windows\Bots">
+      <UniqueIdentifier>{93a006f6-9d6b-48e1-8156-c3f45a96b159}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Window\Windows\Bots\Bot Creator">
+      <UniqueIdentifier>{b619d162-df47-4bb1-a101-f7bd72f442af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Window\Windows\Bots\Bot Manager">
+      <UniqueIdentifier>{fb713ea2-30cb-4417-9344-0a0e741f8dbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Window\Windows\Main Window\Category\Categories\Bots">
+      <UniqueIdentifier>{4b751317-4e18-4853-a83f-7df6553bbaaa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SDK\FN_Basic.cpp">
@@ -262,6 +274,21 @@
     <ClCompile Include="creative_category.cpp">
       <Filter>UI\Window\Windows\Main Window\Category\Categories\Creative</Filter>
     </ClCompile>
+    <ClCompile Include="bot_creator.cpp">
+      <Filter>UI\Window\Windows\Bots\Bot Creator</Filter>
+    </ClCompile>
+    <ClCompile Include="bot_manager.cpp">
+      <Filter>UI\Window\Windows\Bots\Bot Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="bot_category.cpp">
+      <Filter>UI\Window\Windows\Main Window\Category\Categories\Bots</Filter>
+    </ClCompile>
+    <ClCompile Include="SDK\FN_AthenaTeamInfo_functions.cpp">
+      <Filter>Third Party\SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="SDK\FN_GameplayAbilities_functions.cpp">
+      <Filter>Third Party\SDK</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDK.hpp">
@@ -378,6 +405,15 @@
     </ClInclude>
     <ClInclude Include="creative_category.h">
       <Filter>UI\Window\Windows\Main Window\Category\Categories\Creative</Filter>
+    </ClInclude>
+    <ClInclude Include="bot_creator.h">
+      <Filter>UI\Window\Windows\Bots\Bot Creator</Filter>
+    </ClInclude>
+    <ClInclude Include="bot_manager.h">
+      <Filter>UI\Window\Windows\Bots\Bot Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="bot_category.h">
+      <Filter>UI\Window\Windows\Main Window\Category\Categories\Bots</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

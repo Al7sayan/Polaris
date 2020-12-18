@@ -11,6 +11,7 @@ namespace polaris::globals
 	SDK::TArray<SDK::ULocalPlayer*> gpLocalPlayers;
 	SDK::ULocalPlayer* gpLocalPlayer;
 
+	std::list<pawn::pawns::BotPawn*> glBotList;
 	SDK::APlayerController* gpPlayerController;
 	SDK::UObject* (*StaticConstructObject_Internal)(SDK::UClass* InClass, SDK::UObject* InOuter, SDK::FName InName, int64_t InFlags, SDK::FUObjectItem::ObjectFlags InternalSetFlags, SDK::UObject* InTemplate, bool bCopyTransientsFromClassDefaults, void* InInstanceGraph, bool bAssumeTemplateIsArchetype);
 }

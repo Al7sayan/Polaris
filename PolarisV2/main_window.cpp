@@ -6,6 +6,7 @@
 #include "changelog_window.h"
 #include "player_category.h"
 #include "window_category.h"
+#include "bot_category.h"
 
 polaris::ui::window::windows::MainWindow* gpMainWindow;
 
@@ -21,6 +22,7 @@ namespace polaris::ui::window::windows
 
         m_vCategories.push_back(new mainwindow::category::categories::PlayerCategory);
         m_vCategories.push_back(new mainwindow::category::categories::WindowCategory);
+        m_vCategories.push_back(new mainwindow::category::categories::BotCategory);
     }
 
     void MainWindow::Draw()

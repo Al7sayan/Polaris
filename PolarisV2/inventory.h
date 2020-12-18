@@ -29,6 +29,7 @@ namespace polaris::inventory
         std::map<SDK::FGuid*, SDK::UFortWeaponItemDefinition*> m_mItems;
         std::map<SDK::FGuid*, SDK::UFortTrapItemDefinition*> m_mTraps;
         int iInventoryIteration = 0;
+        SDK::TArray<class SDK::UFortWorldItem*>* pItemInsts;
 
         void SetupInventory(); //!< SetupInventory initializes the inventory.
     };

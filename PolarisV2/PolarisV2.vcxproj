@@ -140,6 +140,8 @@
     <ClCompile Include="about_window.cpp" />
     <ClCompile Include="athena_pawn.cpp" />
     <ClCompile Include="athena_plate.cpp" />
+    <ClCompile Include="bot_creator.cpp" />
+    <ClCompile Include="bot_manager.cpp" />
     <ClCompile Include="bot_pawn.cpp" />
     <ClCompile Include="changelog_window.cpp" />
     <ClCompile Include="choice_menu.cpp" />
@@ -166,7 +168,9 @@
     <ClCompile Include="player_category.cpp" />
     <ClCompile Include="program.cpp" />
     <ClCompile Include="SDK\FN_AthenaQuickbarPrimary_functions.cpp" />
+    <ClCompile Include="SDK\FN_AthenaTeamInfo_functions.cpp" />
     <ClCompile Include="SDK\FN_FortniteUI_functions.cpp" />
+    <ClCompile Include="SDK\FN_GameplayAbilities_functions.cpp" />
     <ClCompile Include="SDK\FN_QuickbarSlot_functions.cpp" />
     <ClCompile Include="SDK\FN_UMG_functions.cpp" />
     <ClCompile Include="sdk_utils.cpp" />
@@ -177,6 +181,7 @@
     <ClCompile Include="inventory.cpp" />
     <ClCompile Include="quickbars.cpp" />
     <ClCompile Include="category.cpp" />
+    <ClCompile Include="bot_category.cpp" />
     <ClCompile Include="table.cpp" />
     <ClCompile Include="ui_renderer.cpp" />
     <ClCompile Include="ui_window.cpp" />
@@ -189,6 +194,8 @@
     <ClInclude Include="about_window.h" />
     <ClInclude Include="athena_pawn.h" />
     <ClInclude Include="athena_plate.h" />
+    <ClInclude Include="bot_creator.h" />
+    <ClInclude Include="bot_manager.h" />
     <ClInclude Include="bot_pawn.h" />
     <ClInclude Include="build.h" />
     <ClInclude Include="base_plate.h" />
@@ -202,6 +209,7 @@
     <ClInclude Include="error_utils.h" />
     <ClInclude Include="frontend_plate.h" />
     <ClInclude Include="globals.h" />
+    <ClInclude Include="bot_category.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="player_category.h" />
     <ClInclude Include="quickbars.h" />

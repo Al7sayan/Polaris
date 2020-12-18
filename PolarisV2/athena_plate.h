@@ -21,7 +21,12 @@ namespace polaris::tables::plates
         inventory::Inventory* m_pInventory;
         inventory::quickbars* m_pQuickbars;
         inventory::equip* m_pEquip;
-        SDK::UAthenaHUD_C* hud;
+        SDK::UAthenaHUD_C* m_pHud;
+        pawn::pawns::BotPawn* m_pBotPawn;
+        SDK::UKismetMathLibrary* m_pKismetmathlibrary;
+        std::list<pawn::pawns::BotPawn*> m_lBots;
+        PVOID m_pCollectGarbageInternalAddress;
+        bool m_bHasDoneQuickbars = false;
         SDK::UFortGlobalUIContext* uiContext;
         bool m_bIsInitialized;
     public:

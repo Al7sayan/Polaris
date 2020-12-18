@@ -188,6 +188,20 @@ namespace polaris
 				"\xC0\x0F\x84\x3C\x02\x00\x00\x0F\x2F\xF7\x0F\x86\xF5\x00\x00\x00",
 				"xxxxxxxxxxxxxxxx"
 			);
+			auto pSpawnActorPatchAddress = SDKUtils::FindPattern
+			(
+				"\xC7\x87\x94\x03\x00\x00\x00\x00\x80\x42\xC7\x87\xC8\x03\x00\x00\x0A\xD7\x2F\x41\xC6\x87\x49\x01\x00\x00\x03\x48\x83\xC4\x30\x5F",
+				"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+			);
+			if (pSpawnActorPatchAddress) {
+				DWORD dwProtection;
+				VirtualProtect(pSpawnActorPatchAddress, 32, PAGE_EXECUTE_READWRITE, &dwProtection);
+
+				reinterpret_cast<uint8_t*>(pSpawnActorPatchAddress)[26] = 0x01;
+
+				DWORD dwTemp;
+				VirtualProtect(pSpawnActorPatchAddress, 32, dwProtection, &dwTemp);
+			}
 			if (pAbilityPatchAddress)
 			{
 				DWORD dwProtection;

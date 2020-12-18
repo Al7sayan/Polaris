@@ -1,6 +1,7 @@
 #include "inventory.h"
 #include "globals.h"
 #include "error_utils.h"
+#include "inventory_offset_fixes.h"
 #include "sdk_utils.h"
 #include "program.h"
 #include <MinHook.h>
@@ -65,44 +66,44 @@ namespace polaris
                     }
                 }
             }
-            auto pInventory1 = static_cast<SDK::AFortInventory*>(polaris::utilities::SDKUtils::FindActor(SDK::AFortInventory::StaticClass()));
-            auto pInventory2 = static_cast<SDK::AFortInventory*>(polaris::utilities::SDKUtils::FindActor(SDK::AFortInventory::StaticClass(), 1));
-            SDK::AFortInventory* pActualInv = nullptr;
-
-            // joe nuts
-            if (pInventory1 && pInventory1->InventoryType == SDK::EFortInventoryType::World)
-            {
-                pActualInv = pInventory1;
-            }
-
-            if (pInventory2 && pInventory2->InventoryType == SDK::EFortInventoryType::World)
-            {
-                pActualInv = pInventory2;
-            }
-
-            if (pActualInv)
+            auto controller = static_cast<SDK::AFortPlayerController*>(globals::gpPlayerController);
+            auto winventory = reinterpret_cast<polaris::models::offsetfixes::WorldInventory*>(controller)->WorldInventory;
+            if (winventory)
             {
                 //gaming rgb inventory
-                auto myInventory = pActualInv;
-                SDK::FFortItemList* inv = &myInventory->Inventory;
-                SDK::TArray<class SDK::UFortWorldItem*>* pItemInsts = &inv->ItemInstances;
+                SDK::FFortItemList* inv = &winventory->Inventory;
+                pItemInsts = &inv->ItemInstances;
                 pItemInsts->Count = m_mItems.size();
                 pItemInsts->Max = m_mItems.size();
                 pItemInsts->Data = (class SDK::UFortWorldItem**)::malloc(pItemInsts->Count * sizeof(SDK::UFortWorldItem*));
                 for (auto it = m_mItems.begin(); it != m_mItems.end(); it++) {
                     auto pItemEntry = new SDK::FFortItemEntry;
-                    pItemEntry->Count = 100;
+                    if (it->second->IsA(SDK::UFortWeaponItemDefinition::StaticClass()))
+                        pItemEntry->Count = 1;
+                    else
+                        pItemEntry->Count = 100;
                     pItemEntry->ItemDefinition = it->second;
-                    pItemEntry->Durability = 1000;
-                    pItemEntry->Level = 1;
+                    pItemEntry->Durability = it->second->GetMaxDurability(it->second->MaxLevel);
+                    pItemEntry->Level = it->second->MaxLevel;
                     pItemEntry->ItemGuid = (*it->first);
                     pItemEntry->bIsDirty = false;
+                    pItemEntry->bIsReplicatedCopy = true;
                     pItemEntry->LoadedAmmo = 0;
-                    //pItemEntry->ParentInventory.ObjectIndex = myInventory->InternalIndex;
-                    auto pWorldItem = reinterpret_cast<SDK::UFortWorldItem*>(polaris::globals::StaticConstructObject_Internal(SDK::UFortWorldItem::StaticClass(), myInventory, SDK::FName("None"), 0, SDK::FUObjectItem::ObjectFlags::None, NULL, false, NULL, false));
-                    pWorldItem->OwnerInventory = myInventory;
+                    pItemEntry->ParentInventory.ObjectIndex = winventory->InternalIndex;
+                    pItemEntry->ParentInventory.ObjectSerialNumber = SDK::UObject::GObjects->ObjObjects.GetItemByIndex(winventory->InternalIndex)->SerialNumber;
+                    
+                    //reinterpret_cast<polaris::models::offsetfixes::ParentInventory*>(pItemEntry)->ParentInventory = (*winventory);
+                    auto pWorldItem = reinterpret_cast<SDK::UFortWorldItem*>(polaris::globals::StaticConstructObject_Internal(SDK::UFortWorldItem::StaticClass(), winventory, SDK::FName("None"), 0, SDK::FUObjectItem::ObjectFlags::None, NULL, false, NULL, false));
+                    pWorldItem->bTemporaryItemOwningController = true;
+                    pWorldItem->SetOwningControllerForTemporaryItem(controller);
+                    reinterpret_cast<polaris::models::offsetfixes::OwnerInventory*>(pWorldItem)->OwnerInventory = winventory;
                     pWorldItem->ItemEntry = *pItemEntry;
                     pItemInsts->operator[](iInventoryIteration) = pWorldItem;
+                    auto statval = new SDK::FFortItemEntryStateValue;
+                    statval->IntValue = 1;
+                    statval->NameValue = SDK::FName("Item");
+                    statval->StateType = SDK::EFortItemEntryState::NewItemCount;
+                    controller->ServerSetInventoryStateValue((*it->first), (*statval));
                     iInventoryIteration++;
                 }
             }

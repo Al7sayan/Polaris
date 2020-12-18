@@ -21,6 +21,7 @@ namespace polaris
 		gpProgram = this;
 
 		//utilities::SDKUtils::InitConsole();
+		utilities::SDKUtils::InitPatches();
 		std::cout << "Welcome to Polaris!" << std::endl;
 
 		m_pMainTable = new tables::PehTable;

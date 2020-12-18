@@ -2,6 +2,8 @@
 #define GLOBALS_H
 
 #include "SDK.hpp"
+#include "bot_pawn.h"
+#include <list>
 
 namespace polaris::globals
 {
@@ -14,6 +16,7 @@ namespace polaris::globals
 	extern SDK::TArray<SDK::ULocalPlayer*> gpLocalPlayers;
 	extern SDK::ULocalPlayer* gpLocalPlayer;
 
+	extern std::list<pawn::pawns::BotPawn*> glBotList;
 	extern SDK::APlayerController* gpPlayerController;
 	extern SDK::UObject* (*StaticConstructObject_Internal)(SDK::UClass* InClass, SDK::UObject* InOuter, SDK::FName InName, int64_t InFlags, SDK::FUObjectItem::ObjectFlags InternalSetFlags, SDK::UObject* InTemplate, bool bCopyTransientsFromClassDefaults, void* InInstanceGraph, bool bAssumeTemplateIsArchetype);
 };

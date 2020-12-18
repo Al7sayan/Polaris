@@ -9,16 +9,25 @@
 #include <vector>
 #include <map>
 #include <iostream>
-
 PVOID(*CollectGarbageInternal)(uint32_t, bool) = nullptr;
 PVOID CollectGarbageInternalHook(uint32_t KeepFlags, bool bPerformFullPurge)
 {
+
     return NULL;
 }
+
 namespace polaris::tables::plates
 {
     void AthenaPlate::ProcessEventHook(SDK::UObject* pObject, SDK::UFunction* pFunction, PVOID pParams)
     {
+        if (pFunction->GetName().find("ClientReportKill") != std::string::npos) { //kill stuff
+            auto controller = static_cast<SDK::AFortPlayerControllerAthena*>(globals::gpPlayerController);
+            auto playerstate = static_cast<SDK::AFortPlayerStateAthena*>(globals::gpPlayerController->PlayerState);
+            if (playerstate->KillScore >= 99)
+                controller->ClientNotifyWon();
+            playerstate->KillScore++;
+            playerstate->OnRep_Kills();
+        }
         if (pFunction->GetName().find("ServerAddItemInternal") != std::string::npos)
         {
             auto params = reinterpret_cast<SDK::AFortQuickBars_ServerAddItemInternal_Params*>(pParams);
@@ -32,17 +41,15 @@ namespace polaris::tables::plates
                     if (m_pEquip->AreGuidsTheSame((*it->first), guid))
                     {
                         SDK::FLinearColor color{ 100,100,100,100 };
-                        if (!hud)
-                        {
-                            hud = SDK::UObject::FindObject<SDK::UAthenaHUD_C>("AthenaHUD_C Transient.FortEngine_1.FortGameInstance_1.AthenaHUD_C_1");
-                        }
-                        if (hud != nullptr)
+                        if (!m_pHud)
+                            m_pHud = SDK::UObject::FindObject<SDK::UAthenaHUD_C>("AthenaHUD_C Transient.FortEngine_1.FortGameInstance_1.AthenaHUD_C_1");
+                        if (m_pHud != nullptr)
                         {
                             SDK::FSlateBrush brush = it->second->GetSmallPreviewImageBrush();
                             if (&brush)
                             {
-                                hud->QuickbarSecondary->QuickbarSlots[params->Slot]->Empty->SetBrush(brush);
-                                hud->QuickbarSecondary->QuickbarSlots[params->Slot]->Empty->SetColorAndOpacity(color);
+                                m_pHud->QuickbarSecondary->QuickbarSlots[params->Slot]->Empty->SetBrush(brush);
+                                m_pHud->QuickbarSecondary->QuickbarSlots[params->Slot]->Empty->SetColorAndOpacity(color);
                             }
                         }
                     }
@@ -55,21 +62,30 @@ namespace polaris::tables::plates
         if (m_pEquip != nullptr)
             m_pEquip->ProcessEventHook(pObject, pFunction, pParams);
 
-        if (pFunction->GetName().find("Tick") != std::string::npos)
+        if (pFunction->GetName().find("Tick") != std::string::npos && m_bHasLoadingScreenDropped && m_pPlayerPawn->m_pPawnActor != nullptr)
         {
-            if (GetAsyncKeyState(VK_OEM_PLUS) & 0x8000)
-            {
-                SDK::FVector Pos = m_pPlayerPawn->m_pPawnActor->K2_GetActorLocation();
-                Pos.X = Pos.X + m_pPlayerPawn->m_pPawnActor->GetActorForwardVector().X;
-                Pos.Y = Pos.Y + m_pPlayerPawn->m_pPawnActor->GetActorForwardVector().Y;
-                Pos.Z = Pos.Z + m_pPlayerPawn->m_pPawnActor->GetActorForwardVector().Z;
-                new pawn::pawns::BotPawn(Pos, m_pPlayerPawn->m_pPawnActor->K2_GetActorRotation(), SDK::EFortTeam::HumanPvP_Team2, nullptr);
-            }
-            if (GetAsyncKeyState(VK_END) & 0x8000 && !m_bGameOver)
-            {
-                m_bGameOver = true;
-                static_cast<SDK::AFortPlayerControllerAthena*>(globals::gpPlayerController)->ClientNotifyWon();
-                static_cast<SDK::AFortPlayerControllerAthena*>(globals::gpPlayerController)->PlayWinEffects();
+            for (std::list<pawn::pawns::BotPawn*>::iterator it = globals::glBotList.begin(); it != globals::glBotList.end(); it++) {
+                if (!(*it)->m_bHasConstructed) {
+                    (*it)->Construct();
+                    m_pHud->TeamInfo->AppendTeamMember((*it)->m_pPlayerState, globals::glBotList.size());
+                    //(*it)->m_pBotPawnController->NetPlayerIndex = globals::glBotList.size();
+                    //static_cast<SDK::AFortPlayerControllerAthena*>(globals::gpPlayerController)->PlayerToSpectateOnDeath = (*it)->m_pBotPawnActor;
+                }
+                else if ((*it) != nullptr && (*it)->m_pBotPawnActor != nullptr && !(*it)->m_pBotPawnController->IsInAircraft() && (*it)->m_pBotPawnActor->GetHealth() != 0) {
+                    SDK::FVector loc = m_pKismetmathlibrary->STATIC_Subtract_VectorVector(
+                        m_pPlayerPawn->m_pPawnActor->K2_GetActorLocation(),
+                        (*it)->m_pBotPawnActor->K2_GetActorLocation());
+                    (*it)->m_pBotPawnActor->AddMovementInput(loc, 1, true);
+                    SDK::FRotator rot = m_pKismetmathlibrary->STATIC_Conv_VectorToRotator(loc);
+                    (*it)->m_pBotPawnController->ControlRotation = rot;
+                    rot.Pitch = 0;
+                    (*it)->m_pBotPawnActor->K2_SetActorRotation(rot, false);
+                    (*it)->m_pBotPawnActor->CurrentMovementStyle = SDK::EFortMovementStyle::Sprinting;
+                    (*it)->m_pBotPawnActor->PawnStartFire(0);
+                }
+                else {
+                    m_lBots.erase(it);
+                }
             }
         }
 
@@ -101,8 +117,10 @@ namespace polaris::tables::plates
                 SDK::FRotator{ 0,0,0 });
             m_pEquip->m_pPlayerPawn = m_pPlayerPawn;
         }
-        if (pFunction->GetName().find("ServerLoadingScreenDropped") != std::string::npos)
+        if (pFunction->GetName().find("ServerLoadingScreenDropped") != std::string::npos && !m_bHasDoneQuickbars) {
             m_pQuickbars->SetupQuickbars();
+            m_bHasDoneQuickbars = true;
+        }
     }
     void AthenaPlate::Update()
     {
@@ -115,7 +133,7 @@ namespace polaris::tables::plates
         utilities::SDKUtils::InitSdk();
         utilities::SDKUtils::InitGlobals();
 
-        globals::gpPlayerController->SwitchLevel(TEXT("athena_terrain"));
+        globals::gpPlayerController->SwitchLevel(TEXT("Athena_Terrain"));
     }
 
     void AthenaPlate::Initialize()
@@ -124,7 +142,6 @@ namespace polaris::tables::plates
         m_bIsInitialized = true;
         utilities::SDKUtils::InitSdk();
         utilities::SDKUtils::InitGlobals();
-        utilities::SDKUtils::InitPatches();
         //Load Husks Into Memory.
         utilities::SDKUtils::FindOrLoadObject("/Game/Characters/Enemies/Husk/Blueprints/HuskPawn.HuskPawn_C");
         utilities::SDKUtils::FindOrLoadObject("/Game/Characters/Enemies/Husk/Blueprints/HuskPawn_Fire.HuskPawn_Fire_C");
@@ -137,16 +154,22 @@ namespace polaris::tables::plates
         utilities::SDKUtils::FindOrLoadObject("/Game/Characters/Enemies/Husk/Blueprints/HuskPawn_Dwarf_Fire.HuskPawn_Dwarf_Fire_C");
         utilities::SDKUtils::FindOrLoadObject("/Game/Characters/Enemies/Husk/Blueprints/HuskPawn_Dwarf_Ice.HuskPawn_Dwarf_Ice_C");
         utilities::SDKUtils::FindOrLoadObject("/Game/Characters/Enemies/Husk/Blueprints/HuskPawn_Dwarf_Lightning.HuskPawn_Dwarf_Lightning_C");
+        utilities::SDKUtils::FindOrLoadObject("/Game/Items/Traps/Blueprints/Trap_Floor_Spikes.Trap_Floor_Spikes_C");
+        utilities::SDKUtils::FindOrLoadObject("/Game/Items/Traps/Blueprints/Trap_Floor_Player_Jump_Free_Direction_Pad.Trap_Floor_Player_Jump_Free_Direction_Pad_C");
+        utilities::SDKUtils::FindOrLoadObject("/Game/Items/Traps/Blueprints/Trap_Floor_Player_Jump_Pad.Trap_Floor_Player_Jump_Pad_C");
+        utilities::SDKUtils::FindOrLoadObject("/Game/Items/Traps/Blueprints/Trap_Ceiling_ElectricWeak_Athena.Trap_Ceiling_ElectricWeak_Athena_C");
+        utilities::SDKUtils::FindOrLoadObject("/Game/Items/Traps/Blueprints/Trap_Floor_Spikes.Trap_Floor_Spikes_C");
+        utilities::SDKUtils::FindOrLoadObject("/Game/Items/Traps/Blueprints/Trap_Ceiling_Falling.Trap_Ceiling_Falling_C");
 
         // Disable garbage collection.
 
-        auto pCollectGarbageInternalAddress = utilities::SDKUtils::FindPattern("\x48\x8B\xC4\x48\x89\x58\x08\x88\x50\x10", "xxxxxxxxxx");
-        if (!pCollectGarbageInternalAddress)
+        m_pCollectGarbageInternalAddress = utilities::SDKUtils::FindPattern("\x48\x8B\xC4\x48\x89\x58\x08\x88\x50\x10", "xxxxxxxxxx");
+        if (!m_pCollectGarbageInternalAddress)
             utilities::ErrorUtils::ThrowException(L"Finding pattern for CollectGarbageInternal has failed. Please relaunch Fortnite and try again!");
 
-        MH_CreateHook(static_cast<LPVOID>(pCollectGarbageInternalAddress), CollectGarbageInternalHook, reinterpret_cast<LPVOID*>(&CollectGarbageInternal));
-        MH_EnableHook(static_cast<LPVOID>(pCollectGarbageInternalAddress));
-
+        MH_CreateHook(static_cast<LPVOID>(m_pCollectGarbageInternalAddress), CollectGarbageInternalHook, reinterpret_cast<LPVOID*>(&CollectGarbageInternal));
+        MH_EnableHook(static_cast<LPVOID>(m_pCollectGarbageInternalAddress));
+        static_cast<SDK::AFortGameModeAthena*>((*globals::gpWorld)->AuthorityGameMode)->bSquadPlay = true;
         // Spawn a Player Pawn and setup inventory.
         m_pPlayerPawn = new pawn::pawns::AthenaPawn(globals::gpPlayerController->SpectatorPawn->K2_GetActorLocation(),
             globals::gpPlayerController->SpectatorPawn->K2_GetActorRotation());
@@ -170,5 +193,8 @@ namespace polaris::tables::plates
         static_cast<SDK::AFortPlayerController*>(globals::gpPlayerController)->ServerReadyToStartMatch();
         static_cast<SDK::AGameMode*>((*globals::gpWorld)->AuthorityGameMode)->StartMatch();
         m_bHasLoadingScreenDropped = true;
+
+        m_pKismetmathlibrary = SDK::UObject::FindObject<SDK::UKismetMathLibrary>("KismetMathLibrary Engine.Default__KismetMathLibrary");
+        globals::glBotList.clear();
     }
 }

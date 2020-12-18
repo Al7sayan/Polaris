@@ -23,7 +23,7 @@ namespace polaris::tables::plates
             Sleep(1000 / 60);
 
         // NOTE: For some reason if you don't wait a bit here, everything will be nullptr.
-        Sleep(500);
+        Sleep(5000);
 
         utilities::SDKUtils::InitGlobals();
 
