@@ -2,8 +2,8 @@
 They said to think back, but I think we went a bit too far.
 
 # Building
-Add an SDK to your Polaris instance, they can be found in #fn-sdk.
-Sometimes you may have to fix the SDK, by undefining PF_MAX in CoreUObject_Classes.
+Add an SDK to your Polaris instance. The required files are found in #polaris-news; #fn-sdk will be available at a later time.
+You might need to fix your SDK the first time you set up the Polaris codebase by undefining PF_MAX in FN_CoreUObject_Classes.hpp.
 
 # Libraries
 | Library       | License       | Usage                                                     |
